@@ -29,7 +29,7 @@ const shots = [1, 2, 3].filter((n) => existsSync(`public/photos/bench-${n}.jpg`)
   </div>
 
   <div class="film-beats">
-    <header class="beat beat--hero wrap" data-beat>
+    <header class="beat beat--hero" data-beat><div class="beat-in wrap">
       <h1 class="film-name" data-split>{first}<br />{rest.join(' ')}</h1>
       <p class="film-lead">{h.lead}</p>
       <nav class="film-contents" aria-label={h.contents}>
@@ -46,23 +46,23 @@ const shots = [1, 2, 3].filter((n) => existsSync(`public/photos/bench-${n}.jpg`)
         </ol>
       </nav>
       <p class="film-cue" aria-hidden="true"><span></span>{f.cue}</p>
-    </header>
+    </div></header>
 
     {f.beats.map((b, i) => (
-      <article class={`beat beat--q wrap beat--${i + 1}`} data-beat>
+      <article class={`beat beat--q beat--${i + 1}`} data-beat><div class="beat-in wrap">
         <h2 class="film-q">{b.q}</h2>
         <p class="film-a">{b.a}</p>
-      </article>
+      </div></article>
     ))}
 
-    <footer class="beat beat--coda wrap" data-beat>
+    <footer class="beat beat--coda" data-beat><div class="beat-in wrap">
       {shots.length > 0 && (
         <div class="film-shots">{shots.map((n) => <Photo name={`bench-${n}`} alt={f.photoAlt} />)}</div>
       )}
       <p class="film-coda">{f.coda}</p>
       <a class="go" href="#work">{f.toWork} <Arrow /></a>
       <p class="film-note">{f.note}</p>
-    </footer>
+    </div></footer>
   </div>
 </section>
 
@@ -110,28 +110,30 @@ const shots = [1, 2, 3].filter((n) => existsSync(`public/photos/bench-${n}.jpg`)
   /* the film is on: the stage sticks, the text scrolls over it */
   :global(.film-on) .film-stage { position: sticky; top: 0; }
   :global(.film-on) .film-beats { margin-top: -100svh; }
-  :global(.film-on) .beat { min-height: 100svh; display: grid; align-content: center; justify-items: start; }
-  :global(.film-on) .beat--hero { align-content: end; padding-bottom: 10vh; }
-  /* beat positions are timed to the film: each lands at its scene (scroll
-     progress ≈ 0.16 board, 0.46 alignment, 0.69 fold, 0.97 attractor) */
-  :global(.film-on) .beat--1 { margin-top: 40svh; }
-  :global(.film-on) .beat--2 { margin-top: 170svh; }
-  :global(.film-on) .beat--3 { margin-top: 106svh; }
-  :global(.film-on) .beat--coda { margin-top: 152svh; margin-bottom: 30svh; }
-  :global(.film-on) .beat > * { text-shadow: 0 2px 30px rgba(6, 9, 30, 0.9); }
+  /* each beat is a tall scroll segment whose text is pinned in the middle of
+     the screen: it fades in, holds and fades out without moving. Heights and
+     gaps place each pinned window on its scene (scroll progress ≈ 0.17 board,
+     0.45 alignment, 0.68 fold, 0.95 attractor; scroll length 1360svh). */
+  :global(.film-on) .beat { padding: 0; height: 200svh; }
+  :global(.film-on) .beat--hero { height: 180svh; }
+  :global(.film-on) .beat--2 { margin-top: 181svh; }
+  :global(.film-on) .beat--3 { margin-top: 113svh; }
+  :global(.film-on) .beat--coda { margin-top: 167svh; margin-bottom: 18svh; }
+  :global(.film-on) .beat-in { position: sticky; top: 0; height: 100svh; display: grid; align-content: center; justify-items: start; isolation: isolate; }
+  :global(.film-on) .beat--hero .beat-in { align-content: end; padding-bottom: 10vh; }
+  :global(.film-on) .beat-in > * { text-shadow: 0 2px 30px rgba(6, 9, 30, 0.9); }
   /* a soft dark field behind each beat's text, on the side the text sits */
-  :global(.film-on) .beat { isolation: isolate; }
-  :global(.film-on) .beat--q::before, :global(.film-on) .beat--coda::before {
+  :global(.film-on) .beat--q .beat-in::before, :global(.film-on) .beat--coda .beat-in::before {
     content: ""; position: absolute; z-index: -1; top: 18%; bottom: 18%; left: -8%; width: 66%;
     background: radial-gradient(closest-side, rgba(8, 12, 40, 0.78), rgba(8, 12, 40, 0.4) 60%, transparent); filter: blur(8px); pointer-events: none;
   }
-  :global(.film-on) .beat--2::before { left: auto; right: -8%; }
-  @media (min-width: 900px) { :global(.film-on) .beat--2 { padding-right: 150px; } }
+  :global(.film-on) .beat--2 .beat-in::before { left: auto; right: -8%; }
+  @media (min-width: 900px) { :global(.film-on) .beat--2 .beat-in { padding-right: 150px; } }
   @media (max-width: 899px) {
-    :global(.film-on) .beat--q::before, :global(.film-on) .beat--coda::before { left: -10%; right: -10%; width: auto; }
-    :global(.film-on) .beat--hero { background: linear-gradient(0deg, rgba(8, 12, 40, 0.85) 45%, transparent); }
+    :global(.film-on) .beat--q .beat-in::before, :global(.film-on) .beat--coda .beat-in::before { left: -10%; right: -10%; width: auto; }
+    :global(.film-on) .beat--hero .beat-in { background: linear-gradient(0deg, rgba(8, 12, 40, 0.85) 45%, transparent); }
   }
-  :global(.film-on) .beat--2 { justify-items: end; text-align: right; }
+  :global(.film-on) .beat--2 .beat-in { justify-items: end; text-align: right; }
   :global(.film-on) .beat--2 .film-q, :global(.film-on) .beat--2 .film-a { margin-left: auto; }
   :global(.film-on) .film-rail {
     display: grid; gap: 10px; position: absolute; right: max(16px, 3vw); top: 50%; transform: translateY(-50%); z-index: 3;

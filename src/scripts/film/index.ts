@@ -32,14 +32,21 @@ if (section && canvas && !reduce && !saveData && webgl()) {
   const rail = Array.from(section.querySelectorAll<HTMLElement>('[data-rail]'));
   const railAt = [0, 0.24, 0.31, 0.4, 0.56, 0.86];
 
-  // the beats fade in and out as they cross the middle of the screen
+  // each beat's text is pinned (CSS sticky); over its pinned window it fades
+  // in, holds, and fades out, without moving. The hero starts visible.
   section.querySelectorAll<HTMLElement>('[data-beat]').forEach((b, i) => {
+    const inner = b.querySelector<HTMLElement>('.beat-in')!;
+    const st = { trigger: b, start: 'top top', end: 'bottom bottom', scrub: true };
     if (i === 0) {
-      gsap.to(b, { opacity: 0, ease: 'none', scrollTrigger: { trigger: b, start: 'bottom 70%', end: 'bottom 20%', scrub: true } });
+      gsap.timeline({ scrollTrigger: st }).to(inner, { opacity: 1, duration: 0.55 }).to(inner, { opacity: 0, duration: 0.45, ease: 'power1.in' });
       return;
     }
-    gsap.fromTo(b.children, { opacity: 0 }, { opacity: 1, stagger: 0.08, ease: 'power1.inOut', scrollTrigger: { trigger: b, start: 'top 75%', end: 'top 35%', scrub: true } });
-    gsap.to(b.children, { opacity: 0, ease: 'power1.inOut', immediateRender: false, scrollTrigger: { trigger: b, start: 'bottom 45%', end: 'bottom 10%', scrub: true } });
+    gsap.set(inner, { opacity: 0 });
+    // fades happen only while the text is pinned, so it is never seen moving
+    const last = b.classList.contains('beat--coda');
+    const tl = gsap.timeline({ scrollTrigger: st }).to(inner, { opacity: 1, duration: 0.3, ease: 'power1.out' }).to(inner, { opacity: 1, duration: 0.4 });
+    // the closing line stays up as the work scrolls in
+    if (!last) tl.to(inner, { opacity: 0, duration: 0.3, ease: 'power1.in' }); else tl.to(inner, { opacity: 1, duration: 0.3 });
   });
 
   document.fonts?.ready.then(async () => {
