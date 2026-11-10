@@ -9,9 +9,9 @@ export const en = {
     title: 'Vinicius Castelli · Computer engineering, comparative genomics',
     description:
       'Vinicius Castelli studies Computer Engineering at Poli-USP and writes research software for comparative genomics at ICB-USP.',
-    aboutTitle: 'Datasheet · Vinicius Castelli',
+    aboutTitle: 'One Pager · Vinicius Castelli',
     aboutDescription:
-      'Datasheet of Vinicius Castelli: what I work on, measured values, stack, history and how to reach me.',
+      'One pager of Vinicius Castelli: what I work on, measured values, stack, history and how to reach me.',
   },
   ui: {
     skip: 'Skip to content',
@@ -23,7 +23,7 @@ export const en = {
     modes: { blueprint: 'Blueprint', paper: 'Paper', graphite: 'Graphite' },
     layers: 'Layers',
     layerNames: { grid: 'Grid', dims: 'Dimensions', notes: 'Annotations' },
-    datasheet: 'Datasheet',
+    datasheet: 'One Pager',
     fig: 'Fig.',
     rev: 'Rev. A',
     scale: 'Scale 1:1',
@@ -106,9 +106,8 @@ export const en = {
     ],
   },
   aboutTeaser: {
-    title: 'Datasheet',
-    text: 'The rest is on one page, laid out like a component datasheet: description, measured values, stack, history.',
-    cta: 'Open the datasheet',
+    title: 'One Pager',
+    cta: 'Open the one pager',
   },
   contact: {
     title: 'Contact',

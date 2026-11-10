@@ -11,9 +11,9 @@ export const pt: Dict = {
     title: 'Vinicius Castelli · Engenharia de computação, genômica comparativa',
     description:
       'Vinicius Castelli cursa Engenharia de Computação na Poli-USP e escreve software de pesquisa para genômica comparativa no ICB-USP.',
-    aboutTitle: 'Datasheet · Vinicius Castelli',
+    aboutTitle: 'One Pager · Vinicius Castelli',
     aboutDescription:
-      'Datasheet de Vinicius Castelli: no que trabalho, valores medidos, ferramentas, histórico e como me encontrar.',
+      'One pager de Vinicius Castelli: no que trabalho, valores medidos, ferramentas, histórico e como me encontrar.',
   },
   ui: {
     skip: 'Ir para o conteúdo',
@@ -25,7 +25,7 @@ export const pt: Dict = {
     modes: { blueprint: 'Blueprint', paper: 'Papel', graphite: 'Grafite' },
     layers: 'Camadas',
     layerNames: { grid: 'Malha', dims: 'Cotas', notes: 'Anotações' },
-    datasheet: 'Datasheet',
+    datasheet: 'One Pager',
     fig: 'Fig.',
     rev: 'Rev. A',
     scale: 'Escala 1:1',
@@ -108,9 +108,8 @@ export const pt: Dict = {
     ],
   },
   aboutTeaser: {
-    title: 'Datasheet',
-    text: 'O resto está em uma página, montada como o datasheet de um componente: descrição, valores medidos, ferramentas, histórico.',
-    cta: 'Abrir o datasheet',
+    title: 'One Pager',
+    cta: 'Abrir o one pager',
   },
   contact: {
     title: 'Contato',

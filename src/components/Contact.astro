@@ -1,5 +1,5 @@
 ---
-// Sheet 04: contact drawn as a connector pinout, plus the way to the datasheet.
+// Sheet 04: contact drawn as a connector pinout, plus the way to the one pager.
 import type { Dict } from '../i18n/en';
 interface Props { t: Dict; teaser?: boolean }
 const { t, teaser = true } = Astro.props;
@@ -46,7 +46,6 @@ const py = (i: number) => 29 + ((i + 0.5) * 136) / c.pins.length;
         <aside class="panel j1-teaser" data-reveal>
           <p class="legend">VC-2026 · {t.ui.rev}</p>
           <h3>{t.aboutTeaser.title}</h3>
-          <p>{t.aboutTeaser.text}</p>
           <a class="btn" href={t.paths.about}>{t.aboutTeaser.cta} <span aria-hidden="true">→</span></a>
         </aside>
       )}

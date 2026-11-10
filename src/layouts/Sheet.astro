@@ -57,7 +57,7 @@ const zonesY = ['A', 'B', 'C', 'D', 'E', 'F'];
         {t.nav.map((n) => (
           <a class="tb-link" href={href(n.id)} data-nav={n.id}><span>{n.n}</span>{n.label}</a>
         ))}
-        <a class="tb-link" href={t.paths.about} aria-current={page === 'about' ? 'page' : undefined}><span>DS</span>{t.ui.datasheet}</a>
+        <a class="tb-link" href={t.paths.about} aria-current={page === 'about' ? 'page' : undefined}><span>OP</span>{t.ui.datasheet}</a>
       </nav>
       <div class="tb-tools">
         <div class="tb-readout mono" aria-hidden="true"><span data-xy>X 0000 · Y 0000</span><span data-pct>000 %</span></div>
@@ -92,7 +92,7 @@ const zonesY = ['A', 'B', 'C', 'D', 'E', 'F'];
         {t.nav.map((n) => (
           <a href={href(n.id)} data-close-menu><span class="mono">{n.n}</span>{n.label}</a>
         ))}
-        <a href={t.paths.about} data-close-menu><span class="mono">DS</span>{t.ui.datasheet}</a>
+        <a href={t.paths.about} data-close-menu><span class="mono">OP</span>{t.ui.datasheet}</a>
       </nav>
       <div class="menu-tools">
         <p class="legend">{t.ui.mode}</p>
