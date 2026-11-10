@@ -38,6 +38,7 @@
   --c-coomassie-claro: #DCE0F5;
   --c-coomassie-tinta: #C9CEF2;
   --c-marca-texto: #F2D43B;
+  --c-night: #0B1030;
 
   /* paper ground */
   --bg: var(--c-papel);

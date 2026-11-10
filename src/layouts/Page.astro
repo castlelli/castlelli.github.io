@@ -4,8 +4,8 @@ import Monogram from '../components/Monogram.astro';
 import type { Dict } from '../i18n/en';
 
 // A work page passes its own path and its translation's path in `paths`.
-interface Props { t: Dict; page: 'home' | 'about' | 'work'; paths?: { self: string; other: string } }
-const { t, page, paths } = Astro.props;
+interface Props { t: Dict; page: 'home' | 'about' | 'work'; paths?: { self: string; other: string }; dark?: boolean }
+const { t, page, paths, dark = false } = Astro.props;
 const title = page === 'about' ? t.meta.aboutTitle : t.meta.title;
 const description = page === 'about' ? t.meta.aboutDescription : t.meta.description;
 const self = paths?.self ?? (page === 'about' ? t.paths.about : t.paths.home);
@@ -15,7 +15,7 @@ const href = (id: string) => (page === 'home' ? `#${id}` : `${t.paths.home}#${id
 const otherLang = t.lang === 'en' ? 'pt-BR' : 'en';
 ---
 <!doctype html>
-<html lang={t.htmlLang}>
+<html lang={t.htmlLang} class={dark ? 'top-dark' : undefined}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -28,7 +28,7 @@ const otherLang = t.lang === 'en' ? 'pt-BR' : 'en';
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={new URL(self, site)} />
-    <meta name="theme-color" content="#F3F1EA" />
+    <meta name="theme-color" content={dark ? '#0B1030' : '#F3F1EA'} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preload" href="/fonts/source-serif-4-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/source-serif-4-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
@@ -100,6 +100,14 @@ const otherLang = t.lang === 'en' ? 'pt-BR' : 'en';
     border-bottom: 1px solid transparent; transition: border-color 0.3s;
   }
   :global(.scrolled) .rh { border-bottom-color: var(--c-tinta); }
+  /* over the film the running head goes dark, then returns to paper */
+  .rh { transition: border-color 0.3s, background-color 0.4s, color 0.4s; }
+  :global(.top-dark:not(.past-film)) .rh { background: color-mix(in srgb, var(--c-night) 88%, transparent); color: var(--c-papel); border-bottom-color: rgba(243, 241, 234, 0.14); }
+  :global(.top-dark:not(.past-film)) .rh-nav a, :global(.top-dark:not(.past-film)) .rh-place { color: var(--c-coomassie-tinta); }
+  :global(.top-dark:not(.past-film)) .rh-nav a:hover { color: var(--c-papel); }
+  :global(.top-dark:not(.past-film)) .rh-end { border-left-color: rgba(243, 241, 234, 0.2); }
+  :global(.top-dark:not(.past-film)) .rh-mark :global(.mono-vc path) { fill: var(--c-papel); }
+  :global(.top-dark:not(.past-film)) .rh-mark :global(.mono-vc g) { stroke: var(--c-coomassie-tinta); }
   .rh-in { display: flex; align-items: center; gap: 32px; height: 68px; font-family: var(--font-sans); font-size: 15px; }
   .rh-id { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 500; letter-spacing: 0.01em; }
   .rh-mark :global(.mono-vc) { height: 26px; width: auto; }

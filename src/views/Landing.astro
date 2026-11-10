@@ -1,6 +1,6 @@
 ---
 import Page from '../layouts/Page.astro';
-import Hero from '../components/Hero.astro';
+import Film from '../components/Film.astro';
 import Work from '../components/Work.astro';
 import Research from '../components/Research.astro';
 import Proof from '../components/Proof.astro';
@@ -9,8 +9,8 @@ import type { Dict } from '../i18n/en';
 interface Props { t: Dict }
 const { t } = Astro.props;
 ---
-<Page t={t} page="home">
-  <Hero t={t} />
+<Page t={t} page="home" dark>
+  <Film t={t} />
   <Work t={t} />
   <Research t={t} />
   <Proof t={t} />
