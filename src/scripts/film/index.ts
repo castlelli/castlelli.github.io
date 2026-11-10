@@ -32,14 +32,14 @@ if (section && canvas && !reduce && !saveData && webgl()) {
   const rail = Array.from(section.querySelectorAll<HTMLElement>('[data-rail]'));
   const railAt = [0, 0.24, 0.31, 0.4, 0.56, 0.86];
 
-  // the beats fade and lift as they cross the middle of the screen
+  // the beats fade in and out as they cross the middle of the screen
   section.querySelectorAll<HTMLElement>('[data-beat]').forEach((b, i) => {
     if (i === 0) {
-      gsap.to(b, { opacity: 0, y: -60, ease: 'none', scrollTrigger: { trigger: b, start: 'bottom 70%', end: 'bottom 20%', scrub: true } });
+      gsap.to(b, { opacity: 0, ease: 'none', scrollTrigger: { trigger: b, start: 'bottom 70%', end: 'bottom 20%', scrub: true } });
       return;
     }
-    gsap.fromTo(b.children, { opacity: 0, y: 48 }, { opacity: 1, y: 0, stagger: 0.08, ease: 'power2.out', scrollTrigger: { trigger: b, start: 'top 75%', end: 'top 35%', scrub: true } });
-    gsap.to(b.children, { opacity: 0, y: -40, ease: 'none', immediateRender: false, scrollTrigger: { trigger: b, start: 'bottom 45%', end: 'bottom 10%', scrub: true } });
+    gsap.fromTo(b.children, { opacity: 0 }, { opacity: 1, stagger: 0.08, ease: 'power1.inOut', scrollTrigger: { trigger: b, start: 'top 75%', end: 'top 35%', scrub: true } });
+    gsap.to(b.children, { opacity: 0, ease: 'power1.inOut', immediateRender: false, scrollTrigger: { trigger: b, start: 'bottom 45%', end: 'bottom 10%', scrub: true } });
   });
 
   document.fonts?.ready.then(async () => {
