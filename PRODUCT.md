@@ -36,7 +36,7 @@ A serious engineer, builder and researcher at once, spanning biology and health,
 - Pages: landing, One Pager (`/about/`, `/pt/sobre/`), one page per project (`/work/<slug>/`).
 - Must work without JavaScript; content visible by default.
 - Self-hosted fonts in `public/fonts/`; no third-party font or script hosts.
-- GSAP is available as a dependency.
+- GSAP (with ScrollTrigger, SplitText, DrawSVG) and three.js 0.186.1 are dependencies; the WebGL film loads lazily and degrades to static content without WebGL, with reduced motion or with data saver.
 - Text on the site is reviewed with the humanizer skill; facts are not altered without the author's approval.
 - Commits carry no co-author lines.
 
@@ -56,8 +56,11 @@ A serious engineer, builder and researcher at once, spanning biology and health,
 - Vildagliptin for skin fibrosis: Cortellis Drug Repositioning Hackathon 2026-08, co-led analysis, live project page and source.
 - Duffing oscillator, live in-browser simulation.
 - VivaPay: 5,000+ users, 10,000 transactions over 3 days. NxCoop CRM: 10,000+ users (as intern). AccessPlus: 5,000+ opportunities, led a team of 8.
+- Real figure data for the vildagliptin study, copied with source notes into `src/data/vildagliptin/` from castlelli/vildagliptin-for-sclerosis (values read from published figures, approximate).
 
-Absent, never to be fabricated: a portrait photo (placeholder until supplied), published papers, awards, testimonials, employer logos.
+Pending from the author: a portrait (`public/photos/portrait.jpg`) and 2–3 bench photos (`public/photos/bench-1.jpg` …); slots fall back to the monogram or collapse until then. The "three questions" copy is a draft built only from facts on the site; the author will write their own motivation.
+
+Absent, never to be fabricated: published papers, awards, testimonials, employer logos, motivations the author has not stated.
 
 ## Product Principles
 
