@@ -9,9 +9,12 @@ const plates = Array.from(document.querySelectorAll<HTMLElement>('[data-plate]')
 
 if (!reduce && 'IntersectionObserver' in window) {
   const io = new IntersectionObserver((entries) => {
-    for (const en of entries) if (en.isIntersecting) { en.target.classList.remove('pending'); en.target.classList.add('run'); io.unobserve(en.target); }
+    // watch the figure, not the plate: a clipped plate never counts as visible
+    for (const en of entries) if (en.isIntersecting) {
+      const p = en.target.querySelector('[data-plate]'); p?.classList.remove('pending'); p?.classList.add('run'); io.unobserve(en.target);
+    }
   }, { threshold: 0.2 });
-  plates.forEach((p) => { p.classList.add('pending'); io.observe(p); });
+  plates.forEach((p) => { p.classList.add('pending'); io.observe(p.parentElement ?? p); });
 }
 
 if (!reduce && matchMedia('(hover: hover) and (pointer: fine)').matches) {
