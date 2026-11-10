@@ -1,7 +1,8 @@
 ---
 name: Vinicius Castelli
-description: A personal site set like the first page of a landmark technical paper, with Coomassie figure plates.
+description: A personal site that opens with a live, scroll-driven macro film, from a circuit board to a protein to an attractor, then sets the work on paper with Coomassie plates.
 colors:
+  night: "#0B1030"
   papel: "#F3F1EA"
   papel-elevado: "#FBFAF6"
   tinta: "#16181D"
@@ -12,13 +13,22 @@ colors:
   coomassie-claro: "#DCE0F5"
   coomassie-tinta: "#C9CEF2"
   marca-texto: "#F2D43B"
+  data-cool: "#6F86F6"
+  data-mid: "#8A8FA8"
+  data-copper: "#CF7836"
 typography:
-  display:
+  film-display:
     fontFamily: "Source Serif 4, Georgia, serif"
-    fontSize: "clamp(56px, 7.4vw, 104px)"
+    fontSize: "clamp(64px, 10vw, 168px)"
     fontWeight: 600
-    lineHeight: 0.94
-    letterSpacing: "-0.028em"
+    lineHeight: 0.88
+    letterSpacing: "-0.035em"
+  film-question:
+    fontFamily: "Source Serif 4, Georgia, serif"
+    fontSize: "clamp(40px, 5.6vw, 92px)"
+    fontWeight: 400
+    lineHeight: 1.02
+    letterSpacing: "-0.025em"
   headline:
     fontFamily: "Source Serif 4, Georgia, serif"
     fontSize: "clamp(32px, 3.6vw, 46px)"
@@ -41,6 +51,7 @@ typography:
     fontWeight: 500
 rounded:
   none: "0px"
+  data-end: "4px"
 spacing:
   1: "4px"
   2: "8px"
@@ -63,6 +74,9 @@ components:
     backgroundColor: "{colors.coomassie}"
     textColor: "{colors.papel}"
     rounded: "{rounded.none}"
+  film-stage:
+    backgroundColor: "{colors.night}"
+    textColor: "{colors.papel}"
   segmented-control-on:
     backgroundColor: "{colors.tinta}"
     textColor: "{colors.papel}"
@@ -74,115 +88,105 @@ components:
 
 ## Overview
 
-**Creative North Star: "The Technical Journal"**
+**Creative North Star: "The Macro Film"**
 
-The site reads like page one of a paper from the Bell System Technical Journal era: a running head, a title set large in serif, an italic byline and abstract, numbered sections, figures with "Fig. n." captions and tables with "Table n." captions above them. The person is the subject and the projects are the contents. Paper carries the reading; blueprint appears only where there is a figure to look at or a drawing to operate.
+The landing is one continuous shot the visitor drives by scrolling, lit like a product film: a Coomassie-masked dev board with gold copper on a night studio floor, a dive into its OLED, one protein sequence that becomes a wall of many, the first sequence lifting off to fold into a cartoon-ribbon protein, and the protein dissolving into the forced Duffing attractor drawn in its true phase space. Text scrolls over the film as questions and short answers; a six-step rail on the right names where you are.
 
-Density is that of a well-set journal page: generous margins, a 62-character measure, three or four type sizes per page, and hierarchy that comes from space and position more than size. The old drawing-sheet chrome (zone frames, crosshairs, coordinate readouts, print modes, title blocks, parts lists) was rejected by the author as too robotic and is not part of this system.
+After the film the page returns to paper. The work is set editorially, each project with a Coomassie figure plate; the research drawings live on one full-bleed plate; the close is a plate too. The film is the spectacle; everything after it is calm, precise and readable, so the spectacle reads as earned.
 
 **Key Characteristics:**
-- Papel ground with tinta ink; Coomassie only as figure plates and full-bleed plate sections.
-- Source Serif 4 carries the voice; IBM Plex Sans for labels; IBM Plex Mono only for data in transit.
-- Figures are real: computed or drawn by the author, captioned like a paper.
-- Square corners everywhere; hairline rules in place of boxes.
+- Night studio film first (WebGL, three.js), papel and Coomassie plates after.
+- Every figure is real or labelled: computed attractors, figure data copied from the project's own repository, illustrations stated as such.
+- Source Serif 4 carries the voice; IBM Plex Sans labels; IBM Plex Mono only for sequences and data.
+- Motion has one grammar: scroll-scrubbed scenes, draw-ins on entry, nothing that loops for decoration except the film's own signals.
 
 ## Colors
 
-One saturated blue against warm paper, with a single highlighter yellow held in reserve.
+A night studio and warm paper, held together by Coomassie, with one highlighter yellow and one copper for data.
 
 ### Primary
-- **Coomassie** (coomassie): the plate. Fills figure panels and the two plate sections (research drawings, correspondence). Also the link and list-marker accent on paper.
-- **Deep Coomassie** (coomassie-fundo) and **Pale Coomassie Ink** (coomassie-tinta): secondary tones inside plates; coomassie-tinta is muted text and figure labels on blue.
+- **Coomassie** (coomassie): figure plates, plate sections, the board's solder mask.
+- **Night** (night): the film's studio ground and fog.
+- **Pale Coomassie Ink** (coomassie-tinta): muted text over night and plates.
 
 ### Secondary
-- **Marca-texto** (marca-texto): the way into a project. Nothing else.
+- **Marca-texto** (marca-texto): the way into a project (contents chips, "Open" buttons, the primary project link), plus selection and focus on dark grounds.
+
+### Tertiary
+- **Data cool / mid / copper** (data-cool, data-mid, data-copper): the one diverging scale for figures on a plate, validated for CVD separation and contrast against Coomassie. Copper echoes the board's traces.
 
 ### Neutral
-- **Papel** (papel): the page ground and the line work on plates.
-- **Papel elevado** (papel-elevado): reserved lighter paper.
-- **Tinta** (tinta): body text, strong rules (table tops, running head on scroll, section rules).
-- **Grafite** (grafite): secondary text, captions, metadata on paper.
-- **Linha** (linha): hairline dividers between rows and entries.
+- **Papel**, **Tinta**, **Grafite**, **Linha**: page ground, text, secondary text, hairlines.
 
 ### Named Rules
-**The Marca-texto Rule.** Yellow marks the way into a project (contents chips, "Open" buttons, the primary project link) plus text selection and plate focus rings. It never decorates a figure, a heading or a chart line.
+**The Marca-texto Rule.** Yellow marks the way into a project and nothing else on the page. Data never uses it; the film never uses it.
 
-**The Earned Blue Rule.** Coomassie appears where there is a figure to read or a drawing to operate. A paper section never gets a blue background just for variety.
+**The Earned Blue Rule.** Coomassie appears as the board, as figure plates and as plate sections. A paper section never turns blue for variety.
 
 ## Typography
 
 **Display Font:** Source Serif 4 (with Georgia)
 **Body Font:** Source Serif 4 (with Georgia)
-**Label/Mono Font:** IBM Plex Sans for labels and UI; IBM Plex Mono for data
+**Label/Mono Font:** IBM Plex Sans for labels and UI; IBM Plex Mono for sequences, bits and data
 
-**Character:** A sober book serif doing almost everything, with a neutral grotesque for the small print around it, like a journal's body type and its captions set by the same compositor.
+**Character:** A book serif set huge over the film, then at reading size on paper; a neutral grotesque for the small print.
 
 ### Hierarchy
-- **Display** (600, clamp(56px, 7.4vw, 104px), 0.94): the name on the front page and the title of a CV or project page.
-- **Headline** (400, clamp(32px, 3.6vw, 46px), 1.08): section heads, with a small Plex Sans roman numeral inline before them (I, II, III, IV) on the landing.
-- **Body** (400, clamp(17px, 1.25vw, 19px), 1.6): prose at max 62ch; abstracts and summaries in italic.
-- **Label** (500, 13–15px): metadata keys, table heads, nav, buttons, in sentence case. Uppercase with 0.14em tracking only for the single "Contents" label and the block labels inside Fig. 1.
-- **Data** (IBM Plex Mono 500, 13px): only for signals inside figures (bases, bits). Never for headings or labels.
+- **Film display** (600, clamp(64px, 10vw, 168px), 0.88): the name, revealed letter by letter on load.
+- **Film question** (400, clamp(40px, 5.6vw, 92px), 1.02): the three questions over the film.
+- **Headline** (400, clamp(32px, 3.6vw, 46px), 1.08): section heads on paper, with a small inline roman numeral.
+- **Body** (400, clamp(17px, 1.25vw, 19px), 1.6): prose at max 62ch; summaries and captions in italic.
+- **Label** (500, 13–15px): metadata, nav, buttons, table heads, in sentence case.
 
 ### Named Rules
-**The Three Sizes Rule.** A page uses display, headline, body and caption sizes and nothing between them. Rank comes from space and position.
-
-**The Italic Abstract Rule.** Bylines, abstracts, summaries and figure-label prose are italic serif; that is how this world says "about the thing" rather than "the thing".
+**The No Eyebrow Rule.** Nothing sits above a heading. The film's rail lives at the edge, never over the text.
 
 ## Layout
 
-A centered column up to 1280px wide, with 16px side gutters on phones and 72px from 900px up. Sections are separated by a large vertical rhythm (clamp(88px, 11vw, 168px)); two paper sections in a row share one gap. The landing alternates grounds: hero and selected work on paper, research as a full-bleed plate, the software table on paper, correspondence on a plate.
-
-Two-column compositions appear from about 960–1060px: hero text beside Fig. 1; each project as figure plus abstract, alternating sides, with the figure always in the wider column. The research plate uses a 6-column grid: two panels of 3 above, three panels of 2 below. Below those widths everything stacks, and tables become stacked records under 720px.
+The film is a 900svh-tall section with a sticky 100svh stage; beats are placed so each lands on its scene (≈0.16 board, 0.46 alignment, 0.69 fold, 0.97 attractor). A left-to-right scrim keeps text legible over the scene. After the film: a centered column up to 1280px with 16px gutters on phones and 72px from 900px; sections separated by clamp(88px, 11vw, 168px). Projects alternate figure and text with the figure always in the wider column; the research plate is a 6-column grid (3+3 above, 2+2+2 below); tables become stacked records under 720px. On phones the film runs in a light mode (no depth of field or bloom, DPR 1, wider lens) and the rail hides.
 
 ## Elevation & Depth
 
-Flat. There are no drop shadows; the only box-shadow is a 1px inset hairline (rgba(22, 24, 29, 0.08)) that crisps a plate's edge on paper. Depth comes from ground changes (paper against Coomassie) and from rule weight: 1.5px tinta for structural rules, 1px linha for row dividers. The running head gets a backdrop blur and its tinta rule only once the page scrolls.
+Depth lives inside the film: physically based materials, an environment map, a warm key with shadows, a cool rim, depth of field, bloom and grain. The paper page is flat: no drop shadows, only a 1px inset hairline on plates, a slight tilt and a soft light under the pointer on project plates.
 
 ### Named Rules
-**The Paper Has No Shadows Rule.** Nothing lifts off the page. A plate is a printed figure, not a card.
+**The Paper Has No Shadows Rule.** After the film, nothing lifts off the page except the plate you are pointing at, by a few degrees.
 
 ## Shapes
 
-Square corners throughout (0px). Rules in place of boxes: tables are open-sided with heavier top and bottom rules, lists are separated by hairlines, the segmented control is a 1px outline with filled selected state. The only drawn icon is a 1.5px round-capped arrow in three directions (in, back, out).
+Square corners on paper and plates (0px). Data bars end in 4px rounded caps anchored at the baseline. The drawn arrow (1.5px, round caps) is the only icon.
 
 ## Components
 
-### Buttons
-- **Shape:** square (0px), 44px tall.
-- **Primary (go):** marca-texto fill, tinta text, Plex Sans 500 15px, 0 18px padding, arrow icon after the label.
-- **Hover / Focus:** the gap before the arrow widens from 10px to 16px; focus is a 2px Coomassie outline on paper, marca-texto on plates.
-- **Quiet link:** Plex Sans 500 15px, no fill, underline on hover; used for Source, back links and the one-pager link.
+### Film
+- **Stage:** night ground, WebGL canvas fading in over a still poster; disabled without WebGL, under reduced motion or with data saver, where beats stack as plain sections.
+- **Beats:** large serif question, short answer, entering and leaving with a lift and fade scrubbed to scroll.
+- **Rail:** six labels, right edge, the current one lit with a longer tick.
 
-### Contents entry
-A row with a number, the title in serif, the summary in Plex Sans under it, and a yellow "Open" chip at the end. Hairline between rows, a tinta rule above the list.
+### Buttons
+- **Go (primary):** marca-texto fill, tinta text, Plex Sans 500 15px, 44px tall, drawn arrow; the gap before the arrow widens on hover.
+- **Quiet link:** Plex Sans 500 15px, underline on hover.
 
 ### Figure plate
-- **Background:** coomassie, papel line work at 1.3–1.6px non-scaling strokes.
-- **Padding:** clamp(20px, 3.6vw, 52px).
-- **Caption:** below, serif 16px grafite, figure number in bold tinta ("Fig. 2.").
-- **Motion:** draws in once when it enters the viewport (boxes stroke in, points build up); signals loop slowly. Everything is complete and static under reduced motion or without JavaScript.
+Coomassie panel, papel line work at non-scaling 1–1.6px, numbered caption below in serif. Plates wipe open on entry; the Duffing points build up in integration order as you scroll; the PAGA graph draws edges, then nodes, then the DPP4 branch, with hover and focus tooltips and a table view.
 
-### Journal table
-Caption above ("Table 1." bold), Plex Sans 13px column heads between a 1.5px top rule and a 1px rule, rows on 1px linha, a 1.5px bottom rule. Numbers right-aligned with tabular lining figures.
-
-### Segmented control
-1px outline, Plex Sans 13px; the pressed state fills with tinta (on paper) or papel with Coomassie text (on plates).
+### Number ticker
+Any numeric value marked for it counts up once on entry with tabular figures and locked width; below the fold it waits at zero; static under reduced motion.
 
 ### Navigation
-A running head: monogram and name on the left; Work, Research, Contact, One Pager in grafite Plex Sans, tinta on hover; place and language switch after a hairline divider. Under 900px it collapses to a "Menu" button that opens a full-screen paper dialog with large serif links.
+A running head: dark and translucent over the film, paper after it; monogram, name, four links, place and language.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** give every figure a numbered caption and make it real: computed, measured or drawn by the author.
-- **Do** keep Coomassie to plates and plate sections, and marca-texto to project entry points.
-- **Do** set abstracts, bylines and summaries in italic Source Serif 4.
-- **Do** keep every figure legible at 390px; scale SVG text up on narrow screens when the plate shrinks.
+- **Do** keep every figure honest: computed, copied from its source with the source's caveats, or labelled as an illustration.
+- **Do** time scroll text to the film's scenes and keep it on the scrim side of the frame.
+- **Do** validate any data palette against the plate before using it.
+- **Do** keep the page complete without JavaScript or WebGL.
 
 ### Don't:
-- **Don't** bring back the drawing-sheet chrome: zone frames, crosshairs, X/Y readouts, title blocks, parts lists, print-mode switches.
-- **Don't** tile the blueprint grid on paper sections; the faint grid lives only inside plate sections.
-- **Don't** use Plex Mono for labels or headings, or uppercase tracked labels above headings.
-- **Don't** add shadows, rounded cards or big-number stat tiles.
-- **Don't** use Unicode arrows or emoji as icons; use the drawn arrow.
+- **Don't** bring back drawing-sheet chrome (zone frames, crosshairs, coordinate readouts, title blocks, print modes).
+- **Don't** use marca-texto in figures or the film.
+- **Don't** put labels above headings or use Plex Mono for headings.
+- **Don't** add drop shadows or rounded cards on paper.
+- **Don't** use Unicode arrows or emoji as icons.

@@ -1,38 +1,165 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-10T13:45:00-03:00",
+  "generatedAt": "2026-11-10T14:55:00-03:00",
   "title": "Design System: Vinicius Castelli",
   "extensions": {
     "colorMeta": {
-      "coomassie": { "role": "primary", "displayName": "Coomassie", "canonical": "#24338F", "tonalRamp": ["#0F1640", "#172159", "#1E2B7A", "#24338F", "#4A57A6", "#8F98CC", "#C9CEF2", "#EEF0FB"] },
-      "coomassie-fundo": { "role": "primary", "displayName": "Deep Coomassie", "canonical": "#1E2B7A" },
-      "coomassie-tinta": { "role": "primary", "displayName": "Pale Coomassie Ink", "canonical": "#C9CEF2" },
-      "coomassie-claro": { "role": "primary", "displayName": "Coomassie Wash", "canonical": "#DCE0F5" },
-      "marca-texto": { "role": "secondary", "displayName": "Marca-texto", "canonical": "#F2D43B", "tonalRamp": ["#4A3E08", "#7A6610", "#B39618", "#E0BE2A", "#F2D43B", "#F6E07A", "#FAEDB4", "#FDF8E3"] },
-      "papel": { "role": "neutral", "displayName": "Papel", "canonical": "#F3F1EA" },
-      "papel-elevado": { "role": "neutral", "displayName": "Papel elevado", "canonical": "#FBFAF6" },
-      "tinta": { "role": "neutral", "displayName": "Tinta", "canonical": "#16181D" },
-      "grafite": { "role": "neutral", "displayName": "Grafite", "canonical": "#55575C" },
-      "linha": { "role": "neutral", "displayName": "Linha", "canonical": "#CFCBBF" }
+      "coomassie": {
+        "role": "primary",
+        "displayName": "Coomassie",
+        "canonical": "#24338F",
+        "tonalRamp": [
+          "#0F1640",
+          "#172159",
+          "#1E2B7A",
+          "#24338F",
+          "#4A57A6",
+          "#8F98CC",
+          "#C9CEF2",
+          "#EEF0FB"
+        ]
+      },
+      "coomassie-fundo": {
+        "role": "primary",
+        "displayName": "Deep Coomassie",
+        "canonical": "#1E2B7A"
+      },
+      "coomassie-tinta": {
+        "role": "primary",
+        "displayName": "Pale Coomassie Ink",
+        "canonical": "#C9CEF2"
+      },
+      "coomassie-claro": {
+        "role": "primary",
+        "displayName": "Coomassie Wash",
+        "canonical": "#DCE0F5"
+      },
+      "marca-texto": {
+        "role": "secondary",
+        "displayName": "Marca-texto",
+        "canonical": "#F2D43B",
+        "tonalRamp": [
+          "#4A3E08",
+          "#7A6610",
+          "#B39618",
+          "#E0BE2A",
+          "#F2D43B",
+          "#F6E07A",
+          "#FAEDB4",
+          "#FDF8E3"
+        ]
+      },
+      "papel": {
+        "role": "neutral",
+        "displayName": "Papel",
+        "canonical": "#F3F1EA"
+      },
+      "papel-elevado": {
+        "role": "neutral",
+        "displayName": "Papel elevado",
+        "canonical": "#FBFAF6"
+      },
+      "tinta": {
+        "role": "neutral",
+        "displayName": "Tinta",
+        "canonical": "#16181D"
+      },
+      "grafite": {
+        "role": "neutral",
+        "displayName": "Grafite",
+        "canonical": "#55575C"
+      },
+      "linha": {
+        "role": "neutral",
+        "displayName": "Linha",
+        "canonical": "#CFCBBF"
+      },
+      "night": {
+        "role": "primary",
+        "displayName": "Night",
+        "canonical": "#0B1030"
+      },
+      "data-cool": {
+        "role": "tertiary",
+        "displayName": "Data cool",
+        "canonical": "#6F86F6"
+      },
+      "data-mid": {
+        "role": "tertiary",
+        "displayName": "Data mid",
+        "canonical": "#8A8FA8"
+      },
+      "data-copper": {
+        "role": "tertiary",
+        "displayName": "Data copper",
+        "canonical": "#CF7836"
+      }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "The name on the front page; page titles." },
-      "headline": { "displayName": "Headline", "purpose": "Section heads, with an inline roman numeral on the landing." },
-      "body": { "displayName": "Body", "purpose": "Prose at 62ch; italic for abstracts and summaries." },
-      "label": { "displayName": "Label", "purpose": "Metadata, table heads, nav and buttons, sentence case." },
-      "data": { "displayName": "Data", "purpose": "Signals inside figures only." }
+      "film-display": {
+        "displayName": "Film display",
+        "purpose": "The name over the film, set letter by letter on load."
+      },
+      "film-question": {
+        "displayName": "Film question",
+        "purpose": "The three questions over the film."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section heads on paper."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Prose at 62ch; italic for summaries and captions."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Metadata, nav, buttons, table heads."
+      },
+      "data": {
+        "displayName": "Data",
+        "purpose": "Sequences, bits and data values only."
+      }
     },
     "shadows": [],
     "motion": [
-      { "name": "ease-out-expo", "value": "cubic-bezier(0.2, 0.8, 0.2, 1)", "purpose": "Arrow gap on buttons; figure points building up." },
-      { "name": "ease-draw", "value": "cubic-bezier(0.65, 0, 0.35, 1)", "purpose": "Fig. 1 boxes stroking in, 1.1s, staggered 160ms." }
+      {
+        "name": "film-progress",
+        "value": "scroll progress smoothed 1 − 0.0015^dt",
+        "purpose": "The film follows the scroll with inertia."
+      },
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.2, 0.8, 0.2, 1)",
+        "purpose": "Arrow gaps, tilts, plate light."
+      },
+      {
+        "name": "wipe",
+        "value": "cubic-bezier(0.76, 0, 0.24, 1) 1.1s",
+        "purpose": "Work plates opening on entry."
+      }
     ],
     "breakpoints": [
-      { "name": "table-stack", "value": "719px" },
-      { "name": "nav", "value": "900px" },
-      { "name": "two-column", "value": "960px" },
-      { "name": "research-grid", "value": "1000px" },
-      { "name": "hero-split", "value": "1060px" }
+      {
+        "name": "table-stack",
+        "value": "719px"
+      },
+      {
+        "name": "nav",
+        "value": "900px"
+      },
+      {
+        "name": "two-column",
+        "value": "960px"
+      },
+      {
+        "name": "research-grid",
+        "value": "1000px"
+      },
+      {
+        "name": "hero-split",
+        "value": "1060px"
+      }
     ]
   },
   "components": [
@@ -83,33 +210,48 @@
     }
   ],
   "narrative": {
-    "northStar": "The Technical Journal",
-    "overview": "The site reads like page one of a paper from the Bell System Technical Journal era: a running head, a title set large in serif, an italic byline and abstract, numbered sections, figures with \"Fig. n.\" captions and tables with \"Table n.\" captions above them. The person is the subject and the projects are the contents. Paper carries the reading; blueprint appears only where there is a figure to look at or a drawing to operate.\n\nDensity is that of a well-set journal page: generous margins, a 62-character measure, three or four type sizes per page, and hierarchy that comes from space and position more than size. The old drawing-sheet chrome (zone frames, crosshairs, coordinate readouts, print modes, title blocks, parts lists) was rejected by the author as too robotic and is not part of this system.",
+    "northStar": "The Macro Film",
+    "overview": "The landing is one continuous shot the visitor drives by scrolling, lit like a product film: a Coomassie-masked dev board with gold copper on a night studio floor, a dive into its OLED, one protein sequence that becomes a wall of many, the first sequence lifting off to fold into a cartoon-ribbon protein, and the protein dissolving into the forced Duffing attractor drawn in its true phase space. Text scrolls over the film as questions and short answers; a six-step rail on the right names where you are.\n\nAfter the film the page returns to paper. The work is set editorially, each project with a Coomassie figure plate; the research drawings live on one full-bleed plate; the close is a plate too. The film is the spectacle; everything after it is calm, precise and readable, so the spectacle reads as earned.",
     "keyCharacteristics": [
-      "Papel ground with tinta ink; Coomassie only as figure plates and full-bleed plate sections.",
-      "Source Serif 4 carries the voice; IBM Plex Sans for labels; IBM Plex Mono only for data in transit.",
-      "Figures are real: computed or drawn by the author, captioned like a paper.",
-      "Square corners everywhere; hairline rules in place of boxes."
+      "Night studio film first (WebGL, three.js), papel and Coomassie plates after.",
+      "Every figure is real or labelled: computed attractors, figure data copied from the project's own repository, illustrations stated as such.",
+      "Source Serif 4 carries the voice; IBM Plex Sans labels; IBM Plex Mono only for sequences and data.",
+      "Motion has one grammar: scroll-scrubbed scenes, draw-ins on entry, nothing that loops for decoration except the film's own signals."
     ],
     "rules": [
-      { "name": "The Marca-texto Rule", "body": "Yellow marks the way into a project (contents chips, \"Open\" buttons, the primary project link) plus text selection and plate focus rings. It never decorates a figure, a heading or a chart line.", "section": "colors" },
-      { "name": "The Earned Blue Rule", "body": "Coomassie appears where there is a figure to read or a drawing to operate. A paper section never gets a blue background just for variety.", "section": "colors" },
-      { "name": "The Three Sizes Rule", "body": "A page uses display, headline, body and caption sizes and nothing between them. Rank comes from space and position.", "section": "typography" },
-      { "name": "The Italic Abstract Rule", "body": "Bylines, abstracts, summaries and figure-label prose are italic serif; that is how this world says \"about the thing\" rather than \"the thing\".", "section": "typography" },
-      { "name": "The Paper Has No Shadows Rule", "body": "Nothing lifts off the page. A plate is a printed figure, not a card.", "section": "elevation" }
+      {
+        "name": "The Marca-texto Rule",
+        "body": "Yellow marks the way into a project and nothing else on the page. Data never uses it; the film never uses it.",
+        "section": "colors"
+      },
+      {
+        "name": "The Earned Blue Rule",
+        "body": "Coomassie appears as the board, as figure plates and as plate sections. A paper section never turns blue for variety.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Eyebrow Rule",
+        "body": "Nothing sits above a heading. The film's rail lives at the edge, never over the text.",
+        "section": "typography"
+      },
+      {
+        "name": "The Paper Has No Shadows Rule",
+        "body": "After the film, nothing lifts off the page except the plate you are pointing at, by a few degrees.",
+        "section": "elevation"
+      }
     ],
     "dos": [
-      "Do give every figure a numbered caption and make it real: computed, measured or drawn by the author.",
-      "Do keep Coomassie to plates and plate sections, and marca-texto to project entry points.",
-      "Do set abstracts, bylines and summaries in italic Source Serif 4.",
-      "Do keep every figure legible at 390px; scale SVG text up on narrow screens when the plate shrinks."
+      "Do keep every figure honest: computed, copied from its source with the source's caveats, or labelled as an illustration.",
+      "Do time scroll text to the film's scenes and keep it on the scrim side of the frame.",
+      "Do validate any data palette against the plate before using it.",
+      "Do keep the page complete without JavaScript or WebGL."
     ],
     "donts": [
-      "Don't bring back the drawing-sheet chrome: zone frames, crosshairs, X/Y readouts, title blocks, parts lists, print-mode switches.",
-      "Don't tile the blueprint grid on paper sections; the faint grid lives only inside plate sections.",
-      "Don't use Plex Mono for labels or headings, or uppercase tracked labels above headings.",
-      "Don't add shadows, rounded cards or big-number stat tiles.",
-      "Don't use Unicode arrows or emoji as icons; use the drawn arrow."
+      "Don't bring back drawing-sheet chrome (zone frames, crosshairs, coordinate readouts, title blocks, print modes).",
+      "Don't use marca-texto in figures or the film.",
+      "Don't put labels above headings or use Plex Mono for headings.",
+      "Don't add drop shadows or rounded cards on paper.",
+      "Don't use Unicode arrows or emoji as icons."
     ]
   }
 }
