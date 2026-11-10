@@ -7,7 +7,7 @@ summary: Um remédio para diabetes pode acalmar as células que endurecem a pele
 role: Análise (colíder), pitch
 dates: 2026-08
 status: no ar
-figure: fibrosis
+figure: paga
 stack: [Python, Scanpy, PAGA, decoupler, STRING, PK/PD, Redes, PubMed, D3, Astro]
 dims:
   - { label: evidências, value: "7", unit: camadas }

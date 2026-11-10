@@ -2,15 +2,15 @@
 // The figure a project carries, by name. Projects without one show the
 // author's mark, so a new entry never breaks the page.
 import Phase from './figures/Phase.astro';
-import Fibrosis from './figures/Fibrosis.astro';
+import Paga from './figures/Paga.astro';
 import Monogram from './Monogram.astro';
 import type { Dict } from '../i18n/en';
-interface Props { t: Dict; figure?: 'phase' | 'fibrosis' }
+interface Props { t: Dict; figure?: 'phase' | 'paga' }
 const { t, figure } = Astro.props;
 const f = t.work.figs;
 ---
 {figure === 'phase' && <Phase alt={f.phase.alt} />}
-{figure === 'fibrosis' && <Fibrosis alt={f.fibrosis.alt} labels={f.fibrosis.labels} />}
+{figure === 'paga' && <Paga t={t} />}
 {!figure && <div class="fig-mark" data-ground="plate"><Monogram /></div>}
 
 <style>

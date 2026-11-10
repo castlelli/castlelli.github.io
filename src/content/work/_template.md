@@ -9,7 +9,7 @@ role: The real size of my role
 dates: 2026-02 → 2026-10
 status: live
 pending: false
-# figure: phase | fibrosis   (optional; add a component in src/components/figures/ for a new one)
+# figure: phase | paga   (optional; add a component in src/components/figures/ for a new one)
 stack: [Python, CLI, CI, Docs]
 dims:
   - { label: size, value: "~200", unit: tools }

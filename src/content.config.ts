@@ -18,7 +18,7 @@ const work = defineCollection({
     status: z.string(),
     pending: z.boolean().default(false),
     /** the figure drawn for the project; projects without one show the author's mark */
-    figure: z.enum(['phase', 'fibrosis']).optional(),
+    figure: z.enum(['phase', 'paga']).optional(),
     /** methods and tools, listed on the project page */
     stack: z.array(z.string()).max(12).default([]),
     /** up to 3 key numbers with units */
