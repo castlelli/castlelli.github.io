@@ -36,24 +36,11 @@ import Arrow from '../components/Arrow.astro';
       </section>
     </div>
 
-    <section class="cv-sec" aria-labelledby="cv-num">
-      <h2 class="cv-h" id="cv-num">{s.measurements}</h2>
-      <div class="table-scroll" tabindex="0" role="region" aria-labelledby="cv-num">
-        <table class="jtable cv-table">
-          <caption><b>{t.ui.table} 1.</b> {a.measCaption}</caption>
-          <thead><tr><th scope="col">{a.measHead[0]}</th><th scope="col" class="num">{a.measHead[1]}</th><th scope="col">{a.measHead[2]}</th><th scope="col">{a.measHead[3]}</th></tr></thead>
-          <tbody>
-            {a.measurements.map((r) => <tr><td>{r.p}</td><td class="num cv-v"><span data-count>{r.v}</span></td><td class="cv-u">{r.u}</td><td class="note">{r.c}</td></tr>)}
-          </tbody>
-        </table>
-      </div>
-    </section>
-
     <section class="cv-sec" aria-labelledby="cv-op">
       <h2 class="cv-h" id="cv-op">{s.operating}</h2>
       <div class="table-scroll" tabindex="0" role="region" aria-labelledby="cv-op">
         <table class="jtable cv-table">
-          <caption><b>{t.ui.table} 2.</b> {a.opCaption}</caption>
+          <caption><b>{t.ui.table} 1.</b> {a.opCaption}</caption>
           <thead><tr><th scope="col">{a.opHead[0]}</th><th scope="col">{a.opHead[1]}</th><th scope="col">{a.opHead[2]}</th></tr></thead>
           <tbody>
             {a.operating.map((r) => <tr><td>{r.p}</td><td>{r.v}</td><td class="note">{r.c}</td></tr>)}
@@ -102,8 +89,6 @@ import Arrow from '../components/Arrow.astro';
   .cv-list { margin: 0; padding: 0 0 0 1.1em; display: grid; gap: 12px; }
   .cv-list li::marker { color: var(--accent); }
   .cv-table { min-width: 620px; }
-  .cv-v { font-size: 22px; }
-  .cv-u { font: 14px var(--font-sans); color: var(--muted); }
   .cv-refs { margin: 0; padding-left: 1.6em; display: grid; gap: 14px; }
   .cv-refs li::marker { font: 500 14px var(--font-sans); color: var(--muted); }
   .cv-status { font: 500 13px var(--font-sans); color: var(--muted); margin-left: 6px; white-space: nowrap; }
