@@ -58,7 +58,6 @@ export const en = {
   },
   work: {
     title: 'Work',
-    lead: 'Each project gets its own part drawing: what it connects to, what it does, what I did.',
     reserved: 'Sheet reserved',
     inPrep: 'in preparation',
     tpl: { part: 'Part', role: 'Role', dates: 'Dates', notes: 'Notes', open: 'Open sheet' },
@@ -67,7 +66,6 @@ export const en = {
   axes: {
     title: 'Axes',
     figTitle: 'Five drawings, one datum',
-    lead: 'Five lines of work. Each drawing sends one line to the same point. Select a drawing to see what is real on that axis today.',
     here: 'I’m here',
     hereNote: 'datum',
     cota: '≈ 1.2 km',
@@ -115,7 +113,6 @@ export const en = {
   contact: {
     title: 'Contact',
     figTitle: 'Connector J1, pinout',
-    lead: 'Three pins. All of them are public.',
     pins: [
       { n: 1, name: 'LINKEDIN', value: 'in/viniciuscastelli', href: 'https://www.linkedin.com/in/viniciuscastelli' },
       { n: 2, name: 'EMAIL', value: 'vcastelli@usp.br', href: 'mailto:vcastelli@usp.br' },

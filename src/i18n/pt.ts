@@ -60,7 +60,6 @@ export const pt: Dict = {
   },
   work: {
     title: 'Trabalhos',
-    lead: 'Cada projeto ganha o seu desenho de peça: a que se conecta, o que faz, o que eu fiz.',
     reserved: 'Folha reservada',
     inPrep: 'em preparação',
     tpl: { part: 'Peça', role: 'Papel', dates: 'Datas', notes: 'Notas', open: 'Abrir folha' },
@@ -69,7 +68,6 @@ export const pt: Dict = {
   axes: {
     title: 'Eixos',
     figTitle: 'Cinco desenhos, um ponto de referência',
-    lead: 'Cinco linhas de trabalho. Cada desenho manda uma linha para o mesmo ponto. Selecione um desenho para ver o que existe de verdade naquele eixo hoje.',
     here: 'Estou aqui',
     hereNote: 'referência',
     cota: '≈ 1,2 km',
@@ -117,7 +115,6 @@ export const pt: Dict = {
   contact: {
     title: 'Contato',
     figTitle: 'Conector J1, pinagem',
-    lead: 'Três pinos. Todos são públicos.',
     pins: [
       { n: 1, name: 'LINKEDIN', value: 'in/viniciuscastelli', href: 'https://www.linkedin.com/in/viniciuscastelli' },
       { n: 2, name: 'EMAIL', value: 'vcastelli@usp.br', href: 'mailto:vcastelli@usp.br' },
