@@ -82,8 +82,10 @@ import Arrow from '../components/Arrow.astro';
   .cv-back:hover { color: var(--fg); }
   .cv-head { display: grid; gap: 40px; align-items: end; padding-bottom: clamp(32px, 4vw, 48px); border-bottom: 1.5px solid var(--c-tinta); }
   .cv-sub { margin-top: 22px; font-style: italic; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.35; color: var(--muted); max-width: 32ch; }
-  .cv-fig { width: min(100%, 300px); }
+  .cv-fig { width: min(100%, 340px); }
   .cv-fig :global(.cv-plate) { aspect-ratio: 4 / 5; width: 100%; height: auto; }
+  /* the portrait is a cutout: show it whole, at its own shape, straight on the paper */
+  .cv-fig :global(img.cv-plate) { aspect-ratio: auto; object-fit: contain; filter: none; }
   .cv-cols { display: grid; gap: clamp(56px, 7vw, 96px); }
   .cv-sec { display: grid; gap: 24px; align-content: start; min-width: 0; }
   .cv-h { font-weight: 400; font-size: var(--t-head); line-height: 1.1; letter-spacing: -0.015em; }
@@ -99,6 +101,7 @@ import Arrow from '../components/Arrow.astro';
   .cv-chron li { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--rule); font-size: 17px; }
   .cv-date { font: 500 14px/1.9 var(--font-sans); color: var(--accent); font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
   @media (max-width: 479px) { .cv-chron li { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
-  @media (min-width: 820px) { .cv-head { grid-template-columns: minmax(0, 1fr) auto; } }
+  /* the title column never shrinks below its longest word, so the portrait can't slide over it */
+  @media (min-width: 820px) { .cv-head { grid-template-columns: minmax(min-content, 1fr) clamp(220px, 28vw, 340px); } .cv-fig { width: 100%; } }
   @media (min-width: 1000px) { .cv-cols { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); } }
 </style>
