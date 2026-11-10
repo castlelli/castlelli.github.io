@@ -31,7 +31,7 @@ export const en = {
   ],
   hero: {
     name: 'Vinicius Castelli',
-    lead: 'I write research software for comparative genomics at ICB-USP and study computer engineering at Poli-USP. I’m heading toward embedded systems for health.',
+    lead: 'Research software for comparative genomics, held to the standard science needs and pointed at public health. Computer engineering at Poli-USP; research at ICB-USP.',
     contents: 'Contents',
     open: 'Open',
   },
@@ -42,13 +42,13 @@ export const en = {
     photoAlt: 'At the bench, photographed by the author.',
     cue: 'Scroll',
     beats: [
-      { q: 'What fits on a device?', a: 'The hardware end of my work is firmware and sensors. On a device every bit costs something: fewer bits per weight buy a smaller model and a coarser signal. This semester it starts with Digital Systems I at Poli.' },
-      { q: 'What do many genomes say that one can’t?', a: 'Comparative genomics reads a gene against its relatives in other species. At LEEP, in ICB-USP, I lead the modernisation of ROTIFER, the lab’s open-source toolkit for turning biological sequences into analysis pipelines.' },
-      { q: 'How do you build research software that others can build on?', a: 'Make it easy to install, test and extend. That is most of my ROTIFER work: packaging, CI and documentation, for a lab that studies how proteins are shaped and how they evolve.' },
+      { q: 'How do you make a device any doctor can trust?', a: 'Firmware, sensors and models small enough to run on the device itself, each one checked against what the signal can still tell you. On a device every bit costs something. In a hospital, it can cost lives.' },
+      { q: 'What do many genomes say that one can’t?', a: 'Read side by side, related genes show what evolution kept and what it let go. At LEEP, ICB-USP, I lead the modernisation of ROTIFER, the open-source toolkit the lab uses for that comparison. Its tool paper, which I co-author, is in preparation.' },
+      { q: 'What should research software owe the people who use it?', a: 'Results they can rerun. Science builds on what others can reproduce, so I hold ROTIFER to that: packaged, tested, documented and released. Antibiotic resistance is the public-health problem I keep returning to; as lead developer I put the iGEM USP 2026 team’s work on it in front of judges and the public.' },
     ],
     coda: 'That last shape is the forced Duffing oscillator, the first project below, integrated in your browser just like on its own page.',
     toWork: 'See the work',
-    note: 'The film is rendered live in your browser with three.js. The sequences and the protein are illustrations; the attractor is real, computed on your machine.',
+    note: 'The film is rendered live in your browser with three.js. The sequences and the protein are illustrations; the attractor is real, computed on your machine.'
   },
   work: {
     title: 'Selected work',
@@ -121,7 +121,7 @@ export const en = {
       { p: 'VivaPay', w: 'Payments for a school fair', n: '5,000+', u: 'users', c: '10,000 transactions in 3 days, 40 booths, team of 7' },
       { p: 'NxCoop CRM', w: 'CRM at Nexum', n: '10,000+', u: 'users', c: 'I was an intern on the team' },
       { p: 'AccessPlus', w: 'Opportunities for young people', n: '5,000+', u: 'listings', c: 'I led a team of 8' },
-      { p: 'iGEM USP 2026 wiki', w: 'Team wiki on antibiotic resistance', n: '', u: 'live', c: 'Lead developer' },
+      { p: 'S(H)ARP', w: 'Team wiki on antibiotic resistance + Antibiotic hit finder at streptomyce genes', n: '', u: 'live', c: 'Lead developer, Software Engineer' },
       { p: 'ROTIFER', w: 'Comparative genomics toolkit', n: '', u: 'open source', c: 'Leading its modernisation since 2026-02' },
     ],
   },

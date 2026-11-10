@@ -33,7 +33,7 @@ export const pt: Dict = {
   ],
   hero: {
     name: 'Vinicius Castelli',
-    lead: 'Escrevo software de pesquisa para genômica comparativa no ICB-USP e curso engenharia de computação na Poli-USP. E sigo em direção a sistemas embarcados para saúde.',
+    lead: 'Software de pesquisa para genômica comparativa, feito com o rigor que a ciência pede e voltado à saúde pública. Engenharia de computação na Poli-USP; pesquisa no ICB-USP.',
     contents: 'Sumário',
     open: 'Abrir',
   },
@@ -44,9 +44,9 @@ export const pt: Dict = {
     photoAlt: 'Na bancada, fotografado pelo autor.',
     cue: 'Role',
     beats: [
-      { q: 'O que cabe num dispositivo?', a: 'A ponta de hardware do meu trabalho é firmware e sensores. Num dispositivo cada bit custa alguma coisa: menos bits por peso compram um modelo menor e um sinal mais grosseiro. Neste semestre isso começa com Sistemas Digitais I na Poli.' },
-      { q: 'O que muitos genomas dizem que um só não diz?', a: 'A genômica comparativa lê um gene contra os seus parentes em outras espécies. No LEEP, no ICB-USP, lidero a modernização do ROTIFER, o pacote aberto do laboratório para transformar sequências biológicas em pipelines de análise.' },
-      { q: 'Como fazer software de pesquisa em que outros possam construir?', a: 'Ele precisa ser fácil de instalar, testar e estender. É boa parte do meu trabalho no ROTIFER: empacotamento, CI e documentação, para um laboratório que estuda a forma das proteínas e como elas evoluem.' },
+      { q: 'Como fazer um dispositivo em que qualquer médico confie?', a: 'Firmware, sensores e modelos pequenos o bastante para rodar no próprio dispositivo, cada um conferido contra o que o sinal ainda consegue dizer. Num dispositivo, cada bit custa alguma coisa. Num hospital, pode custar vidas.' },
+      { q: 'O que muitos genomas dizem que um só não diz?', a: 'Lidos lado a lado, genes parentes mostram o que a evolução manteve e o que deixou ir. No LEEP, ICB-USP, lidero a modernização do ROTIFER, o pacote aberto que o laboratório usa nessa comparação. O paper da ferramenta, do qual sou coautor, está em preparação.' },
+      { q: 'O que o software de pesquisa deve a quem o usa?', a: 'Resultados que dê para refazer. A ciência avança sobre o que outros conseguem reproduzir, e é esse o padrão que mantenho no ROTIFER: empacotado, testado, documentado e publicado. A resistência a antibióticos é o problema de saúde pública ao qual sempre volto; como desenvolvedor principal, levei o trabalho do time iGEM USP 2026 sobre ela aos juízes e ao público.' },
     ],
     coda: 'Essa última forma é o oscilador de Duffing forçado, o primeiro projeto abaixo, integrado no seu navegador como na página dele.',
     toWork: 'Ver os trabalhos',
