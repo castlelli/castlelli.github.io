@@ -1,0 +1,147 @@
+---
+// Fig. 1: the work as a closed loop, drawn after the block diagram in
+// Shannon's "A Mathematical Theory of Communication" (1948). Each channel
+// carries the signal that really travels between the two blocks: bases,
+// bits, a pulse, and questions going back.
+interface Block { label: string; note: string }
+interface Props { blocks: Block[]; noise: string; back: string; alt: string }
+const { blocks, noise, back, alt } = Astro.props;
+
+const BW = 168, BH = 104;
+const pos = [[36, 84], [356, 84], [356, 332], [36, 332]] as const;
+const box = (i: number) => {
+  const [x, y] = pos[i];
+  return `M${x} ${y}H${x + BW}V${y + BH}H${x}Z`;
+};
+
+// glyphs, one per block, in local coordinates (origin at the block's corner)
+const helix = (() => {
+  const a: string[] = [], b: string[] = [], rungs: string[] = [];
+  for (let i = 0; i <= 64; i++) {
+    const px = 20 + i * 2, ph = (i / 64) * Math.PI * 4;
+    const y1 = 68 + 13 * Math.sin(ph), y2 = 68 - 13 * Math.sin(ph);
+    a.push(`${i ? 'L' : 'M'}${px} ${y1.toFixed(1)}`);
+    b.push(`${i ? 'L' : 'M'}${px} ${y2.toFixed(1)}`);
+    if (i % 4 === 2) rungs.push(`M${px} ${y1.toFixed(1)}V${y2.toFixed(1)}`);
+  }
+  return { strands: a.join('') + b.join(''), rungs: rungs.join('') };
+})();
+const chipPins = [0, 1, 2, 3].map((k) => 56 + k * 9.3);
+
+// signals
+const BASES = 'ATGCGTACCTGAAGTCCATG';
+const baseStep = 14, baseRun = BASES.length * baseStep;
+const BITS = '1011001110100101';
+const bitStep = 15, bitRun = BITS.length * bitStep;
+const beat = 'h18l4 -4l4 4h6l3 5l5 -26l5 34l4 -13h8l5 -6l6 6h12';
+const beatW = 80;
+const pulse = 'M0 0' + beat.repeat(5);
+---
+<svg class="fig-schem" viewBox="0 0 560 520" role="img" aria-label={alt} data-schem>
+  <defs>
+    <clipPath id="ch-top"><rect x="212" y="120" width="130" height="32" /></clipPath>
+    <clipPath id="ch-right"><rect x="420" y="196" width="52" height="124" /></clipPath>
+    <clipPath id="ch-bottom"><rect x="214" y="350" width="128" height="56" /></clipPath>
+    <linearGradient id="fade-x" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0" /><stop offset="0.18" stop-color="#fff" /><stop offset="0.82" stop-color="#fff" /><stop offset="1" stop-color="#fff" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="fade-y" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity="0" /><stop offset="0.18" stop-color="#fff" /><stop offset="0.82" stop-color="#fff" /><stop offset="1" stop-color="#fff" stop-opacity="0" />
+    </linearGradient>
+    <mask id="m-top" maskUnits="userSpaceOnUse" x="212" y="120" width="130" height="32"><rect x="212" y="120" width="130" height="32" fill="url(#fade-x)" /></mask>
+    <mask id="m-right" maskUnits="userSpaceOnUse" x="420" y="196" width="52" height="124"><rect x="420" y="196" width="52" height="124" fill="url(#fade-y)" /></mask>
+    <mask id="m-bottom" maskUnits="userSpaceOnUse" x="214" y="350" width="128" height="56"><rect x="214" y="350" width="128" height="56" fill="url(#fade-x)" /></mask>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M0 1L10 5L0 9Z" fill="#F3F1EA" />
+    </marker>
+  </defs>
+
+  <!-- channels -->
+  <path class="sc-ch" d="M204 136H354" marker-end="url(#arr)" />
+  <path class="sc-ch" d="M440 188V330" marker-end="url(#arr)" />
+  <path class="sc-ch" d="M356 384H206" marker-end="url(#arr)" />
+  <path class="sc-ch sc-back" d="M120 332V190" marker-end="url(#arr)" />
+  <path class="sc-ch" d="M280 446V386" marker-end="url(#arr)" />
+
+  <!-- signals in transit -->
+  <g clip-path="url(#ch-top)" mask="url(#m-top)"><g class="sc-flow sc-flow-x" style={`--run:${baseRun}px`}>
+    {(BASES + BASES).split('').map((c, i) => <text class="sc-sig" x={212 + i * baseStep - baseRun} y="131">{c}</text>)}
+  </g></g>
+  <g clip-path="url(#ch-right)" mask="url(#m-right)"><g class="sc-flow sc-flow-y" style={`--run:${bitRun}px`}>
+    {(BITS + BITS).split('').map((c, i) => <text class="sc-sig" x="452" y={206 + i * bitStep - bitRun}>{c}</text>)}
+  </g></g>
+  <g clip-path="url(#ch-bottom)" mask="url(#m-bottom)"><g class="sc-flow sc-flow-back" style={`--run:${beatW}px`}>
+    <path class="sc-pulse" d={pulse} transform="translate(214 370)" />
+  </g></g>
+  <text class="sc-back-l" x="136" y="266">{back}</text>
+
+  <!-- blocks -->
+  {blocks.map((b, i) => {
+    const [x, y] = pos[i];
+    const above = i < 2;
+    return (
+      <g class="sc-block" style={`--i:${i}`}>
+        <path class="sc-box" d={box(i)} pathLength="1" />
+        <text class="sc-label" x={x + 16} y={y + 26}>{b.label}</text>
+        <text class="sc-note" x={x} y={above ? y - 14 : y + BH + 28}>{b.note}</text>
+        <g transform={`translate(${x} ${y})`} class="sc-glyph">
+          {i === 0 && <><path d={helix.strands} /><path class="sc-thin" d={helix.rungs} /></>}
+          {i === 1 && <>
+            <path d="M35 68L66 52M35 68L66 84M74 52L104 68M74 84L104 68M112 68H136" />
+            <circle cx="30" cy="68" r="5" /><circle cx="70" cy="52" r="5" /><circle cx="70" cy="84" r="5" />
+            <circle cx="108" cy="68" r="5" /><rect x="138" y="62" width="12" height="12" />
+          </>}
+          {i === 2 && <>
+            <rect x="66" y="50" width="36" height="36" />
+            <rect class="sc-thin" x="74" y="58" width="20" height="20" />
+            {chipPins.map((p) => <path d={`M${p + 12} 50v-7M${p + 12} 86v7M66 ${p - 2}h-7M102 ${p - 2}h7`} />)}
+          </>}
+          {i === 3 && <>
+            <rect x="60" y="46" width="48" height="42" />
+            <path d="M84 46V88M60 66H72M78 66H90M96 66H108" />
+            <path d="M68 46V36M76 46V36M92 46V36M100 46V36" />
+            <path class="sc-thin" d="M72 62l3 5l3 -5M90 62l3 5l3 -5" />
+            <path class="sc-thin" d="M30 74h22l4 -6l4 10l3 -4h0M108 74h4l4 -8l4 12l3 -4h15" />
+          </>}
+        </g>
+      </g>
+    );
+  })}
+
+  <!-- noise source -->
+  <path class="sc-noise" d="M222 446H338V482H222Z" />
+  <text class="sc-label" x="280" y="469" text-anchor="middle">{noise}</text>
+</svg>
+
+<style>
+  .fig-schem { width: 100%; height: auto; overflow: visible; }
+  .sc-box { fill: var(--c-coomassie); stroke: var(--c-papel); stroke-width: 1.6; vector-effect: non-scaling-stroke; }
+  .sc-ch { fill: none; stroke: var(--c-papel); stroke-width: 1.3; vector-effect: non-scaling-stroke; }
+  .sc-back { stroke-dasharray: 5 5; stroke: rgba(243, 241, 234, 0.7); }
+  .sc-noise { fill: none; stroke: rgba(243, 241, 234, 0.75); stroke-width: 1.2; stroke-dasharray: 4 4; vector-effect: non-scaling-stroke; }
+  .sc-label { fill: var(--c-papel); font-family: var(--font-sans); font-size: 12.5px; font-weight: 500; letter-spacing: 0.16em; }
+  .sc-note { fill: var(--c-coomassie-tinta); font-family: var(--font-serif); font-style: italic; font-size: 16px; }
+  .sc-back-l { fill: var(--c-coomassie-tinta); font-family: var(--font-serif); font-style: italic; font-size: 15px; }
+  .sc-glyph path, .sc-glyph circle, .sc-glyph rect { fill: none; stroke: var(--c-papel); stroke-width: 1.3; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+  .sc-glyph .sc-thin { stroke: rgba(243, 241, 234, 0.5); stroke-width: 1; }
+  .sc-sig { fill: var(--c-papel); font-family: var(--font-mono); font-size: 13px; font-weight: 500; }
+  .sc-pulse { fill: none; stroke: var(--c-papel); stroke-width: 1.4; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+
+  /* the signals move; everything is drawn and legible at rest */
+  @media (prefers-reduced-motion: no-preference) {
+    .sc-flow-x { animation: sc-x 7s linear infinite; }
+    .sc-flow-y { animation: sc-y 6s linear infinite; }
+    .sc-flow-back { animation: sc-back 2.2s linear infinite; }
+    :global(.js) .fig-schem.pending .sc-box { stroke-dasharray: 1; stroke-dashoffset: 1; }
+    :global(.js) .fig-schem.pending .sc-glyph,
+    :global(.js) .fig-schem.pending .sc-label,
+    :global(.js) .fig-schem.pending .sc-note { opacity: 0; }
+    .fig-schem.run .sc-box { stroke-dasharray: 1; animation: sc-draw 1.1s cubic-bezier(0.65, 0, 0.35, 1) both; animation-delay: calc(var(--i) * 160ms); }
+    .fig-schem.run .sc-glyph, .fig-schem.run .sc-label, .fig-schem.run .sc-note { animation: sc-fade 0.7s ease-out both; animation-delay: calc(var(--i) * 160ms + 700ms); }
+  }
+  @keyframes sc-x { from { transform: translateX(0); } to { transform: translateX(var(--run)); } }
+  @keyframes sc-y { from { transform: translateY(0); } to { transform: translateY(var(--run)); } }
+  @keyframes sc-back { from { transform: translateX(0); } to { transform: translateX(calc(var(--run) * -1)); } }
+  @keyframes sc-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  @keyframes sc-fade { from { opacity: 0; } to { opacity: 1; } }
+</style>

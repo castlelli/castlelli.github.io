@@ -1,0 +1,72 @@
+---
+// Poincaré section of the forced Duffing oscillator, integrated at build time:
+//   x'' + δx' + αx + βx³ = γ cos ωt,  δ = 0.3, α = −1, β = 1, γ = 0.5, ω = 1.2
+// Fourth-order Runge-Kutta, 100 steps per forcing period. One point is kept per
+// period after a 100-period transient.
+interface Props { alt: string }
+const { alt } = Astro.props;
+
+const D = 0.3, A = -1, B = 1, G = 0.5, W = 1.2;
+const T = (2 * Math.PI) / W, N = 100, h = T / N;
+const PERIODS = 4500, SKIP = 100;
+const acc = (t: number, x: number, v: number) => -D * v - A * x - B * x ** 3 + G * Math.cos(W * t);
+
+let x = 1, v = 0, t = 0;
+const pts: [number, number][] = [];
+for (let k = 0; k < PERIODS + SKIP; k++) {
+  for (let i = 0; i < N; i++) {
+    const a1 = acc(t, x, v);
+    const x2 = x + (h / 2) * v, v2 = v + (h / 2) * a1, a2 = acc(t + h / 2, x2, v2);
+    const x3 = x + (h / 2) * v2, v3 = v + (h / 2) * a2, a3 = acc(t + h / 2, x3, v3);
+    const x4 = x + h * v3, v4 = v + h * a3, a4 = acc(t + h, x4, v4);
+    x += (h / 6) * (v + 2 * v2 + 2 * v3 + v4);
+    v += (h / 6) * (a1 + 2 * a2 + 2 * a3 + a4);
+    t += h;
+  }
+  if (k >= SKIP) pts.push([x, v]);
+}
+
+// plot area in viewBox units
+const VB = { w: 1000, h: 640 };
+const P = { l: 96, r: 960, t: 40, b: 560 };
+const X = [-1.6, 1.6], V = [-0.6, 1.1];
+const sx = (q: number) => P.l + ((q - X[0]) / (X[1] - X[0])) * (P.r - P.l);
+const sy = (q: number) => P.b - ((q - V[0]) / (V[1] - V[0])) * (P.b - P.t);
+
+// the section is drawn in ten chunks so it can build up in order on screen
+const CHUNKS = 10;
+const chunk = Math.ceil(pts.length / CHUNKS);
+const dots = Array.from({ length: CHUNKS }, (_, c) =>
+  pts.slice(c * chunk, (c + 1) * chunk).map(([px, pv]) => `M${sx(px).toFixed(0)} ${sy(pv).toFixed(0)}h0`).join(''),
+);
+const xt = [-1.5, -1, -0.5, 0, 0.5, 1, 1.5];
+const vt = [-0.5, 0, 0.5, 1];
+const fmt = (n: number) => (n < 0 ? `−${Math.abs(n)}` : String(n));
+---
+<svg class="fig-phase" viewBox={`0 0 ${VB.w} ${VB.h}`} role="img" aria-label={alt} data-phase>
+  <g class="ph-axes">
+    <path d={`M${P.l} ${P.t}V${P.b}H${P.r}`} />
+    {xt.map((q) => <path d={`M${sx(q)} ${P.b}v8`} />)}
+    {vt.map((q) => <path d={`M${P.l} ${sy(q)}h-8`} />)}
+    <path class="ph-zero" d={`M${sx(0)} ${P.t}V${P.b}M${P.l} ${sy(0)}H${P.r}`} />
+  </g>
+  <g class="ph-ticks">
+    {xt.filter((q) => Number.isInteger(q)).map((q) => <text x={sx(q)} y={P.b + 34} text-anchor="middle">{fmt(q)}</text>)}
+    {vt.map((q) => <text x={P.l - 18} y={sy(q) + 6} text-anchor="end">{fmt(q)}</text>)}
+    <text class="ph-var" x={P.r} y={P.b + 66} text-anchor="end">x</text>
+    <text class="ph-var" x={P.l - 18} y={P.t + 6} text-anchor="end">ẋ</text>
+  </g>
+  {dots.map((d, i) => <path class="ph-dots" d={d} style={`--i:${i}`} />)}
+</svg>
+
+<style>
+  .fig-phase { width: 100%; height: auto; overflow: visible; }
+  .ph-axes path { stroke: rgba(243, 241, 234, 0.55); stroke-width: 1; fill: none; vector-effect: non-scaling-stroke; }
+  .ph-axes .ph-zero { stroke: rgba(243, 241, 234, 0.14); stroke-dasharray: 2 6; }
+  .ph-ticks text { fill: var(--c-coomassie-tinta); font-family: var(--font-sans); font-size: 20px; font-variant-numeric: lining-nums tabular-nums; }
+  .ph-ticks .ph-var { fill: var(--c-papel); font-family: var(--font-serif); font-style: italic; font-size: 30px; }
+  .ph-dots { fill: none; stroke: var(--c-papel); stroke-width: 2.9; stroke-linecap: round; }
+  :global(.js) .fig-phase.pending .ph-dots { opacity: 0; }
+  .fig-phase.run .ph-dots { animation: ph-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; animation-delay: calc(var(--i) * 140ms + 200ms); }
+  @keyframes ph-in { from { opacity: 0; } to { opacity: 1; } }
+</style>
