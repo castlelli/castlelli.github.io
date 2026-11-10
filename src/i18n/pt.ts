@@ -13,7 +13,7 @@ export const pt: Dict = {
       'Vinicius Castelli cursa Engenharia de Computação na Poli-USP e escreve software de pesquisa para genômica comparativa no ICB-USP.',
     aboutTitle: 'One Pager · Vinicius Castelli',
     aboutDescription:
-      'One pager de Vinicius Castelli: no que trabalho, números, ferramentas, histórico e como me encontrar.',
+      'Vinicius Castelli numa página: no que trabalho, os números, as ferramentas, o histórico e como me encontrar.',
   },
   ui: {
     skip: 'Ir para o conteúdo',
@@ -33,28 +33,28 @@ export const pt: Dict = {
   ],
   hero: {
     name: 'Vinicius Castelli',
-    byline: ['Engenharia de Computação, Escola Politécnica, USP', 'Iniciação científica, LEEP, ICB-USP'],
-    abstractLabel: 'Resumo',
-    abstract:
-      'Escrevo software de pesquisa para genômica comparativa e curso engenharia de computação. Meu trabalho cobre biologia, ferramentas abertas e hardware, e estou indo em direção a sistemas embarcados para saúde.',
+    lead: 'Escrevo software de pesquisa para genômica comparativa no ICB-USP e curso engenharia de computação na Poli-USP. E sigo em direção a sistemas embarcados para saúde.',
     contents: 'Sumário',
     open: 'Abrir',
-    fig: {
-      caption: 'Diagrama esquemático do trabalho, segundo Shannon (1948).',
-      alt: 'Diagrama de blocos em ciclo: a biologia manda sequências ao software, o software manda bits ao hardware, o hardware manda um sinal à saúde, e a saúde devolve novas perguntas à biologia. Uma fonte de ruído entra no caminho do sinal.',
-      blocks: [
-        { label: 'BIOLOGIA', note: 'genômica comparativa' },
-        { label: 'SOFTWARE', note: 'ROTIFER, código aberto' },
-        { label: 'HARDWARE', note: 'sistemas embarcados' },
-        { label: 'SAÚDE', note: 'a aplicação' },
-      ],
-      noise: 'RUÍDO',
-      back: 'novas perguntas',
-    },
+  },
+  film: {
+    label: 'Um curta: uma placa de circuito, a sua tela, sequências de proteína, um enovelamento e um atrator',
+    terminal: ['$ python align.py family.fa', 'lendo 72 sequências', 'alinhando'],
+    rail: ['Uma placa', 'A tela', 'Uma sequência', 'Muitas', 'Um enovelamento', 'Um atrator'],
+    photoAlt: 'Na bancada, fotografado pelo autor.',
+    cue: 'Role',
+    beats: [
+      { q: 'O que cabe num dispositivo?', a: 'A ponta de hardware do meu trabalho é firmware e sensores. Num dispositivo cada bit custa alguma coisa: menos bits por peso compram um modelo menor e um sinal mais grosseiro. Neste semestre isso começa com Sistemas Digitais I na Poli.' },
+      { q: 'O que muitos genomas dizem que um só não diz?', a: 'A genômica comparativa lê um gene contra os seus parentes em outras espécies. No LEEP, no ICB-USP, lidero a modernização do ROTIFER, o pacote aberto do laboratório para transformar sequências biológicas em pipelines de análise.' },
+      { q: 'Como fazer software de pesquisa em que outros possam construir?', a: 'Ele precisa ser fácil de instalar, testar e estender. É boa parte do meu trabalho no ROTIFER: empacotamento, CI e documentação, para um laboratório que estuda a forma das proteínas e como elas evoluem.' },
+    ],
+    coda: 'Essa última forma é o oscilador de Duffing forçado, o primeiro projeto abaixo, integrado no seu navegador como na página dele.',
+    toWork: 'Ver os trabalhos',
+    note: 'O filme é renderizado ao vivo no seu navegador com three.js. As sequências e a proteína são ilustrações; o atrator é real, calculado na sua máquina.',
   },
   work: {
     title: 'Trabalhos selecionados',
-    lead: 'Cada projeto tem sua página, com o método, o resultado e o código.',
+    lead: 'Cada projeto tem sua página: o que fiz, como fiz e o código.',
     role: 'Papel',
     dates: 'Data',
     stack: 'Métodos e ferramentas',
@@ -66,17 +66,18 @@ export const pt: Dict = {
           'Seção de Poincaré do oscilador de Duffing forçado: um ponto por período da força, 4.500 períodos, RK4. δ = 0,3, α = −1, β = 1, γ = 0,5, ω = 1,2.',
         alt: 'Um atrator estranho: milhares de pontos dobrando-se numa faixa fina e curva.',
       },
-      fibrosis: {
+      paga: {
         caption:
-          'A hipótese. A DPP-4 marca os fibroblastos progenitores que viram miofibroblastos produtores de colágeno. A vildagliptina bloqueia a DPP-4; se isso freia a fibrose é a pergunta em aberto.',
-        alt: 'Um fibroblasto progenitor com DPP-4 na superfície vira um miofibroblasto que deposita fibras de colágeno. A vildagliptina aparece bloqueando a DPP-4, com um ponto de interrogação.',
-        labels: { progenitor: 'fibroblasto progenitor', dpp4: 'DPP-4', myo: 'miofibroblasto', collagen: 'colágeno', drug: 'vildagliptina' },
+          'Estados de fibroblastos na pele com esclerose sistêmica (GSE138669), ligados por PAGA. A cor é o efeito da ES na fração de células de cada estado. O ramo DPP4-alto vai de 0 → 2 → 4. Os valores foram lidos da figura publicada, então são aproximados. O PAGA mostra como os estados se ligam; sozinho, não diz para que lado uma linhagem segue.',
+        alt: 'Um grafo de onze estados de fibroblasto ligados por linhas de pesos diferentes. Os nós vão de menor na ES a maior na ES. Um ramo, de um estado progenitor por um estado de MEC até um estado ativado, aparece destacado como a rota DPP4-alto.',
+        legend: { low: 'menor na ES', high: 'maior na ES', branch: 'ramo DPP4-alto', sig: 'contorno: significativo na figura original', inset: 'células DPP4-positivas, %', control: 'controle', ssc: 'ES' },
+        states: { progenitor: 'progenitor', ecm: 'MEC', activated: 'ativado', myofibroblast: 'miofibroblasto' },
       },
     },
   },
   axes: {
     title: 'Linhas de pesquisa',
-    lead: 'Cinco desenhos de onde o trabalho acontece e para que ele serve. Cada um tem um controle para você testar.',
+    lead: 'Cinco desenhos: onde o trabalho acontece e para que ele serve. Cada um tem um controle para você mexer.',
     caption: 'Cinco linhas de trabalho, desenhadas pelo autor.',
     cota: '≈ 1,2 km',
     quant: { bit: 'bit', levels: 'níveis', size: 'do tamanho em float32' },
@@ -150,11 +151,11 @@ export const pt: Dict = {
       history: 'Cronologia',
     },
     description: [
-      'Sou Vinicius Castelli. Curso Engenharia de Computação na Escola Politécnica da USP, turma 2026 → 2030.',
-      'Desde fevereiro de 2026 faço iniciação científica no LEEP, o laboratório de estrutura e evolução de proteínas do ICB-USP. O ROTIFER é o pacote aberto de genômica comparativa do laboratório: bibliotecas e ferramentas de linha de comando para montar pipelines de análise de sequências biológicas. Lidero a sua modernização, para que o pacote fique mais fácil de instalar, testar e estender.',
-      'Também construí a wiki do time iGEM USP 2026, como desenvolvedor principal. Ela apresenta o projeto do time sobre resistência a antibióticos aos juízes e ao público.',
-      'Antes da universidade fiz o curso técnico em informática de três anos no CTI-UNESP, em Bauru, e entreguei software que gente usou: um sistema de pagamentos para a feira da escola, um CRM durante um estágio e uma plataforma que listava oportunidades para jovens.',
-      'Minha direção são sistemas embarcados para saúde: firmware, sensores e modelos pequenos o bastante para rodar no dispositivo.',
+      'Sou o Vinicius Castelli. Curso engenharia de computação na Escola Politécnica da USP, turma 2026 → 2030.',
+      'Desde fevereiro de 2026 faço iniciação científica no LEEP, o laboratório de estrutura e evolução de proteínas do ICB-USP. O pacote aberto de genômica comparativa do laboratório se chama ROTIFER: bibliotecas e ferramentas de linha de comando para montar pipelines de análise de sequências biológicas. Lidero a modernização dele, para que fique mais fácil de instalar, testar e estender.',
+      'Também construí a wiki do time iGEM USP 2026 como desenvolvedor principal. É por ela que o time apresenta o projeto sobre resistência a antibióticos aos juízes e a todo mundo.',
+      'Antes da universidade passei três anos no técnico em informática do CTI-UNESP, em Bauru, entregando software que gente usou: um sistema de pagamentos para a feira da escola, um CRM num estágio e uma plataforma que listava oportunidades para jovens.',
+      'Sigo em direção a sistemas embarcados para saúde: firmware, sensores e modelos pequenos o bastante para rodar no próprio dispositivo.',
     ],
     features: [
       'Software de pesquisa para biologia: acesso a dados, empacotamento, CI, documentação',
@@ -179,7 +180,7 @@ export const pt: Dict = {
     operating: [
       { p: 'Português', v: 'nativo', c: '' },
       { p: 'Espanhol', v: 'fluente', c: 'sem certificado' },
-      { p: 'Inglês', v: 'fluente em conversa', c: 'ainda sem certificado' },
+      { p: 'Inglês', v: 'fluente', c: 'ainda sem certificado' },
       { p: 'Linguagens', v: 'Python, C, TypeScript', c: 'Python é a principal' },
       { p: 'Software científico', v: 'C/C++, Rust', c: 'para trabalho de desempenho' },
       { p: 'Front-end', v: 'Vue 3, Nuxt 4, React, Tailwind v4, GSAP', c: '' },

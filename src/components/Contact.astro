@@ -13,7 +13,7 @@ import Arrow from './Arrow.astro';
       <p class="contact-lead">{c.lead}</p>
     </div>
     <div class="contact-body">
-      <a class="contact-mail" href={c.email.href}>{c.email.value}</a>
+      <a class="contact-mail" href={c.email.href} data-magnet><span>{c.email.value}</span></a>
       <ul class="contact-links">
         {c.links.map((l) => <li><span>{l.label}</span><a href={l.href} rel="me noopener">{l.value}</a></li>)}
       </ul>
@@ -21,6 +21,21 @@ import Arrow from './Arrow.astro';
     </div>
   </div>
 </section>
+
+<script>
+  // the address leans toward the pointer, a few pixels, then settles back
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll<HTMLElement>('[data-magnet]').forEach((el) => {
+      const inner = el.firstElementChild as HTMLElement;
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width / 2) / r.width, y = (e.clientY - r.top - r.height / 2) / r.height;
+        inner.style.transform = `translate(${x * 18}px, ${y * 10}px)`;
+      });
+      el.addEventListener('pointerleave', () => { inner.style.transform = ''; });
+    });
+  }
+</script>
 
 <style>
   .contact-grid { display: grid; gap: 40px; }
@@ -31,6 +46,7 @@ import Arrow from './Arrow.astro';
     text-decoration-thickness: 1px; text-underline-offset: 0.16em; overflow-wrap: anywhere;
   }
   .contact-mail:hover { text-decoration-color: var(--c-papel); }
+  .contact-mail span { display: inline-block; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
   .contact-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-family: var(--font-sans); font-size: 16px; width: 100%; max-width: 480px; }
   .contact-links li { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
   .contact-links span { color: var(--muted); }

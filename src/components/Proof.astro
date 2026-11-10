@@ -20,7 +20,7 @@ const p = t.proof;
             <tr>
               <th scope="row" class="proof-p">{r.p}</th>
               <td>{r.w}</td>
-              <td class="num">{r.n ? <><span class="proof-n">{r.n}</span> <span class="proof-u">{r.u}</span></> : <span class="proof-u">{r.u}</span>}</td>
+              <td class="num">{r.n ? <><span class="proof-n" data-count>{r.n}</span> <span class="proof-u">{r.u}</span></> : <span class="proof-u">{r.u}</span>}</td>
               <td class="note">{r.c}</td>
             </tr>
           ))}
@@ -29,6 +29,10 @@ const p = t.proof;
     </div>
   </div>
 </section>
+
+<script>
+  import '../scripts/ticker.ts';
+</script>
 
 <style>
   @media (min-width: 720px) { .proof-t { min-width: 760px; } }

@@ -31,7 +31,7 @@ import Arrow from '../components/Arrow.astro';
     </header>
 
     <figure class="art-fig">
-      <div class="plate art-plate"><Figure t={t} figure={d.figure} /></div>
+      <div class="plate art-plate" style={`view-transition-name: plate-${d.slug}`}><Figure t={t} figure={d.figure} /></div>
       {d.figure && <figcaption class="figcap"><b>{t.ui.fig} 1.</b> {w.figs[d.figure].caption}</figcaption>}
     </figure>
 

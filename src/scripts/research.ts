@@ -1,4 +1,9 @@
 // Plate I controls: two-view drawings, the edge-AI quantiser, the heart pump.
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin';
+
+gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
 
 const fig = document.querySelector<HTMLElement>('[data-axes]');
 if (fig) {
@@ -51,5 +56,18 @@ if (fig) {
     card.classList.toggle('run', on);
     run.setAttribute('aria-pressed', String(on));
     run.textContent = on ? run.dataset.on! : run.dataset.off!;
+  });
+}
+
+// Each drawing draws itself, stroke by stroke, the first time it scrolls in.
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll<HTMLElement>('.ax').forEach((ax) => {
+    const strokes = ax.querySelectorAll<SVGElement>('.ax-view--a path:not(.dw-solid):not(.h-vent), .ax-view--a rect:not(.dw-solid):not(.h-vent), .ax-view--a circle, svg > path:not(.dw-solid):not(.h-vent):not([data-quant]), svg > rect:not(.dw-solid):not(.h-vent), svg > circle, svg > g:not(.ax-view--b) path:not(.dw-solid):not(.h-vent)');
+    const fills = ax.querySelectorAll<SVGElement>('.dw-solid, text, .ax-body > *');
+    gsap.set(strokes, { drawSVG: '0%' });
+    gsap.set(fills, { opacity: 0 });
+    gsap.timeline({ scrollTrigger: { trigger: ax, start: 'top 82%', once: true } })
+      .to(strokes, { drawSVG: '100%', duration: 1.4, ease: 'power2.inOut', stagger: { amount: 0.6 } })
+      .to(fills, { opacity: 1, duration: 0.6, stagger: 0.04, clearProps: 'opacity' }, '-=0.7');
   });
 }

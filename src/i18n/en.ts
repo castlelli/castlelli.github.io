@@ -11,7 +11,7 @@ export const en = {
       'Vinicius Castelli studies Computer Engineering at Poli-USP and writes research software for comparative genomics at ICB-USP.',
     aboutTitle: 'One Pager · Vinicius Castelli',
     aboutDescription:
-      'One pager of Vinicius Castelli: what I work on, numbers, stack, history and how to reach me.',
+      'Vinicius Castelli on one page: what I work on, the numbers, the stack, the history and how to reach me.',
   },
   ui: {
     skip: 'Skip to content',
@@ -31,28 +31,28 @@ export const en = {
   ],
   hero: {
     name: 'Vinicius Castelli',
-    byline: ['Computer Engineering, Escola Politécnica, USP', 'Undergraduate research, LEEP, ICB-USP'],
-    abstractLabel: 'Abstract',
-    abstract:
-      'I write research software for comparative genomics and study computer engineering. My work covers biology, open-source tools and hardware, and I am moving toward embedded systems for healthcare.',
+    lead: 'I write research software for comparative genomics at ICB-USP and study computer engineering at Poli-USP. I’m heading toward embedded systems for health.',
     contents: 'Contents',
     open: 'Open',
-    fig: {
-      caption: 'Schematic diagram of the work, after Shannon (1948).',
-      alt: 'Block diagram of a loop: biology sends sequences to software, software sends bits to hardware, hardware sends a signal to health, and health sends new questions back to biology. A noise source feeds the signal path.',
-      blocks: [
-        { label: 'BIOLOGY', note: 'comparative genomics' },
-        { label: 'SOFTWARE', note: 'ROTIFER, open source' },
-        { label: 'HARDWARE', note: 'embedded systems' },
-        { label: 'HEALTH', note: 'the application' },
-      ],
-      noise: 'NOISE',
-      back: 'new questions',
-    },
+  },
+  film: {
+    label: 'A short film: a circuit board, its screen, protein sequences, a fold and an attractor',
+    terminal: ['$ python align.py family.fa', 'reading 72 sequences', 'aligning'],
+    rail: ['A board', 'Its screen', 'One sequence', 'Many', 'A fold', 'An attractor'],
+    photoAlt: 'At the bench, photographed by the author.',
+    cue: 'Scroll',
+    beats: [
+      { q: 'What fits on a device?', a: 'The hardware end of my work is firmware and sensors. On a device every bit costs something: fewer bits per weight buy a smaller model and a coarser signal. This semester it starts with Digital Systems I at Poli.' },
+      { q: 'What do many genomes say that one can’t?', a: 'Comparative genomics reads a gene against its relatives in other species. At LEEP, in ICB-USP, I lead the modernisation of ROTIFER, the lab’s open-source toolkit for turning biological sequences into analysis pipelines.' },
+      { q: 'How do you build research software that others can build on?', a: 'Make it easy to install, test and extend. That is most of my ROTIFER work: packaging, CI and documentation, for a lab that studies how proteins are shaped and how they evolve.' },
+    ],
+    coda: 'That last shape is the forced Duffing oscillator, the first project below, integrated in your browser just like on its own page.',
+    toWork: 'See the work',
+    note: 'The film is rendered live in your browser with three.js. The sequences and the protein are illustrations; the attractor is real, computed on your machine.',
   },
   work: {
     title: 'Selected work',
-    lead: 'Each project has its own page with the method, the result and the source.',
+    lead: 'Each project has its own page: what I did, how I did it, and the source.',
     role: 'Role',
     dates: 'Date',
     stack: 'Methods and tools',
@@ -64,17 +64,18 @@ export const en = {
           'Poincaré section of the forced Duffing oscillator: one point per forcing period, 4,500 periods, RK4. δ = 0.3, α = −1, β = 1, γ = 0.5, ω = 1.2.',
         alt: 'A strange attractor: thousands of points folding into a thin curling band.',
       },
-      fibrosis: {
+      paga: {
         caption:
-          'The hypothesis. DPP-4 marks the progenitor fibroblasts that become collagen-producing myofibroblasts. Vildagliptin blocks DPP-4; whether that slows fibrosis is the open question.',
-        alt: 'A progenitor fibroblast with DPP-4 on its surface becomes a myofibroblast that lays down collagen fibres. Vildagliptin is drawn blocking DPP-4, marked with a question mark.',
-        labels: { progenitor: 'progenitor fibroblast', dpp4: 'DPP-4', myo: 'myofibroblast', collagen: 'collagen', drug: 'vildagliptin' },
+          'Fibroblast states in systemic sclerosis skin (GSE138669), connected by PAGA. Colour is the SSc effect on each state’s share of cells. The DPP4-high branch runs 0 → 2 → 4. Values are read off the published figure, so they’re approximate. PAGA shows how states connect; on its own it says nothing about which way a lineage runs.',
+        alt: 'A graph of eleven fibroblast states joined by lines of varying weight. Nodes are coloured from lower in SSc to higher in SSc. One branch, from a progenitor state through an ECM state to an activated state, is highlighted as the DPP4-high route.',
+        legend: { low: 'lower in SSc', high: 'higher in SSc', branch: 'DPP4-high branch', sig: 'outlined: significant in the original figure', inset: 'DPP4-positive cells, %', control: 'control', ssc: 'SSc' },
+        states: { progenitor: 'progenitor', ecm: 'ECM', activated: 'activated', myofibroblast: 'myofibroblast' },
       },
     },
   },
   axes: {
     title: 'Lines of research',
-    lead: 'Five drawings of where the work happens and what it is for. Each has a control you can try.',
+    lead: 'Five drawings: where the work happens and what it’s for. Each one has a control to play with.',
     caption: 'Five lines of work, drawn by the author.',
     cota: '≈ 1.2 km',
     quant: { bit: 'bit', levels: 'levels', size: 'of float32 size' },
@@ -148,11 +149,11 @@ export const en = {
       history: 'Chronology',
     },
     description: [
-      'I am Vinicius Castelli. I study Computer Engineering at Escola Politécnica, USP, class of 2026 → 2030.',
-      'Since February 2026 I do undergraduate research at LEEP, the protein structure and evolution lab at ICB-USP. ROTIFER is the lab’s open-source toolkit for comparative genomics: libraries and command-line tools for building pipelines that analyse biological sequences. I lead its modernisation, so the toolkit is easier to install, test and build on.',
-      'I also built the iGEM USP 2026 team wiki, as lead developer. It presents the team’s project on antibiotic resistance to the judges and to the public.',
-      'Before university I took a three-year IT technician course at CTI-UNESP in Bauru and shipped software that people used: a payment system for the school fair, a CRM during an internship, and a platform that listed opportunities for young people.',
-      'My direction is embedded systems for health: firmware, sensors and models small enough to run on the device.',
+      'I’m Vinicius Castelli. I study computer engineering at Escola Politécnica, USP, in the class of 2026 → 2030.',
+      'Since February 2026 I’ve been an undergraduate researcher at LEEP, the protein structure and evolution lab at ICB-USP. The lab’s open-source toolkit for comparative genomics is called ROTIFER: libraries and command-line tools for building pipelines that analyse biological sequences. I lead its modernisation, so that it’s easier to install, test and build on.',
+      'I also built the iGEM USP 2026 team wiki as lead developer. It’s how the team presents its project on antibiotic resistance to the judges and to everyone else.',
+      'Before university I spent three years in the IT technician course at CTI-UNESP in Bauru, shipping software people used: a payment system for the school fair, a CRM during an internship, and a platform listing opportunities for young people.',
+      'I’m heading toward embedded systems for health, meaning firmware, sensors and models small enough to run on the device itself.',
     ],
     features: [
       'Research software for biology: data access, packaging, CI, documentation',
@@ -177,7 +178,7 @@ export const en = {
     operating: [
       { p: 'Portuguese', v: 'native', c: '' },
       { p: 'Spanish', v: 'fluent', c: 'no certificate' },
-      { p: 'English', v: 'fluent in conversation', c: 'no certificate yet' },
+      { p: 'English', v: 'fluent', c: 'no certificate yet' },
       { p: 'Languages (code)', v: 'Python, C, TypeScript', c: 'Python is the main one' },
       { p: 'Scientific software', v: 'C/C++, Rust', c: 'for performance work' },
       { p: 'Front-end', v: 'Vue 3, Nuxt 4, React, Tailwind v4, GSAP', c: '' },

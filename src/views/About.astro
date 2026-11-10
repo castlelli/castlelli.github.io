@@ -2,7 +2,7 @@
 // The one pager, set as a curriculum vitae in the journal's style.
 import Page from '../layouts/Page.astro';
 import Contact from '../components/Contact.astro';
-import Monogram from '../components/Monogram.astro';
+import Photo from '../components/Photo.astro';
 import type { Dict } from '../i18n/en';
 interface Props { t: Dict }
 const { t } = Astro.props;
@@ -20,7 +20,7 @@ import Arrow from '../components/Arrow.astro';
         <p class="cv-sub">{a.subtitle}</p>
       </div>
       <figure class="cv-fig">
-        <div class="plate cv-plate" data-ground="plate"><Monogram /></div>
+        <Photo name="portrait" alt={a.title} fallback="mark" class="cv-plate" />
         <figcaption class="figcap"><b>{t.ui.fig} 1.</b> {a.figCaption}</figcaption>
       </figure>
     </header>
@@ -43,7 +43,7 @@ import Arrow from '../components/Arrow.astro';
           <caption><b>{t.ui.table} 1.</b> {a.measCaption}</caption>
           <thead><tr><th scope="col">{a.measHead[0]}</th><th scope="col" class="num">{a.measHead[1]}</th><th scope="col">{a.measHead[2]}</th><th scope="col">{a.measHead[3]}</th></tr></thead>
           <tbody>
-            {a.measurements.map((r) => <tr><td>{r.p}</td><td class="num cv-v">{r.v}</td><td class="cv-u">{r.u}</td><td class="note">{r.c}</td></tr>)}
+            {a.measurements.map((r) => <tr><td>{r.p}</td><td class="num cv-v"><span data-count>{r.v}</span></td><td class="cv-u">{r.u}</td><td class="note">{r.c}</td></tr>)}
           </tbody>
         </table>
       </div>
@@ -83,6 +83,10 @@ import Arrow from '../components/Arrow.astro';
   <Contact t={t} onePager={false} />
 </Page>
 
+<script>
+  import '../scripts/ticker.ts';
+</script>
+
 <style>
   .cv { display: grid; gap: clamp(64px, 8vw, 112px); padding-block: clamp(32px, 4vw, 56px) var(--section); }
   .cv-back { color: var(--muted); justify-self: start; margin-bottom: calc(clamp(64px, 8vw, 112px) * -0.6); }
@@ -90,8 +94,7 @@ import Arrow from '../components/Arrow.astro';
   .cv-head { display: grid; gap: 40px; align-items: end; padding-bottom: clamp(32px, 4vw, 48px); border-bottom: 1.5px solid var(--c-tinta); }
   .cv-sub { margin-top: 22px; font-style: italic; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.35; color: var(--muted); max-width: 32ch; }
   .cv-fig { width: min(100%, 300px); }
-  .cv-plate { display: grid; place-items: center; aspect-ratio: 5 / 4; }
-  .cv-plate :global(.mono-vc) { width: 58%; height: auto; }
+  .cv-fig :global(.cv-plate) { aspect-ratio: 4 / 5; width: 100%; height: auto; }
   .cv-cols { display: grid; gap: clamp(56px, 7vw, 96px); }
   .cv-sec { display: grid; gap: 24px; align-content: start; min-width: 0; }
   .cv-h { font-weight: 400; font-size: var(--t-head); line-height: 1.1; letter-spacing: -0.015em; }
