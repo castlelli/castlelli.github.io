@@ -13,10 +13,11 @@ const w = t.work;
 const work = (home: string) => `${home}work/${d.slug}/`;
 const paths = { self: work(t.paths.home), other: work(t.paths.other) };
 const [primary, ...more] = d.links;
+import Arrow from '../components/Arrow.astro';
 ---
 <Page t={{ ...t, meta: { ...t.meta, title: `${d.title} · Vinicius Castelli`, description: d.summary } }} page="work" paths={paths}>
   <article class="art wrap">
-    <a class="link-quiet art-back" href={`${t.paths.home}#work`}><span aria-hidden="true">←</span> {w.contents}</a>
+    <a class="link-quiet art-back" href={`${t.paths.home}#work`}><Arrow dir="left" /> {w.contents}</a>
 
     <header class="art-head">
       <h1 class="art-t">{d.title}</h1>
@@ -25,6 +26,7 @@ const [primary, ...more] = d.links;
         <div><dt>{w.role}</dt><dd>{d.role}</dd></div>
         <div><dt>{w.dates}</dt><dd>{d.dates}</dd></div>
         <div><dt>{w.status}</dt><dd>{d.status}</dd></div>
+        {d.dims.map((m) => <div><dt>{m.label}</dt><dd>{m.value} {m.unit}</dd></div>)}
       </dl>
     </header>
 
@@ -36,12 +38,6 @@ const [primary, ...more] = d.links;
     <div class="art-body">
       <div class="art-prose"><Content /></div>
       <aside class="art-side">
-        {d.dims.length > 0 && (
-          <section>
-            <h2 class="art-h">{w.figures}</h2>
-            <ul class="art-dims">{d.dims.map((m) => <li><b>{m.value}</b> {m.unit}</li>)}</ul>
-          </section>
-        )}
         {d.stack.length > 0 && (
           <section>
             <h2 class="art-h">{w.stack}</h2>
@@ -50,8 +46,8 @@ const [primary, ...more] = d.links;
         )}
         {d.links.length > 0 && (
           <p class="art-links">
-            <a class="go" href={primary.href}>{primary.label} <span class="ar" aria-hidden="true">↗</span></a>
-            {more.map((l) => <a class="link-quiet" href={l.href}>{l.label} <span aria-hidden="true">↗</span></a>)}
+            <a class="go" href={primary.href}>{primary.label} <Arrow dir="out" /></a>
+            {more.map((l) => <a class="link-quiet" href={l.href}>{l.label} <Arrow dir="out" /></a>)}
           </p>
         )}
       </aside>
@@ -68,6 +64,7 @@ const [primary, ...more] = d.links;
   .art-abs { font-style: italic; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.4; color: var(--muted); max-width: 46ch; }
   .art-meta { display: flex; flex-wrap: wrap; gap: 10px 40px; padding-top: 18px; border-top: 1.5px solid var(--c-tinta); font: 15px var(--font-sans); }
   .art-meta dt { font-size: 13px; color: var(--muted); }
+  .art-meta dt::first-letter { text-transform: uppercase; }
   .art-fig { min-width: 0; }
   .art-plate { padding: clamp(20px, 4.5vw, 72px); }
   .art-body { display: grid; gap: 48px; }
@@ -76,8 +73,6 @@ const [primary, ...more] = d.links;
   .art-prose :global(p:first-child::first-line) { font-variant-caps: all-small-caps; letter-spacing: 0.04em; }
   .art-side { display: grid; gap: 36px; align-content: start; }
   .art-h { font: 500 14px var(--font-sans); color: var(--muted); padding-bottom: 10px; border-bottom: 1px solid var(--rule); margin-bottom: 14px; }
-  .art-dims { list-style: none; margin: 0; padding: 0; display: flex; gap: 32px; font: 15px var(--font-sans); color: var(--muted); }
-  .art-dims b { display: block; font: 400 44px/1 var(--font-serif); color: var(--fg); font-variant-numeric: lining-nums; margin-bottom: 6px; }
   .art-stack { font-size: 17px; line-height: 1.6; }
   .art-links { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; }
   @media (min-width: 1000px) { .art-body { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(56px, 7vw, 112px); } }

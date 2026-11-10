@@ -58,7 +58,6 @@ export const pt: Dict = {
     role: 'Papel',
     dates: 'Data',
     stack: 'Métodos e ferramentas',
-    figures: 'Números',
     status: 'Estado',
     contents: 'Voltar ao sumário',
     figs: {

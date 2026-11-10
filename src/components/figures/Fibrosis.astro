@@ -92,9 +92,9 @@ const collagen = Array.from({ length: 6 }, (_, k) => {
   <ellipse class="fb-nuc fb-fill" cx={MX - 6} cy={MY + 4} rx="40" ry="26" transform={`rotate(-12 ${MX - 6} ${MY + 4})`} />
 
   <!-- labels -->
-  <text class="fb-lab" x="196" y="412" text-anchor="middle">{labels.progenitor}</text>
-  <text class="fb-lab" x={MX - 10} y="454" text-anchor="middle">{labels.myo}</text>
-  <text class="fb-lab" x="912" y="420" text-anchor="middle">{labels.collagen}</text>
+  <text class="fb-lab fb-lab-prog" x="196" y="412" text-anchor="middle">{labels.progenitor}</text>
+  <text class="fb-lab fb-lab-myo" x={MX - 10} y="454" text-anchor="middle">{labels.myo}</text>
+  <text class="fb-lab fb-lab-col" x="912" y="420" text-anchor="middle">{labels.collagen}</text>
 </svg>
 
 <style>
@@ -114,4 +114,13 @@ const collagen = Array.from({ length: 6 }, (_, k) => {
   .fb-drug { fill: var(--c-papel); font-family: var(--font-serif); font-style: italic; font-size: 30px; }
   .fb-lab { fill: var(--c-coomassie-tinta); font-family: var(--font-serif); font-style: italic; font-size: 26px; }
   .fb-tag { fill: var(--c-papel); font-family: var(--font-sans); font-weight: 500; font-size: 18px; letter-spacing: 0.12em; }
+  @media (max-width: 600px) {
+    .fb-lab { font-size: 40px; }
+    .fb-drug { font-size: 46px; }
+    .fb-tag { font-size: 28px; }
+    .fb-q { font-size: 56px; }
+    .fb-lab-prog { transform: translateY(30px); }
+    .fb-lab-myo { transform: translateY(22px); }
+    .fb-lab-col { transform: translateY(14px); }
+  }
 </style>

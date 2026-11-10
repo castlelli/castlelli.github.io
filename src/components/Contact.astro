@@ -4,6 +4,7 @@ import type { Dict } from '../i18n/en';
 interface Props { t: Dict; onePager?: boolean }
 const { t, onePager = true } = Astro.props;
 const c = t.contact;
+import Arrow from './Arrow.astro';
 ---
 <section id="contact" class="section contact" data-ground="plate" aria-labelledby="contact-h">
   <div class="wrap contact-grid">
@@ -16,7 +17,7 @@ const c = t.contact;
       <ul class="contact-links">
         {c.links.map((l) => <li><span>{l.label}</span><a href={l.href} rel="me noopener">{l.value}</a></li>)}
       </ul>
-      {onePager && <a class="link-quiet contact-op" href={t.paths.about}>{c.onePager} <span aria-hidden="true">→</span></a>}
+      {onePager && <a class="link-quiet contact-op" href={t.paths.about}>{c.onePager} <Arrow /></a>}
     </div>
   </div>
 </section>

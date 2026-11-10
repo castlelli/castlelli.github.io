@@ -56,7 +56,6 @@ export const en = {
     role: 'Role',
     dates: 'Date',
     stack: 'Methods and tools',
-    figures: 'Key figures',
     status: 'Status',
     contents: 'Back to contents',
     figs: {

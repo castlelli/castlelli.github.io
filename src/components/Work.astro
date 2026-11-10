@@ -9,6 +9,7 @@ const w = t.work;
 const entries = (await getCollection('work', (e) => e.data.lang === t.lang)).sort((a, b) => a.data.order - b.data.order);
 const base = t.lang === 'en' ? '/work/' : '/pt/work/';
 const caption = (fig?: 'phase' | 'fibrosis') => (fig ? w.figs[fig].caption : '');
+import Arrow from './Arrow.astro';
 ---
 <section id="work" class="section work" aria-labelledby="work-h">
   <div class="wrap">
@@ -33,11 +34,9 @@ const caption = (fig?: 'phase' | 'fibrosis') => (fig ? w.figs[fig].caption : '')
               <dl class="paper-meta">
                 <div><dt>{w.role}</dt><dd>{d.role}</dd></div>
                 <div><dt>{w.dates}</dt><dd>{d.dates}</dd></div>
+                {d.dims.map((m) => <div><dt>{m.label}</dt><dd>{m.value} {m.unit}</dd></div>)}
               </dl>
-              {d.dims.length > 0 && (
-                <ul class="paper-dims">{d.dims.map((m) => <li><b>{m.value}</b> {m.unit}</li>)}</ul>
-              )}
-              <a class="go" href={href}>{t.hero.open} <span class="vh">{d.title}</span> <span class="ar" aria-hidden="true">→</span></a>
+              <a class="go" href={href}>{t.hero.open} <span class="vh">{d.title}</span> <Arrow /></a>
             </div>
           </article>
         );
@@ -58,8 +57,7 @@ const caption = (fig?: 'phase' | 'fibrosis') => (fig ? w.figs[fig].caption : '')
   .paper-sum { font-style: italic; color: var(--muted); }
   .paper-meta { display: flex; flex-wrap: wrap; gap: 8px 32px; font-family: var(--font-sans); font-size: 15px; padding-top: 14px; border-top: 1px solid var(--rule); width: 100%; }
   .paper-meta dt { color: var(--muted); font-size: 13px; }
-  .paper-dims { list-style: none; margin: 0; padding: 0; display: flex; gap: 28px; font-family: var(--font-sans); font-size: 15px; color: var(--muted); }
-  .paper-dims b { font: 400 34px/1 var(--font-serif); color: var(--fg); font-variant-numeric: lining-nums; display: block; margin-bottom: 4px; }
+  .paper-meta dt::first-letter { text-transform: uppercase; }
   .go { margin-top: 8px; }
 
   @media (min-width: 960px) {

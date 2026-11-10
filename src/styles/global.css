@@ -95,7 +95,6 @@ svg { display: block; }
   transition: gap 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .go:hover { gap: 16px; }
-.go .ar { transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .link-quiet { font: 500 15px var(--font-sans); text-decoration: none; display: inline-flex; gap: 8px; align-items: center; min-height: 44px; }
 .link-quiet:hover { text-decoration: underline; text-underline-offset: 0.3em; }
 

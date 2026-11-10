@@ -9,6 +9,7 @@ const h = t.hero;
 const entries = (await getCollection('work', (e) => e.data.lang === t.lang)).sort((a, b) => a.data.order - b.data.order);
 const base = t.lang === 'en' ? '/work/' : '/pt/work/';
 const [first, ...rest] = h.name.split(' ');
+import Arrow from './Arrow.astro';
 ---
 <section class="hero" aria-labelledby="hero-name">
   <div class="wrap hero-grid">
@@ -25,7 +26,7 @@ const [first, ...rest] = h.name.split(' ');
               <a href={`${base}${e.data.slug}/`}>
                 <span class="c-n">{i + 1}</span>
                 <span class="c-t">{e.data.title}<small>{e.data.summary}</small></span>
-                <span class="c-go" aria-hidden="true">{h.open} <span class="ar">→</span></span>
+                <span class="c-go" aria-hidden="true">{h.open} <Arrow /></span>
               </a>
             </li>
           ))}

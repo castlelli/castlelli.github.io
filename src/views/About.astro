@@ -8,10 +8,11 @@ interface Props { t: Dict }
 const { t } = Astro.props;
 const a = t.about;
 const s = a.sections;
+import Arrow from '../components/Arrow.astro';
 ---
 <Page t={t} page="about">
   <article class="cv wrap">
-    <a class="link-quiet cv-back" href={t.paths.home}><span aria-hidden="true">←</span> {a.back}</a>
+    <a class="link-quiet cv-back" href={t.paths.home}><Arrow dir="left" /> {a.back}</a>
 
     <header class="cv-head">
       <div>
