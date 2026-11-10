@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+import WorkSheet from '../../../views/WorkSheet.astro';
+import { pt } from '../../../i18n/pt';
+export async function getStaticPaths() {
+  const entries = await getCollection('work', (e) => e.data.lang === 'pt');
+  return entries.map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } }));
+}
+const { entry } = Astro.props;
+---
+<WorkSheet t={pt} entry={entry} />

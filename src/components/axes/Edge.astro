@@ -1,0 +1,38 @@
+---
+// AX-04. A chip with a small neural network on its die, and a signal that
+// gets coarser as the number of bits per value drops.
+const layers = [
+  { x: 72, ys: [86, 108, 130] },
+  { x: 92, ys: [78, 98, 118, 138] },
+  { x: 112, ys: [78, 98, 118, 138] },
+  { x: 132, ys: [98, 118] },
+];
+const edges: string[] = [];
+for (let l = 0; l < layers.length - 1; l++)
+  for (const a of layers[l].ys) for (const b of layers[l + 1].ys) edges.push(`M${layers[l].x} ${a}L${layers[l + 1].x} ${b}`);
+const pins = Array.from({ length: 8 }, (_, i) => 56 + i * 12.6);
+const sine = Array.from({ length: 53 }, (_, i) => {
+  const x = 196 + i * 2;
+  return `${i ? 'L' : 'M'}${x} ${(108 - 40 * Math.sin((i / 52) * Math.PI * 2 * 1.25)).toFixed(1)}`;
+}).join('');
+---
+<svg viewBox="0 0 320 208" aria-hidden="true">
+  <!-- package -->
+  {pins.map((p) => <path class="dw" d={`M${p} 44v-9M${p} 172v9M36 ${p}h-9M164 ${p}h9`} />)}
+  <path class="dw-heavy dw-fill" d="M48 44H164V172H36V56Z" />
+  <rect class="dw" x="54" y="62" width="92" height="92" />
+  <!-- network -->
+  <path class="dw-soft e-edges" d={edges.join('')} />
+  {layers.map((l) => l.ys.map((y) => <circle class="dw dw-fill" cx={l.x} cy={y} r="4.2" />))}
+  <!-- waveform -->
+  <path class="dw" d="M190 52V164H308" />
+  <path class="dw-soft" d="M190 108H304" />
+  <path class="dw-dash" d={sine} />
+  <path class="dw-heavy e-quant" data-quant d="" />
+  <g class="ax-detail lyr-note">
+    <text class="dw-text" x="100" y="57" text-anchor="middle">DIE</text>
+    <text class="dw-text-soft" x="100" y="166" text-anchor="middle">3 · 4 · 4 · 2</text>
+    <text class="dw-text-soft" x="194" y="48">OUT</text>
+    <text class="dw-text-soft" x="304" y="176" text-anchor="end">t</text>
+  </g>
+</svg>

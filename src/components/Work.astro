@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import PartDrawing from './PartDrawing.astro';
+import type { Dict } from '../i18n/en';
+interface Props { t: Dict }
+const { t } = Astro.props;
+const w = t.work;
+const entries = (await getCollection('work', (e) => e.data.lang === t.lang)).sort((a, b) => a.data.order - b.data.order);
+const base = t.lang === 'en' ? '/work/' : '/pt/work/';
+const labels = { ...w.tpl, reserved: w.reserved, inPrep: w.inPrep };
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+---
+<section id="work" data-sheet="work" class="sheet">
+  <div class="wrap">
+    <header class="sheet-head" data-reveal>
+      <p class="legend sheet-no">{t.ui.sheet} 02</p>
+      <h2 class="titulo">{w.title}</h2>
+      <p class="lead">{w.lead}</p>
+    </header>
+    <div class="work-grid">
+      {entries.length > 0
+        ? entries.map((e, i) => (
+            <div data-reveal>
+              <PartDrawing sheet={`02-${letters[i]}`} labels={labels} alt={w.cardAlt}
+                entry={{ ...e.data, href: `${base}${e.data.slug}/` }} />
+            </div>
+          ))
+        : [0, 1, 2].map((i) => (
+            <div data-reveal><PartDrawing sheet={`02-${letters[i]}`} labels={labels} alt={w.cardAlt} /></div>
+          ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .work-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
+</style>

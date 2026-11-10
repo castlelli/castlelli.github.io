@@ -1,0 +1,86 @@
+---
+// AX-02. A four-storey laboratory block with an egg-crate concrete façade and
+// a separate stair tower, after the biomedical sciences buildings at USP.
+const X0 = 52, X1 = 222;
+const floors = [80, 110, 140]; // top of each upper-storey band is y, band is 30 tall
+const cellW = 17;
+const cells = Array.from({ length: (X1 - X0) / cellW }, (_, i) => X0 + i * cellW);
+const levels = [['L0', 170], ['L1', 140], ['L2', 110], ['L3', 80], ['ROOF', 50]] as const;
+---
+<svg viewBox="0 0 320 208" aria-hidden="true">
+  <g class="ax-view ax-view--a">
+    <path class="dw-heavy" d="M8 170H312" />
+    <rect class="dw-hatch" x="8" y="170" width="304" height="7" style="stroke:none" />
+    <!-- block -->
+    <rect class="dw-heavy dw-fill" x={X0} y="50" width={X1 - X0} height="120" />
+    {[80, 110, 140].map((y) => <path class="dw" d={`M${X0} ${y}H${X1}`} />)}
+    <!-- egg-crate façade on the three upper storeys -->
+    {[50, 80, 110].map((y) => cells.map((c) => (
+      <g>
+        <path class="dw" d={`M${c} ${y}v30`} />
+        <rect class="dw-soft" x={c + 3.5} y={y + 6} width={cellW - 7} height="18" />
+      </g>
+    )))}
+    <!-- ground floor: glazing, entrance -->
+    <path class="dw-soft" d={cells.filter((_, i) => i % 2 === 0).map((c) => `M${c} 140v30`).join('')} />
+    <rect class="dw dw-fill" x="122" y="148" width="30" height="22" /><path class="dw" d="M137 148v22" />
+    <path class="dw" d="M114 146h46" />
+    <!-- roof plant -->
+    <rect class="dw" x="86" y="38" width="52" height="12" /><path class="dw-soft" d="M96 38v12M106 38v12M116 38v12M126 38v12" />
+    <rect class="dw" x="170" y="42" width="20" height="8" />
+    <!-- stair tower and links -->
+    <rect class="dw-heavy dw-fill" x="232" y="34" width="34" height="136" />
+    {[58, 88, 118, 148].map((y) => <path class="dw" d={`M240 ${y}h18M240 ${y + 6}h18`} />)}
+    {[80, 110, 140].map((y) => <path class="dw" d={`M${X1} ${y}h10M${X1} ${y + 10}h10`} />)}
+    <g class="ax-detail lyr-note">
+      {levels.map(([l, y]) => (
+        <g>
+          <path class="dw-soft" d={`M270 ${y}H282`} />
+          <path class="dw-solid" d={`M276 ${y}l-4 -6h8z`} />
+          <text class="dw-text" x="285" y={y - 2}>{l}</text>
+        </g>
+      ))}
+      {[X0, X0 + 68, X0 + 136, 249].map((c, i) => (
+        <g>
+          <path class="dw-centre" d={`M${c} 178V186`} />
+          <circle class="dw" cx={c} cy="194" r="7" />
+          <text class="dw-text" x={c} y="197.5" text-anchor="middle">{i + 1}</text>
+        </g>
+      ))}
+    </g>
+  </g>
+
+  <g class="ax-view ax-view--b">
+    <rect class="dw-heavy dw-fill" x={X0} y="58" width={X1 - X0} height="92" />
+    <path class="dw" d={`M${X0} 98H${X1}M${X0} 110H${X1}`} />
+    {[X0 + 34, X0 + 68, X0 + 102, X0 + 136].map((c) => <path class="dw" d={`M${c} 58V98M${c} 110V150`} />)}
+    <!-- benches -->
+    {[X0, X0 + 34, X0 + 68, X0 + 102, X0 + 136].map((c) => (
+      <g>
+        <rect class="dw-soft" x={c + 5} y="63" width="24" height="7" />
+        <rect class="dw-soft" x={c + 13} y="76" width="8" height="16" />
+        <rect class="dw-soft" x={c + 5} y="138" width="24" height="7" />
+        <path class="dw-soft" d={`M${c + 24} 110v8a8 8 0 0 0 8 -8`} />
+        <path class="dw-soft" d={`M${c + 24} 98v-8a8 8 0 0 1 8 8`} />
+      </g>
+    ))}
+    <!-- stair tower -->
+    <rect class="dw-heavy dw-fill" x="232" y="86" width="34" height="36" />
+    <path class="dw-soft" d="M238 86v36M244 86v36M250 86v36M256 86v36M232 104h34" />
+    <path class="dw" d={`M${X1} 98h10M${X1} 110h10`} />
+    {[X0, X0 + 68, X0 + 136, X1].map((c) => [58, 150].map((y) => <rect class="dw-solid" x={c - 2.5} y={y - 2.5} width="5" height="5" />))}
+    <g class="ax-detail lyr-note">
+      <circle class="dw" cx="298" cy="40" r="10" />
+      <path class="dw-solid" d="M298 28l5 16l-5 -4l-5 4z" />
+      <text class="dw-text" x="298" y="24" text-anchor="middle">N</text>
+      <text class="dw-text-soft" x={X0} y="50">LEVEL 2 · LABORATORIES</text>
+      {[X0, X0 + 68, X0 + 136, 249].map((c, i) => (
+        <g>
+          <path class="dw-centre" d={`M${c} 154V166`} />
+          <circle class="dw" cx={c} cy="174" r="7" />
+          <text class="dw-text" x={c} y="177.5" text-anchor="middle">{i + 1}</text>
+        </g>
+      ))}
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,77 @@
+---
+// AX-01. A long modernist slab on pilotis with ribbon windows, after the
+// engineering buildings on the Butantã campus. Elevation and floor plan.
+const X0 = 24, X1 = 280, BAYS = 10;
+const bay = (X1 - X0) / BAYS;
+const cols = Array.from({ length: BAYS + 1 }, (_, i) => X0 + i * bay);
+const mull = Array.from({ length: 31 }, (_, i) => 32 + i * 8);
+const levels = [['L0', 170], ['L1', 150], ['L2', 122], ['ROOF', 94]] as const;
+---
+<svg viewBox="0 0 320 208" aria-hidden="true">
+  <g class="ax-view ax-view--a">
+    <path class="dw-heavy" d="M8 170H312" />
+    <rect class="dw-hatch" x="8" y="170" width="304" height="7" style="stroke:none" />
+    <!-- pilotis -->
+    {cols.map((c) => <path class="dw" d={`M${c - 2} 150V170M${c + 2} 150V170`} />)}
+    <!-- recessed lobby, door and steps -->
+    <rect class="dw-soft" x="126" y="154" width="76" height="16" />
+    <path class="dw-soft" d="M145 154V170M164 154V170M183 154V170" />
+    <path class="dw" d="M100 170v-4h8v-4h8v-4h10" />
+    <!-- slab -->
+    <rect class="dw-heavy dw-fill" x={X0 - 4} y="94" width={X1 - X0 + 8} height="56" />
+    <path class="dw" d={`M${X0 - 4} 122H${X1 + 4}`} />
+    <path class="dw" d={`M${X0 - 8} 94H${X1 + 8}V89H${X0 - 8}Z`} />
+    <!-- ribbon windows -->
+    <rect class="dw" x="32" y="101" width="240" height="14" />
+    <rect class="dw" x="32" y="129" width="240" height="14" />
+    {mull.map((m) => <path class="dw-soft" d={`M${m} 101v14M${m} 129v14`} />)}
+    <!-- roof volumes -->
+    <rect class="dw" x="58" y="77" width="44" height="12" />
+    <rect class="dw" x="196" y="70" width="28" height="19" />
+    <g class="ax-detail lyr-note">
+      {levels.map(([l, y]) => (
+        <g>
+          <path class="dw-soft" d={`M${X1 + 10} ${y}H${X1 + 20}`} />
+          <path class="dw-solid" d={`M${X1 + 14} ${y}l-4 -6h8z`} />
+          <text class="dw-text" x={X1 + 22} y={y - 2}>{l}</text>
+        </g>
+      ))}
+      {cols.filter((_, i) => i % 2 === 0).map((c, i) => (
+        <g>
+          <path class="dw-centre" d={`M${c} 178V186`} />
+          <circle class="dw" cx={c} cy="194" r="7" />
+          <text class="dw-text" x={c} y="197.5" text-anchor="middle">{'ABCDEF'[i]}</text>
+        </g>
+      ))}
+    </g>
+  </g>
+
+  <g class="ax-view ax-view--b">
+    <rect class="dw-heavy dw-fill" x={X0} y="62" width={X1 - X0} height="84" />
+    <!-- corridor -->
+    <path class="dw" d={`M${X0} 98H${X1}M${X0} 110H${X1}`} />
+    <!-- rooms -->
+    {cols.slice(1, -1).filter((_, i) => i % 2 === 1).map((c) => <path class="dw" d={`M${c} 62V98M${c} 110V146`} />)}
+    {cols.slice(1, -1).filter((_, i) => i % 2 === 0).map((c) => <path class="dw-soft" d={`M${c} 62V98`} />)}
+    <!-- stair cores -->
+    <rect class="dw dw-fill" x={X0} y="98" width="16" height="12" /><path class="dw-soft" d={`M${X0} 98l16 12M${X0} 110l16 -12`} />
+    <rect class="dw dw-fill" x={X1 - 16} y="98" width="16" height="12" /><path class="dw-soft" d={`M${X1 - 16} 98l16 12M${X1 - 16} 110l16 -12`} />
+    <!-- columns -->
+    {cols.map((c) => [62, 146].map((y) => <rect class="dw-solid" x={c - 2.5} y={y - 2.5} width="5" height="5" />))}
+    <!-- door swings -->
+    {cols.slice(0, -1).filter((_, i) => i % 2 === 0).map((c) => <path class="dw-soft" d={`M${c + 8} 110v9a9 9 0 0 0 9 -9`} />)}
+    <g class="ax-detail lyr-note">
+      <circle class="dw" cx="298" cy="40" r="10" />
+      <path class="dw-solid" d="M298 28l5 16l-5 -4l-5 4z" />
+      <text class="dw-text" x="298" y="24" text-anchor="middle">N</text>
+      {cols.filter((_, i) => i % 2 === 0).map((c, i) => (
+        <g>
+          <path class="dw-centre" d={`M${c} 150V166`} />
+          <circle class="dw" cx={c} cy="174" r="7" />
+          <text class="dw-text" x={c} y="177.5" text-anchor="middle">{'ABCDEF'[i]}</text>
+        </g>
+      ))}
+      <text class="dw-text-soft" x={X0} y="54">LEVEL 1</text>
+    </g>
+  </g>
+</svg>

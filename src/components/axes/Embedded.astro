@@ -1,0 +1,73 @@
+---
+// AX-03. A microcontroller board from above. The alternate view lifts the
+// parts off the board and leaves their footprints behind.
+const hdr = Array.from({ length: 12 }, (_, i) => 84 + i * 13);
+const pins = Array.from({ length: 7 }, (_, i) => 89 + i * 7);
+---
+<svg viewBox="0 0 320 208" aria-hidden="true">
+  <!-- board -->
+  <rect class="dw-heavy dw-fill" x="34" y="30" width="256" height="152" />
+  {[[46, 42], [278, 42], [46, 170], [278, 170]].map(([x, y]) => (
+    <g><circle class="dw" cx={x} cy={y} r="5" /><path class="dw-soft" d={`M${x - 8} ${y}h16M${x} ${y - 8}v16`} /></g>
+  ))}
+  <!-- traces -->
+  <g class="x-traces">
+    <path class="dw-soft" d="M139 75V62L127 50V47M146 75V58L140 52V47M153 75V47M160 75V56L166 50V47M167 75V60L179 48V47M174 75V64L192 47" />
+    <path class="dw-soft" d="M139 145V156L127 168M146 145V160L140 166V169M153 145V169M160 145V169M167 145V158L179 169M174 145V154L192 169" />
+    <path class="dw-soft" d="M54 100H96L106 96H125M54 110H125M54 120H100L110 117H125" />
+    <path class="dw-soft" d="M195 96H204M195 103H200V118H207M195 110H214V118M195 124H232M195 131H226V142H236" />
+    <path class="dw-soft" d="M81 134V150H110L118 138H125" />
+  </g>
+  <!-- footprints: what stays on the board when the parts are lifted -->
+  <g class="x-ghost">
+    <rect class="dw-dash" x="132" y="82" width="56" height="56" />
+    <rect class="dw-dash" x="24" y="94" width="30" height="32" />
+    <rect class="dw-dash" x="80" y="40" width="160" height="11" />
+    <rect class="dw-dash" x="80" y="165" width="160" height="11" />
+  </g>
+  <!-- headers -->
+  <g class="x-part x-hdr-t">
+    <rect class="dw dw-fill" x="80" y="40" width="160" height="11" />
+    {hdr.map((x) => <rect class="dw-solid" x={x} y="43" width="5" height="5" />)}
+  </g>
+  <g class="x-part x-hdr-b">
+    <rect class="dw dw-fill" x="80" y="165" width="160" height="11" />
+    {hdr.map((x) => <rect class="dw-solid" x={x} y="168" width="5" height="5" />)}
+  </g>
+  <!-- connector -->
+  <g class="x-part x-usb">
+    <rect class="dw-heavy dw-fill" x="24" y="94" width="30" height="32" />
+    <path class="dw-soft" d="M30 101h14M30 110h14M30 119h14" />
+  </g>
+  <!-- small parts -->
+  <g class="x-small">
+    <rect class="dw dw-fill" x="204" y="91" width="22" height="10" rx="5" />
+    <rect class="dw dw-fill" x="204" y="118" width="6" height="10" /><rect class="dw dw-fill" x="211" y="118" width="6" height="10" />
+    <path class="dw" d="M232 118l10 6l-10 6zM243 118v12" /><path class="dw-soft" d="M246 116l5 -5M249 121l5 -5" />
+    <rect class="dw dw-fill" x="236" y="60" width="18" height="18" /><circle class="dw" cx="245" cy="69" r="5" />
+    <rect class="dw dw-fill" x="70" y="134" width="22" height="13" />
+    <rect class="dw dw-fill" x="236" y="138" width="14" height="7" />
+  </g>
+  <!-- microcontroller -->
+  <g class="x-part x-mcu">
+    {pins.map((p) => <path class="dw" d={`M${p} 82v-7M${p} 138v7M132 ${p}h-7M188 ${p}h7`} />)}
+    <rect class="dw-heavy dw-fill" x="132" y="82" width="56" height="56" />
+    <circle class="dw" cx="140" cy="90" r="2.5" />
+    <rect class="dw-soft" x="146" y="96" width="28" height="28" />
+  </g>
+  <!-- projection lines, only in the exploded view -->
+  <g class="x-proj">
+    <path class="dw-centre" d="M132 82l22 -26M188 82l22 -26M188 138l22 -26" />
+    <path class="dw-centre" d="M24 94l-12 -14M54 126l-12 -14" />
+  </g>
+  <g class="ax-detail lyr-note">
+    <text class="dw-text x-lab-mcu" x="160" y="113" text-anchor="middle">U1</text>
+    <text class="dw-text-soft" x="38" y="138">J1</text>
+    <text class="dw-text-soft" x="246" y="38">J2</text>
+    <text class="dw-text-soft" x="246" y="186">J3</text>
+    <text class="dw-text-soft" x="230" y="99">Y1</text>
+    <text class="dw-text-soft" x="258" y="72">SW1</text>
+    <text class="dw-text-soft" x="258" y="128">D1</text>
+    <text class="dw-text-soft" x="70" y="130">U2</text>
+  </g>
+</svg>

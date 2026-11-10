@@ -1,0 +1,32 @@
+---
+import { render, type CollectionEntry } from 'astro:content';
+import Sheet from '../layouts/Sheet.astro';
+import PartDrawing from '../components/PartDrawing.astro';
+import type { Dict } from '../i18n/en';
+interface Props { t: Dict; entry: CollectionEntry<'work'> }
+const { t, entry } = Astro.props;
+const { Content } = await render(entry);
+const labels = { ...t.work.tpl, reserved: t.work.reserved, inPrep: t.work.inPrep };
+const work = (home: string) => `${home}work/${entry.data.slug}/`;
+const paths = { self: work(t.paths.home), other: work(t.paths.other) };
+---
+<Sheet t={{ ...t, meta: { ...t.meta, title: `${entry.data.title} · Vinicius Castelli`, description: entry.data.summary } }} page="work" paths={paths}>
+  <section class="sheet">
+    <div class="wrap ws">
+      <PartDrawing sheet={t.work.title} labels={labels} alt={t.work.cardAlt} entry={entry.data} large />
+      <article class="panel ws-body">
+        <Content />
+        {entry.data.links.length > 0 && (
+          <p class="ws-links">{entry.data.links.map((l) => <a class="btn btn--sm" href={l.href}>{l.label}</a>)}</p>
+        )}
+      </article>
+    </div>
+  </section>
+</Sheet>
+<style>
+  .ws { display: grid; gap: 40px; }
+  .ws-body { max-width: 720px; }
+  .ws-body :global(p + p) { margin-top: 1em; }
+  .ws-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  @media (min-width: 1000px) { .ws { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } }
+</style>

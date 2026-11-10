@@ -1,0 +1,97 @@
+---
+// Sheet 04: contact drawn as a connector pinout, plus the way to the datasheet.
+import type { Dict } from '../i18n/en';
+interface Props { t: Dict; teaser?: boolean }
+const { t, teaser = true } = Astro.props;
+const c = t.contact;
+// Pin centres share the 29..165 band of the 200-unit drawing with the list rows.
+const py = (i: number) => 29 + ((i + 0.5) * 136) / c.pins.length;
+---
+<section id="contact" data-sheet="contact" class="sheet">
+  <div class="wrap">
+    <header class="sheet-head" data-reveal>
+      <p class="legend sheet-no">{t.ui.sheet} 04</p>
+      <h2 class="titulo">{c.title}</h2>
+      <p class="lead">{c.lead}</p>
+    </header>
+    <div class="j1-grid">
+      <figure class="j1" data-reveal>
+        <div class="j1-body">
+          <svg viewBox="0 0 150 200" role="img" aria-label={c.alt}>
+            <path class="dw-heavy dw-fill" d="M40 22H104V178H40Z" />
+            <path class="dw" d="M40 22l-12 10V168l12 10" />
+            <path class="dw-soft" d="M52 30V170" />
+            {c.pins.map((p, i) => (
+              <g class={`j1-pin j1-pin-${p.n}`}>
+                <rect class="dw dw-fill j1-pad" x="62" y={py(i) - 8} width="22" height="16" />
+                <path class="dw-heavy" d={`M104 ${py(i)}H146`} />
+                <text class="dw-text" x="73" y={py(i) + 3.5} text-anchor="middle">{p.n}</text>
+              </g>
+            ))}
+            <text class="dw-text-soft lyr-note" x="72" y="14" text-anchor="middle">J1</text>
+          </svg>
+          <ul class="j1-list" style={`--pins: ${c.pins.length}`}>
+            {c.pins.map((p) => (
+              <li>
+                <a href={p.href} data-pin={p.n} rel="me noopener">
+                  <span class="legend" aria-hidden="true">{p.name}</span>
+                  <span class="j1-val">{p.value}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <figcaption class="fig-cap"><b>{t.ui.fig} 3</b><span class="legend">{c.figTitle}</span></figcaption>
+      </figure>
+      {teaser && (
+        <aside class="panel j1-teaser" data-reveal>
+          <p class="legend">VC-2026 · {t.ui.rev}</p>
+          <h3>{t.aboutTeaser.title}</h3>
+          <p>{t.aboutTeaser.text}</p>
+          <a class="btn" href={t.paths.about}>{t.aboutTeaser.cta} <span aria-hidden="true">→</span></a>
+        </aside>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .j1-grid { display: grid; gap: 48px; align-items: start; }
+  .j1 { margin: 0; }
+  .j1-body { display: grid; grid-template-columns: 165px minmax(0, 1fr); }
+  .j1-body svg { width: 165px; height: 220px; }
+  /* rows line up with the pins: both split the 29..165 band of 200 evenly */
+  .j1-list { list-style: none; margin: 0; padding: 32px 0 38px; height: 220px; display: grid; grid-template-rows: repeat(var(--pins, 4), 1fr); }
+  .j1-list li { min-height: 0; }
+  .j1-list a {
+    display: flex; align-items: center; gap: 4px 16px; height: 100%; padding-left: 14px; text-decoration: none;
+    border-left: 2.5px solid var(--draw); transition: background-color 0.15s, color 0.15s;
+  }
+  .j1-list .legend { display: none; flex: 0 0 120px; }
+  .j1-val { font-family: var(--font-mono); font-size: 12px; line-height: 1.15; font-weight: 500; overflow-wrap: anywhere; }
+  @media (min-width: 560px) {
+    .j1-list .legend { display: block; }
+    .j1-val { font-size: 15px; }
+  }
+  @media (max-width: 559px) {
+    .j1-body { grid-template-columns: 120px minmax(0, 1fr); }
+    .j1-body svg { width: 120px; height: 160px; }
+    .j1-list { height: 160px; padding: 23px 0 28px; }
+    .j1-list a { padding-left: 10px; }
+    .j1-val { font-size: 11.5px; }
+  }
+  .j1-list a:hover, .j1-list a:focus-visible { background: var(--draw); color: var(--bg); }
+  .j1-list a:hover .legend, .j1-list a:focus-visible .legend { color: var(--bg); }
+  .j1-pad { transition: fill 0.15s; }
+  .j1-body:has([data-pin="1"]:is(:hover, :focus-visible)) .j1-pin-1 .j1-pad,
+  .j1-body:has([data-pin="2"]:is(:hover, :focus-visible)) .j1-pin-2 .j1-pad,
+  .j1-body:has([data-pin="3"]:is(:hover, :focus-visible)) .j1-pin-3 .j1-pad,
+  .j1-body:has([data-pin="4"]:is(:hover, :focus-visible)) .j1-pin-4 .j1-pad { fill: var(--hl); }
+  .j1-body:has([data-pin="1"]:is(:hover, :focus-visible)) .j1-pin-1 text,
+  .j1-body:has([data-pin="2"]:is(:hover, :focus-visible)) .j1-pin-2 text,
+  .j1-body:has([data-pin="3"]:is(:hover, :focus-visible)) .j1-pin-3 text,
+  .j1-body:has([data-pin="4"]:is(:hover, :focus-visible)) .j1-pin-4 text { fill: var(--hl-fg); }
+  .j1-teaser { display: grid; gap: 14px; justify-items: start; }
+  .j1-teaser h3 { font-family: var(--font-serif); font-weight: 600; font-size: 34px; line-height: 1.1; }
+  @media (min-width: 1000px) { .j1-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 72px; } }
+</style>

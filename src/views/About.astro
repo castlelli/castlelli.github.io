@@ -1,0 +1,131 @@
+---
+// The about page, laid out as a component datasheet.
+import Sheet from '../layouts/Sheet.astro';
+import Contact from '../components/Contact.astro';
+import type { Dict } from '../i18n/en';
+interface Props { t: Dict }
+const { t } = Astro.props;
+const a = t.about;
+const s = a.sections;
+---
+<Sheet t={t} page="about">
+  <section class="ds-wrap wrap">
+    <a class="legend ds-back" href={t.paths.home}><span aria-hidden="true">←</span> {a.back}</a>
+
+    <article class="panel ds">
+      <header class="ds-head">
+        <div>
+          <p class="legend">{a.part} · {t.ui.datasheet} · {t.ui.rev}</p>
+          <h1 class="ds-title">{a.title}</h1>
+          <p class="ds-sub">{a.subtitle}</p>
+        </div>
+        <div class="ds-photo" role="img" aria-label={a.photo}>
+          <svg viewBox="0 0 120 150" aria-hidden="true">
+            <rect class="dw-dash" x="1" y="1" width="118" height="148" />
+            <path class="dw-soft" d="M1 1L119 149M119 1L1 149" />
+          </svg>
+          <span class="legend">{a.photo}</span>
+        </div>
+      </header>
+
+      <div class="ds-cols">
+        <section class="ds-sec">
+          <h2 class="ds-h"><span>1</span>{s.description}</h2>
+          {a.description.map((p) => <p>{p}</p>)}
+        </section>
+        <section class="ds-sec">
+          <h2 class="ds-h"><span>2</span>{s.features}</h2>
+          <ul class="ds-feat">{a.features.map((f) => <li>{f}</li>)}</ul>
+        </section>
+      </div>
+
+      <section class="ds-sec">
+        <h2 class="ds-h"><span>3</span>{s.measurements}</h2>
+        <div class="table-scroll" tabindex="0" role="region" aria-label={s.measurements}>
+          <table class="medicao ds-table">
+            <thead><tr><th>{a.measHead[0]}</th><th class="v">{a.measHead[1]}</th><th>{a.measHead[2]}</th><th>{a.measHead[3]}</th></tr></thead>
+            <tbody>
+              {a.measurements.map((r) => (
+                <tr><td>{r.p}</td><td class="v" data-count>{r.v}</td><td class="u">{r.u}</td><td class="c">{r.c}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="ds-sec">
+        <h2 class="ds-h"><span>4</span>{s.operating}</h2>
+        <div class="table-scroll" tabindex="0" role="region" aria-label={s.operating}>
+          <table class="medicao ds-table">
+            <thead><tr><th>{a.opHead[0]}</th><th>{a.opHead[1]}</th><th>{a.opHead[2]}</th></tr></thead>
+            <tbody>
+              {a.operating.map((r) => <tr><td>{r.p}</td><td class="ds-val">{r.v}</td><td class="c">{r.c}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="ds-sec">
+        <h2 class="ds-h"><span>5</span>{s.publications}</h2>
+        <ol class="ds-pubs">
+          {a.publications.map((p) => (
+            <li><span>{p.text}</span> <span class:list={['tag', { 'tag--pending': p.pending }]}>{p.status}</span></li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="ds-sec">
+        <h2 class="ds-h"><span>6</span>{s.history}</h2>
+        <div class="table-scroll" tabindex="0" role="region" aria-label={s.history}>
+          <table class="medicao ds-table ds-hist">
+            <thead><tr><th>{a.histHead[0]}</th><th>{a.histHead[1]}</th><th>{a.histHead[2]}</th></tr></thead>
+            <tbody>
+              {a.history.map((r) => <tr><td class="mono">{r.r}</td><td class="mono ds-date">{r.d}</td><td>{r.t}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </article>
+  </section>
+
+  <Contact t={t} teaser={false} />
+</Sheet>
+
+<script>
+  import '../scripts/reveal.ts';
+  import '../scripts/datasheet.ts';
+</script>
+
+<style>
+  .ds-wrap { padding-block: clamp(28px, 5vw, 64px) 0; }
+  .ds-back { display: inline-flex; gap: 8px; min-height: 44px; align-items: center; text-decoration: none; margin-bottom: 20px; }
+  .ds-back:hover { color: var(--fg); }
+  .ds { display: grid; gap: clamp(32px, 5vw, 56px); max-width: 1040px; }
+  .ds-head { display: grid; gap: 24px; padding-bottom: clamp(20px, 3vw, 32px); border-bottom: 2px solid var(--fg); }
+  .ds-title { font-family: var(--font-serif); font-weight: 600; letter-spacing: -0.015em; line-height: 1; font-size: clamp(44px, 7vw, 84px); margin-top: 10px; }
+  .ds-sub { font-family: var(--font-serif); font-size: clamp(19px, 2vw, 24px); line-height: 1.3; margin-top: 12px; color: var(--muted); }
+  .ds-photo { position: relative; width: 120px; display: grid; place-items: center; }
+  .ds-photo svg { width: 120px; height: 150px; }
+  .ds-photo .legend { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 10px; font-size: 10px; background: none; }
+  .ds-photo .legend::before { content: ""; position: absolute; inset: 44px 8px; background: var(--bg); z-index: -1; }
+  .ds-photo { isolation: isolate; }
+  .ds-cols { display: grid; gap: clamp(32px, 5vw, 56px); }
+  .ds-sec { display: grid; gap: 14px; align-content: start; min-width: 0; }
+  .ds-sec p { max-width: 62ch; }
+  .ds-h {
+    display: flex; gap: 12px; align-items: baseline; font-family: var(--font-mono); font-size: 13px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--draw); padding-bottom: 8px; border-bottom: var(--fio) solid var(--rule);
+  }
+  .ds-h span { color: var(--muted); }
+  .ds-feat { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+  .ds-feat li { padding-left: 22px; position: relative; }
+  .ds-feat li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 10px; border-top: 2px solid var(--draw); }
+  .ds-table { min-width: 560px; }
+  .ds-val { font-family: var(--font-mono); font-size: 14px; }
+  .ds-pubs { margin: 0; padding-left: 1.4em; display: grid; gap: 10px; }
+  .ds-pubs li::marker { font-family: var(--font-mono); font-size: 13px; color: var(--muted); }
+  .ds-hist .ds-date { white-space: nowrap; color: var(--draw); font-weight: 500; }
+  .ds-hist td:first-child { color: var(--muted); }
+  @media (min-width: 760px) { .ds-head { grid-template-columns: minmax(0, 1fr) auto; align-items: end; } }
+  @media (min-width: 900px) { .ds-cols { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); } }
+</style>

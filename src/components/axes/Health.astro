@@ -1,0 +1,42 @@
+---
+// AX-05. The heart drawn as an engineer would: a two-sided pump in section,
+// four chambers, four check valves. No device is shown on purpose.
+const beat = 'l14 0l4 -5l4 5l5 0l3 6l5 -30l5 38l4 -14l8 0l6 -8l7 8l15 0';
+---
+<svg viewBox="0 0 320 208" aria-hidden="true">
+  <!-- outlet pipes -->
+  <path class="dw" d="M100 132H66V12M100 146H52V12" />
+  <path class="dw" d="M220 132H254V12M220 146H268V12" />
+  <!-- inlet pipes -->
+  <path class="dw" d="M120 12V38M134 12V38M186 12V38M200 12V38" />
+  <!-- housing -->
+  <rect class="dw-heavy dw-fill" x="100" y="38" width="120" height="126" />
+  <rect class="dw-hatch" x="155" y="38" width="10" height="126" />
+  <!-- ventricles: the working chambers -->
+  <rect class="h-vent" x="102" y="94" width="52" height="68" />
+  <rect class="h-vent" x="166" y="94" width="52" height="68" />
+  <!-- atrio-ventricular plane -->
+  <path class="dw" d="M100 92H117M137 92H155M165 92H183M203 92H220" />
+  <!-- check valves: inlet pair -->
+  <g class="h-valve h-av"><path class="h-tri" d="M118 84h18l-9 13z" /><path class="h-bar dw-heavy" d="M117 99h20" /></g>
+  <g class="h-valve h-av"><path class="h-tri" d="M184 84h18l-9 13z" /><path class="h-bar dw-heavy" d="M183 99h20" /></g>
+  <!-- check valves: outlet pair -->
+  <g class="h-valve h-out"><path class="h-tri" d="M90 130v18l-13 -9z" /><path class="h-bar dw-heavy" d="M75 129v20" /></g>
+  <g class="h-valve h-out"><path class="h-tri" d="M230 130v18l13 -9z" /><path class="h-bar dw-heavy" d="M245 129v20" /></g>
+  <!-- flow arrows -->
+  <path class="dw-solid" d="M127 30l-4 -8h8zM193 30l-4 -8h8zM59 18l-4 8h8zM261 18l-4 8h8z" />
+  <!-- pulse trace -->
+  <path class="dw-soft" d={`M14 190${beat}${beat}${beat}`} />
+  <path class="h-pulse" pathLength="1" d={`M14 190${beat}${beat}${beat}`} />
+  <g class="ax-detail lyr-note">
+    <text class="dw-text" x="127" y="64" text-anchor="middle">RA</text>
+    <text class="dw-text" x="193" y="64" text-anchor="middle">LA</text>
+    <text class="dw-text" x="127" y="132" text-anchor="middle">RV</text>
+    <text class="dw-text" x="193" y="132" text-anchor="middle">LV</text>
+    <text class="dw-text-soft" x="46" y="8" text-anchor="middle">TO LUNGS</text>
+    <text class="dw-text-soft" x="127" y="8" text-anchor="middle">BODY</text>
+    <text class="dw-text-soft" x="193" y="8" text-anchor="middle">LUNGS</text>
+    <text class="dw-text-soft" x="274" y="8" text-anchor="middle">TO BODY</text>
+    <text class="dw-text-soft" x="160" y="178" text-anchor="middle">CHECK VALVE × 4</text>
+  </g>
+</svg>

@@ -1,0 +1,144 @@
+---
+// FIG. 1: the exploded assembly. Rendered fully open on the server so it is
+// complete without JavaScript; the client script closes it and ties the
+// explosion to scroll.
+import type { Dict } from '../i18n/en';
+import { PLATE, VIEWBOX, BALLOON_X, YAW0, plateGeo, lift } from '../lib/iso';
+
+interface Props { t: Dict }
+const { t } = Astro.props;
+const h = t.hero;
+const plates = Array.from({ length: PLATE.count }, (_, i) => plateGeo(i, YAW0));
+const item = (i: number) => PLATE.count - i; // top plate is item 1
+const target = (i: number) => (i === PLATE.count - 1 ? '#axes' : '#work');
+const [first, ...restName] = h.name.split(' ');
+---
+<section id="system" data-sheet="system" class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="legend">{h.kicker}</p>
+      <div class="hero-name">
+        <h1 class="display" data-name>{first}<br />{restName.join(' ')}</h1>
+        <div class="cota lyr-dim" data-name-cota aria-hidden="true"><i></i><i></i><span data-name-px>1:1</span></div>
+      </div>
+      <p class="lead">{h.lead[0]}<span class="hl">{h.lead[1]}</span>{h.lead[2]}</p>
+    </div>
+
+    <figure class="hero-fig">
+      <svg
+        class="asm"
+        viewBox={`${VIEWBOX.x} ${VIEWBOX.y - 4} ${VIEWBOX.w} ${VIEWBOX.h + 8}`}
+        role="group"
+        aria-label={h.figAlt}
+        data-assembly
+      >
+        <g class="cl lyr-note" aria-hidden="true">
+          {plates[0].corners.map((c) => (
+            <line data-cl x1={c[0]} x2={c[0]} y1={c[1] + lift(0, 1)} y2={c[1] - (PLATE.count - 1) * PLATE.t + lift(PLATE.count - 1, 1)} />
+          ))}
+        </g>
+        {plates.map((pl, i) => (
+          <g class="plate" data-plate={i} data-item={item(i)} transform={`translate(0 ${lift(i, 1).toFixed(1)})`}>
+            {pl.d.map((d, k) => <path d={d} class={pl.cls[k]} />)}
+            <a class="balloon lyr-note" href={target(i)} data-item={item(i)} aria-label={`${item(i)}: ${h.plates[PLATE.count - 1 - i]}`}>
+              <line data-leader x1={pl.anchor[0]} y1={pl.anchor[1]} x2={BALLOON_X - 13} y2={pl.anchor[1] - 22} />
+              <circle cx={BALLOON_X} cy={pl.anchor[1] - 22} r="13" />
+              <text class="b-n" x={BALLOON_X} y={pl.anchor[1] - 18} text-anchor="middle">{item(i)}</text>
+              <text class="b-l" x={BALLOON_X} y={pl.anchor[1] + 7} text-anchor="middle">{h.plates[PLATE.count - 1 - i]}</text>
+            </a>
+          </g>
+        ))}
+      </svg>
+      <figcaption class="fig-cap">
+        <b>{t.ui.fig} 1</b>
+        <span class="legend">{h.figTitle}</span>
+        <span class="legend fig-note">{h.figNote}</span>
+      </figcaption>
+    </figure>
+
+    <div class="bom">
+      <p class="legend bom-title">{h.bomTitle}</p>
+      <div class="table-scroll" tabindex="0" role="region" aria-label={h.bomTitle}>
+        <table class="medicao bom-table">
+          <thead>
+            <tr><th>{h.bomHead[0]}</th><th>{h.bomHead[1]}</th><th class="v">{h.bomHead[2]}</th><th>{h.bomHead[3]}</th><th>{h.bomHead[4]}</th></tr>
+          </thead>
+          <tbody>
+            {h.bom.map((r) => (
+              <tr data-item={r.item}>
+                <td class="mono bom-item">{r.item}</td>
+                <td>{r.part}</td>
+                <td class="v">{r.qty}</td>
+                <td class="u">{r.unit}</td>
+                <td><span class="tag">{r.status}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/fig1.ts';
+</script>
+
+<style>
+  .hero { padding-block: clamp(28px, 5vw, 56px) clamp(56px, 8vw, 96px); }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .hero-copy { display: grid; gap: 20px; align-content: start; }
+  .hero-name { display: inline-grid; justify-self: start; gap: 2px; }
+  .hero-name .cota { margin-top: 2px; }
+  .asm { width: 100%; height: auto; max-height: 68vh; touch-action: pan-y; cursor: grab; overflow: visible; }
+  .asm:active { cursor: grabbing; }
+  .fig-note { opacity: 0.8; }
+
+  .asm path { stroke: var(--draw); stroke-width: 1.4; stroke-linejoin: round; fill: none; }
+  .asm .p-top { fill: var(--bg); stroke-width: 1.8; }
+  .asm .p-side { fill: var(--bg-deep); stroke-width: 1.8; }
+  .asm .d-soft { stroke: var(--draw-soft); stroke-width: 1; }
+  .asm .d-hot { fill: var(--hl); stroke: var(--hl); }
+  .asm .cl line { stroke: var(--draw-soft); stroke-width: 1; stroke-dasharray: 12 4 2 4; }
+  .asm .plate.on .p-top, .asm .plate.on .p-side { stroke: var(--hot); stroke-width: 2.6; }
+
+  .asm { --open: 1; }
+  .balloon { cursor: pointer; opacity: clamp(0, calc(var(--open) * 3 - 0.6), 1); }
+  .asm .cl { opacity: clamp(0, calc(var(--open) * 2 - 0.3), 1); }
+  .balloon line { stroke: var(--draw); stroke-width: 1; }
+  .balloon circle { fill: var(--bg); stroke: var(--draw); stroke-width: 1.6; transition: fill 0.15s; }
+  .balloon .b-n { fill: var(--fg); font-family: var(--font-mono); font-size: 13px; font-weight: 500; transition: fill 0.15s; }
+  .balloon .b-l { fill: var(--muted); font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+  .plate.on .balloon circle, .balloon:hover circle, .balloon:focus-visible circle { fill: var(--hl); stroke: var(--hl); }
+  .plate.on .balloon .b-n, .balloon:hover .b-n, .balloon:focus-visible .b-n { fill: var(--hl-fg); }
+  .plate.on .balloon .b-l { fill: var(--fg); }
+  .balloon:focus-visible { outline: none; }
+
+  .bom-title { margin-bottom: 10px; }
+  .bom-table { font-size: 14px; }
+  @media (max-width: 559px) {
+    .bom-table th:last-child, .bom-table td:last-child { display: none; }
+    .bom-table td, .bom-table th { padding-right: 8px; }
+    .bom-table .u { white-space: normal; font-size: 12px; }
+  }
+  @media (min-width: 560px) { .bom-table { min-width: 520px; } }
+  .bom-table td { padding-block: 5px; }
+  .hero .display { font-size: clamp(52px, 7.6vw, 108px); }
+  .bom-item { color: var(--muted); }
+  .bom-table tbody tr { transition: background-color 0.15s; cursor: default; }
+  .bom-table tbody tr.on { background: color-mix(in srgb, var(--hl) 22%, transparent); }
+  .bom-table tbody tr.on .bom-item { color: var(--fg); }
+
+  @media (min-width: 1000px) {
+    .hero-grid {
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
+      grid-template-areas: "copy fig" "bom fig";
+      column-gap: 48px; row-gap: 28px; align-items: start;
+    }
+    .hero-copy { grid-area: copy; }
+    .hero-fig { grid-area: fig; margin: 0; align-self: center; }
+    .bom { grid-area: bom; }
+    .asm { max-height: min(74vh, 720px); }
+  }
+  .hero-fig { margin: 0; }
+</style>

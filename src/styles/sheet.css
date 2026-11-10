@@ -1,0 +1,120 @@
+/* The sheet chrome: title-block header, frame, instruments, menu, footer. */
+
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ---------- title-block header ---------- */
+.tb {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: stretch; height: 56px;
+  background: var(--bg); border-bottom: var(--fio) solid var(--rule);
+}
+.tb > * { display: flex; align-items: center; }
+.tb-logo { padding: 0 16px; border-right: var(--fio) solid var(--rule); }
+.tb-logo .mono-vc { height: 30px; width: auto; }
+.tb-name { padding: 0 18px; border-right: var(--fio) solid var(--rule); color: var(--fg); display: none; }
+.tb-nav { flex: 1; display: none; }
+.tb-link {
+  display: flex; align-items: center; gap: 8px; height: 100%; padding: 0 16px;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+  text-decoration: none; color: var(--muted); border-right: var(--fio) solid var(--rule);
+  transition: color 0.15s, background-color 0.15s;
+}
+.tb-link span { color: var(--muted); }
+.tb-link:hover { color: var(--fg); }
+.tb-link[aria-current] { color: var(--bg); background: var(--draw); }
+.tb-link[aria-current] span { color: var(--bg); opacity: 1; }
+.tb-tools { display: none; margin-left: auto; }
+.tb-tools > * { height: 100%; border-left: var(--fio) solid var(--rule); display: flex; align-items: center; }
+.tb-seg { padding: 0 10px; gap: 4px; }
+.tb-tools > .tb-readout { display: none; gap: 18px; padding: 0 16px; font-size: 10px; letter-spacing: 0.08em; color: var(--muted); white-space: nowrap; }
+@media (min-width: 1360px) { .tb-tools > .tb-readout { display: flex; } }
+.tb-seg button { width: 32px; height: 32px; display: grid; place-items: center; border: var(--fio) solid transparent; }
+.tb-seg button[aria-pressed="true"] { border-color: var(--fg); }
+.sw { width: 16px; height: 16px; border: 1px solid var(--fg); }
+.sw[data-sw="blueprint"] { background: #24338F; }
+.sw[data-sw="paper"] { background: #F3F1EA; }
+.sw[data-sw="graphite"] { background: #141513; }
+.tb-layers { position: relative; }
+.tb-layers summary { list-style: none; cursor: pointer; padding: 0 16px; height: 100%; display: flex; align-items: center; color: var(--muted); }
+.tb-layers summary::-webkit-details-marker { display: none; }
+.tb-layers summary:hover, .tb-layers[open] summary { color: var(--fg); }
+.tb-pop {
+  position: absolute; right: -1px; top: 100%; min-width: 180px; display: grid; gap: 10px; padding: 16px;
+  background: var(--bg); border: var(--fio) solid var(--rule);
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase;
+}
+.tb-pop label, .menu-check { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+input[type="checkbox"] { accent-color: var(--hl); width: 16px; height: 16px; margin: 0; }
+.tb-lang { padding: 0 18px; text-decoration: none; color: var(--fg); }
+.tb-lang:hover { background: var(--draw); color: var(--bg); }
+.tb-menu { margin-left: auto; padding: 0 16px; gap: 12px; color: var(--fg); border-left: var(--fio) solid var(--rule); }
+.tb-menu span:last-child { font-size: 20px; line-height: 1; }
+
+@media (min-width: 1080px) {
+  .tb-name, .tb-nav, .tb-tools { display: flex; }
+  .tb-menu { display: none; }
+}
+
+/* ---------- mobile menu ---------- */
+.menu {
+  width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: 20px 16px 32px;
+  border: 0; background: var(--bg); color: var(--fg);
+}
+.menu::backdrop { background: var(--bg); }
+.menu-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.menu-nav { display: grid; border-top: var(--fio) solid var(--rule); }
+.menu-nav a {
+  display: flex; gap: 16px; align-items: baseline; padding: 14px 0; text-decoration: none;
+  font-family: var(--font-serif); font-weight: 600; font-size: 30px; line-height: 1.1;
+  border-bottom: var(--fio) solid var(--rule);
+}
+.menu-nav a span { font-size: 12px; color: var(--muted); font-weight: 500; }
+.menu-tools { display: grid; gap: 12px; margin-top: 28px; justify-items: start; }
+.menu-row { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 8px; }
+.menu-check { font-family: var(--font-mono); font-size: 13px; min-height: 32px; }
+
+/* ---------- frame and instruments (desktop only) ---------- */
+.frame, .xh { display: none; }
+@media (min-width: 900px) {
+  .frame {
+    display: block; position: fixed; z-index: 40; pointer-events: none;
+    top: 56px; left: 28px; right: 28px; bottom: 28px;
+    border: var(--fio) solid var(--rule); border-top: 0;
+  }
+  .zones-x, .zones-y {
+    position: absolute; display: flex; justify-content: space-around;
+    font-family: var(--font-mono); font-size: 10px; color: var(--muted);
+  }
+  .zones-x { left: -29.5px; right: -29.5px; padding-inline: 28px; top: calc(100% + 1.5px); height: 27px; align-items: center; background: var(--bg); }
+  .zones-y { top: 0; bottom: 0; right: 100%; width: 27px; flex-direction: column; align-items: center; }
+  .zones-x span, .zones-y span { position: relative; }
+  .trace { position: absolute; left: calc(100% + 13px); top: 14px; bottom: 14px; width: 1px; background: var(--rule); }
+  .trace i {
+    position: absolute; left: -4px; top: 0; width: 9px; height: 9px; background: var(--hl);
+    transform: translateY(-50%) rotate(45deg);
+  }
+}
+@media (min-width: 900px) and (hover: hover) and (pointer: fine) {
+  .xh { display: block; position: fixed; z-index: 39; pointer-events: none; background: var(--draw); opacity: 0; transition: opacity 0.3s; }
+  .xh-h { left: 28px; right: 28px; top: 0; height: 1px; }
+  .xh-v { top: 56px; bottom: 28px; left: 0; width: 1px; }
+  .xh.on { opacity: 0.16; }
+}
+
+/* ---------- footer title block ---------- */
+.foot {
+  display: grid; gap: 32px; align-items: end; padding-block: 48px 72px;
+  border-top: var(--fio) solid var(--rule);
+}
+.tblock {
+  margin: 0; display: grid; grid-template-columns: repeat(4, 1fr);
+  border: var(--fio) solid var(--draw); max-width: 460px; width: 100%;
+}
+.tblock > div { padding: 8px 12px; border-right: var(--fio) solid var(--draw); min-width: 0; }
+.tblock > div:last-child { border-right: 0; }
+.tblock dt { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.tblock dd { margin: 2px 0 0; font-family: var(--font-mono); font-size: 13px; font-weight: 500; overflow-wrap: anywhere; }
+@media (min-width: 800px) {
+  .foot { justify-items: end; }
+  .tblock { width: 460px; }
+}
