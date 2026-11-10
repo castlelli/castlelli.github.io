@@ -1,18 +1,17 @@
 ---
-// A photo the author supplies in public/photos/<name>.jpg. Until the file
+// A photo the author supplies in public/photos/<name>.(jpg|png|webp|avif). Until the file
 // exists the slot shows the monogram on a plate (fallback "mark") or nothing.
-import { existsSync } from 'node:fs';
 import Monogram from './Monogram.astro';
-interface Props { name: string; alt: string; fallback?: 'mark' | 'none'; class?: string }
-const { name, alt, fallback = 'none', class: cls } = Astro.props;
-const src = `/photos/${name}.jpg`;
-const has = existsSync(`public${src}`);
+import { findPhoto } from '../lib/photo';
+interface Props { name: string; alt: string; fallback?: 'mark' | 'none'; class?: string; eager?: boolean }
+const { name, alt, fallback = 'none', class: cls, eager = false } = Astro.props;
+const src = findPhoto(name);
 ---
-{has && <img class:list={['photo', cls]} src={src} alt={alt} loading="lazy" decoding="async" />}
-{!has && fallback === 'mark' && <div class:list={['plate', 'photo-mark', cls]} data-ground="plate"><Monogram /></div>}
+{src && <img class:list={['photo', cls]} src={src} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" />}
+{!src && fallback === 'mark' && <div class:list={['plate', 'photo-mark', cls]} data-ground="plate"><Monogram /></div>}
 
 <style>
-  .photo { display: block; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.92) contrast(1.02); }
+  .photo { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: saturate(0.92) contrast(1.02); }
   .photo-mark { display: grid; place-items: center; aspect-ratio: 4 / 5; }
   .photo-mark :global(.mono-vc) { width: 54%; height: auto; }
 </style>

@@ -42,11 +42,12 @@ export const en = {
     photoAlt: 'At the bench, photographed by the author.',
     cue: 'Scroll',
     beats: [
-      { q: 'Why bring intelligence directly to the medical device?', a: 'Because in healthcare, latency and reliability can cost lives. By embedding edge AI and strict regulatory frameworks into the hardware itself, we build clinical tools that are secure, autonomous, and resilient where the patient is.' },
-      { q: 'What can computational biology reveal about disease?', a: 'By applying machine learning to comparative genomics, we can decode the evolutionary patterns of public health threats. It’s about turning biological complexity and raw sequences into actionable, reproducible insights.' },
-      { q: 'What is the ultimate goal of scientific research?', a: 'Translation. Science shouldn’t stop at the paper. Through a hybrid approach spanning rigorous academia and deep-tech entrepreneurship, the mission is to turn laboratory discoveries into tangible healthcare products.' },
+      { q: 'What if the medical device could think for itself?', a: 'A monitor that waits on the cloud is slow exactly when it matters. I want the intelligence inside the device, small enough to run on a microcontroller and built to the safety rules medicine already demands, so care stays close to the patient even when the network fails.' },
+      { q: 'What is evolution already telling us about disease?', a: 'Every genome keeps a record of how life adapted to pressure, including the pressure we put on microbes with antibiotics. Read across many species at once, those sequences can point to how resistance arises. I want that reading to be open and reproducible, so any lab can check it.' },
+      { q: 'Why should a good result stop at the paper?', a: 'Too much good science ends as a PDF. I want findings from the bench to reach the clinic as devices and tools people actually use. That takes the patience of research and the urgency of a company, and I mean to work with both.' },
     ],
-    coda: 'This is what I do. ',
+    coda: 'This is what I do.',
+    codaSub: 'Science and engineering, joined up to build frontier AI products.',
     toWork: 'See the work',
     note: ''
   },
@@ -137,7 +138,9 @@ export const en = {
     title: 'Vinicius Castelli',
     subtitle: 'Computer engineering student, deep-tech builder & researcher',
     back: 'Back to the front page',
-    figCaption: 'The author.',
+    figCaption: 'The author’s mark.',
+    portraitCaption: 'The author.',
+    portraitAlt: 'Portrait of Vinicius Castelli.',
     sections: {
       description: 'About',
       features: 'What I do',

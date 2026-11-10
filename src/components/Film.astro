@@ -60,6 +60,7 @@ const shots = [1, 2, 3].filter((n) => existsSync(`public/photos/bench-${n}.jpg`)
         <div class="film-shots">{shots.map((n) => <Photo name={`bench-${n}`} alt={f.photoAlt} />)}</div>
       )}
       <p class="film-coda">{f.coda}</p>
+      <p class="film-coda-sub">{f.codaSub}</p>
       <a class="go" href="#work">{f.toWork} <Arrow /></a>
       <p class="film-note">{f.note}</p>
     </div></footer>
@@ -102,7 +103,8 @@ const shots = [1, 2, 3].filter((n) => existsSync(`public/photos/bench-${n}.jpg`)
   .film-q { font-family: var(--font-serif); font-weight: 400; font-size: clamp(40px, 5.6vw, 92px); line-height: 1.02; letter-spacing: -0.025em; max-width: 17ch; text-wrap: balance; }
   .film-a { margin-top: 28px; font-size: clamp(18px, 1.45vw, 21px); line-height: 1.6; max-width: 44ch; }
   .beat--coda .go { justify-self: start; }
-  .film-coda { font-family: var(--font-serif); font-style: italic; font-size: clamp(26px, 2.8vw, 40px); line-height: 1.25; max-width: 26ch; margin-bottom: 32px; }
+  .film-coda { font-family: var(--font-serif); font-style: italic; font-size: clamp(26px, 2.8vw, 40px); line-height: 1.25; max-width: 26ch; margin-bottom: 12px; }
+  .film-coda-sub { font-family: var(--font-sans); font-size: clamp(16px, 1.3vw, 19px); line-height: 1.45; max-width: 42ch; opacity: 0.82; margin-bottom: 32px; }
   .film-shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; max-width: 860px; margin-bottom: 48px; }
   .film-shots :global(.photo) { aspect-ratio: 4 / 3; }
   .film-note { margin-top: 48px; font: 13px var(--font-sans); color: var(--c-coomassie-tinta); max-width: 52ch; }

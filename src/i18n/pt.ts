@@ -42,11 +42,12 @@ export const pt = {
     photoAlt: 'Na bancada, fotografia do autor.',
     cue: 'Role a página',
     beats: [
-      { q: 'Por que levar inteligência direto para o dispositivo médico?', a: 'Porque na saúde, latência e confiabilidade podem custar vidas. Ao embarcar edge AI e frameworks regulatórios rígidos no próprio hardware, construímos ferramentas clínicas que são seguras, autônomas e resilientes onde o paciente está.' },
-      { q: 'O que a biologia computacional pode revelar sobre doenças?', a: 'Aplicando machine learning à genômica comparativa, podemos decodificar os padrões evolutivos de ameaças à saúde pública. Trata-se de transformar a complexidade biológica e as sequências brutas em insights acionáveis e reprodutíveis.' },
-      { q: 'Qual é o objetivo final da pesquisa científica?', a: 'Translação. A ciência não deve parar no artigo publicado. Por meio de uma abordagem híbrida que une rigor acadêmico e empreendedorismo deep-tech, a missão é transformar descobertas de laboratório em produtos de saúde tangíveis.' },
+      { q: 'E se o dispositivo médico pensasse por conta própria?', a: 'Um monitor que depende da nuvem fica lento justamente quando mais importa. Quero a inteligência dentro do aparelho, pequena o bastante para rodar num microcontrolador e feita dentro das regras de segurança que a medicina já exige, para que o cuidado fique perto do paciente mesmo quando a rede cai.' },
+      { q: 'O que a evolução já está nos contando sobre a doença?', a: 'Cada genoma guarda o registro de como a vida se adaptou à pressão, inclusive à que colocamos sobre os micróbios com antibióticos. Lidas em muitas espécies de uma vez, essas sequências podem mostrar como a resistência surge. Quero que essa leitura seja aberta e reprodutível, para que qualquer laboratório possa conferir.' },
+      { q: 'Por que um bom resultado tem que parar no artigo?', a: 'Muita ciência boa termina como um PDF. Quero que o que sai da bancada chegue à clínica como aparelhos e ferramentas que as pessoas usam de verdade. Isso pede a paciência da pesquisa e a urgência de uma empresa, e pretendo trabalhar com as duas.' },
     ],
     coda: 'É isso que eu faço.',
+    codaSub: 'Ciência e engenharia juntas para construir produtos de IA de fronteira.',
     toWork: 'Ver os projetos',
     note: ''
   },
@@ -137,7 +138,9 @@ export const pt = {
     title: 'Vinicius Castelli',
     subtitle: 'Estudante de engenharia de computação, pesquisador e construtor de deep-tech',
     back: 'Voltar para a página inicial',
-    figCaption: 'O autor.',
+    figCaption: 'A marca do autor.',
+    portraitCaption: 'O autor.',
+    portraitAlt: 'Retrato de Vinicius Castelli.',
     sections: {
       description: 'Sobre',
       features: 'O que eu faço',

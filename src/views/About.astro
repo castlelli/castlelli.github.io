@@ -3,11 +3,13 @@
 import Page from '../layouts/Page.astro';
 import Contact from '../components/Contact.astro';
 import Photo from '../components/Photo.astro';
+import { findPhoto } from '../lib/photo';
 import type { Dict } from '../i18n/en';
 interface Props { t: Dict }
 const { t } = Astro.props;
 const a = t.about;
 const s = a.sections;
+const hasPortrait = findPhoto('portrait') !== null;
 import Arrow from '../components/Arrow.astro';
 ---
 <Page t={t} page="about">
@@ -20,8 +22,8 @@ import Arrow from '../components/Arrow.astro';
         <p class="cv-sub">{a.subtitle}</p>
       </div>
       <figure class="cv-fig">
-        <Photo name="portrait" alt={a.title} fallback="mark" class="cv-plate" />
-        <figcaption class="figcap"><b>{t.ui.fig} 1.</b> {a.figCaption}</figcaption>
+        <Photo name="portrait" alt={a.portraitAlt} fallback="mark" class="cv-plate" eager />
+        <figcaption class="figcap"><b>{t.ui.fig} 1.</b> {hasPortrait ? a.portraitCaption : a.figCaption}</figcaption>
       </figure>
     </header>
 
