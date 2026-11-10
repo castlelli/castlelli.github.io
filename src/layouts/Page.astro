@@ -1,0 +1,139 @@
+---
+import '../styles/global.css';
+import Monogram from '../components/Monogram.astro';
+import type { Dict } from '../i18n/en';
+
+// A work page passes its own path and its translation's path in `paths`.
+interface Props { t: Dict; page: 'home' | 'about' | 'work'; paths?: { self: string; other: string } }
+const { t, page, paths } = Astro.props;
+const title = page === 'about' ? t.meta.aboutTitle : t.meta.title;
+const description = page === 'about' ? t.meta.aboutDescription : t.meta.description;
+const self = paths?.self ?? (page === 'about' ? t.paths.about : t.paths.home);
+const other = paths?.other ?? (page === 'about' ? t.paths.otherAbout : t.paths.other);
+const site = Astro.site!;
+const href = (id: string) => (page === 'home' ? `#${id}` : `${t.paths.home}#${id}`);
+const otherLang = t.lang === 'en' ? 'pt-BR' : 'en';
+---
+<!doctype html>
+<html lang={t.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(self, site)} />
+    <link rel="alternate" hreflang={t.lang === 'en' ? 'en' : 'pt-BR'} href={new URL(self, site)} />
+    <link rel="alternate" hreflang={otherLang} href={new URL(other, site)} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={new URL(self, site)} />
+    <meta name="theme-color" content="#F3F1EA" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href="/fonts/source-serif-4-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/source-serif-4-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <a class="skip" href="#main">{t.ui.skip}</a>
+
+    <header class="rh">
+      <div class="wrap rh-in">
+        <a class="rh-id" href={t.paths.home}>
+          <span class="rh-mark" aria-hidden="true"><Monogram /></span>
+          <span>Vinicius Castelli</span>
+        </a>
+        <nav class="rh-nav" aria-label="Main">
+          {t.nav.map((n) => <a href={href(n.id)}>{n.label}</a>)}
+          <a href={t.paths.about} aria-current={page === 'about' ? 'page' : undefined}>{t.ui.onePager}</a>
+        </nav>
+        <div class="rh-end">
+          <span class="rh-place">{t.ui.place}</span>
+          <a class="rh-lang" href={other} hreflang={otherLang} lang={otherLang} aria-label={t.otherName}>{t.otherLabel}</a>
+          <button type="button" class="rh-menu" data-open-menu aria-haspopup="dialog">{t.ui.menu}</button>
+        </div>
+      </div>
+    </header>
+
+    <dialog class="menu" data-menu aria-label={t.ui.menu}>
+      <div class="menu-head">
+        <span class="rh-mark" aria-hidden="true"><Monogram /></span>
+        <button type="button" class="rh-menu" data-close-menu>{t.ui.close}</button>
+      </div>
+      <nav class="menu-nav">
+        {t.nav.map((n) => <a href={href(n.id)} data-close-menu>{n.label}</a>)}
+        <a href={t.paths.about} data-close-menu>{t.ui.onePager}</a>
+        <a href={other} lang={otherLang} data-close-menu>{t.otherName}</a>
+      </nav>
+    </dialog>
+
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <defs>
+        <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="7" stroke="var(--draw-soft)" stroke-width="1.2" />
+        </pattern>
+      </defs>
+    </svg>
+
+    <main id="main"><slot /></main>
+
+    <footer class="colophon">
+      <div class="wrap colophon-in">
+        <span class="colophon-mark" aria-hidden="true"><Monogram /></span>
+        <p>© 2026 Vinicius Castelli. {t.ui.colophon}</p>
+        <a href={other} hreflang={otherLang} lang={otherLang}>{t.otherName}</a>
+      </div>
+    </footer>
+
+    <script>
+      import '../scripts/page.ts';
+    </script>
+  </body>
+</html>
+
+<style>
+  /* running head */
+  .rh {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--c-papel) 94%, transparent);
+    backdrop-filter: saturate(1.2) blur(8px); -webkit-backdrop-filter: saturate(1.2) blur(8px);
+    border-bottom: 1px solid transparent; transition: border-color 0.3s;
+  }
+  :global(.scrolled) .rh { border-bottom-color: var(--c-tinta); }
+  .rh-in { display: flex; align-items: center; gap: 32px; height: 68px; font-family: var(--font-sans); font-size: 15px; }
+  .rh-id { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 500; letter-spacing: 0.01em; }
+  .rh-mark :global(.mono-vc) { height: 26px; width: auto; }
+  .rh-nav { display: none; gap: 28px; margin-left: auto; }
+  .rh-nav a { text-decoration: none; color: var(--muted); padding-block: 8px; transition: color 0.2s; }
+  .rh-nav a:hover, .rh-nav a[aria-current] { color: var(--fg); }
+  .rh-end { display: flex; align-items: center; gap: 20px; margin-left: auto; }
+  .rh-place { display: none; color: var(--muted); }
+  .rh-lang { text-decoration: none; font-weight: 500; padding: 8px 0; }
+  .rh-menu { font: 500 15px var(--font-sans); padding: 10px 0; min-height: 44px; }
+  @media (min-width: 900px) {
+    .rh-nav { display: flex; }
+    .rh-end { margin-left: 0; padding-left: 28px; border-left: 1px solid var(--rule); }
+    .rh-menu { display: none; }
+  }
+  @media (min-width: 1240px) { .rh-place { display: inline; } }
+
+  .menu {
+    width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: 18px 16px 40px;
+    border: 0; background: var(--c-papel); color: var(--c-tinta);
+  }
+  .menu::backdrop { background: var(--c-papel); }
+  .menu-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+  .menu-nav { display: grid; }
+  .menu-nav a {
+    font: 400 38px/1.15 var(--font-serif); letter-spacing: -0.01em; text-decoration: none;
+    padding: 14px 0; border-bottom: 1px solid var(--rule);
+  }
+
+  .colophon { border-top: 1px solid var(--c-tinta); }
+  .colophon-in {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding-block: 32px 40px;
+    font: 14px/1.5 var(--font-sans); color: var(--muted);
+  }
+  .colophon-mark :global(.mono-vc) { height: 22px; width: auto; }
+  .colophon-in p { flex: 1; min-width: 240px; }
+</style>

@@ -7,8 +7,8 @@ summary: Um oscilador não linear forçado, integrado no navegador. Mude os dado
 role: Modelo, integrador e página
 dates: 2026-11
 status: no ar
-icon: oscillation
-pins: [RK4, Python, NumPy, pytest, LaTeX, JavaScript, Canvas, Web Audio, Fases, Bacias]
+figure: phase
+stack: [RK4, Python, NumPy, pytest, LaTeX, JavaScript, Canvas, Web Audio, Fases, Bacias]
 links:
   - { label: Abrir ao vivo, href: "https://castlelli.github.io/algorithms/pme3100/optativa-9/" }
   - { label: Código, href: "https://github.com/castlelli/algorithms/tree/main/pme3100/optativa-9" }

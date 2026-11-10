@@ -1,0 +1,52 @@
+---
+// Table 1: software that people used, set as a journal table.
+import type { Dict } from '../i18n/en';
+interface Props { t: Dict }
+const { t } = Astro.props;
+const p = t.proof;
+---
+<section id="shipped" class="section proof" aria-labelledby="proof-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <h2 class="head" id="proof-h"><span class="n">III</span>{p.title}</h2>
+      <p>{p.lead}</p>
+    </header>
+    <div class="table-scroll" tabindex="0" role="region" aria-labelledby="proof-cap">
+      <table class="jtable proof-t">
+        <caption id="proof-cap"><b>{t.ui.table} 1.</b> {p.caption}</caption>
+        <thead><tr><th scope="col">{p.head[0]}</th><th scope="col">{p.head[1]}</th><th scope="col" class="num">{p.head[2]}</th><th scope="col">{p.head[3]}</th></tr></thead>
+        <tbody>
+          {p.rows.map((r) => (
+            <tr>
+              <th scope="row" class="proof-p">{r.p}</th>
+              <td>{r.w}</td>
+              <td class="num">{r.n ? <><span class="proof-n">{r.n}</span> <span class="proof-u">{r.u}</span></> : <span class="proof-u">{r.u}</span>}</td>
+              <td class="note">{r.c}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (min-width: 720px) { .proof-t { min-width: 760px; } }
+  .proof-p { font-weight: 600; text-align: left; padding: 14px 24px 14px 0; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+  .proof-t tbody tr:last-child .proof-p { border-bottom: 1.5px solid var(--rule-strong); }
+  .proof-n { font-size: 26px; line-height: 1; letter-spacing: -0.01em; }
+  .proof-u { font: 14px var(--font-sans); color: var(--muted); }
+  .proof-t td:nth-child(2) { color: var(--fg); }
+  /* narrow screens: each row becomes a short record */
+  @media (max-width: 719px) {
+    .proof-t thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .proof-t tbody tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 16px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+    .proof-t tbody tr:last-child { border-bottom: 1.5px solid var(--rule-strong); }
+    .proof-t th, .proof-t td, .proof-t tbody tr:last-child td, .proof-t tbody tr:last-child .proof-p { border: 0; padding: 0; }
+    .proof-p { grid-column: 1; }
+    .proof-t .num { grid-column: 2; grid-row: 1 / span 2; align-self: start; }
+    .proof-t td:nth-child(2) { grid-column: 1; }
+    .proof-t .note { grid-column: 1 / -1; margin-top: 6px; }
+    .proof-t caption { display: block; }
+  }
+</style>

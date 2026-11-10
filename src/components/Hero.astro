@@ -1,0 +1,80 @@
+---
+// The front page of the paper: title, byline, abstract, contents, Fig. 1.
+import { getCollection } from 'astro:content';
+import Schematic from './figures/Schematic.astro';
+import type { Dict } from '../i18n/en';
+interface Props { t: Dict }
+const { t } = Astro.props;
+const h = t.hero;
+const entries = (await getCollection('work', (e) => e.data.lang === t.lang)).sort((a, b) => a.data.order - b.data.order);
+const base = t.lang === 'en' ? '/work/' : '/pt/work/';
+const [first, ...rest] = h.name.split(' ');
+---
+<section class="hero" aria-labelledby="hero-name">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <h1 class="display" id="hero-name">{first}<br />{rest.join(' ')}</h1>
+      <p class="byline">{h.byline[0]}<br />{h.byline[1]}</p>
+      <p class="abstract measure"><span class="abstract-l">{h.abstractLabel}.</span> {h.abstract}</p>
+
+      <nav class="contents" aria-label={h.contents}>
+        <p class="contents-h smallcaps">{h.contents}</p>
+        <ol>
+          {entries.map((e, i) => (
+            <li>
+              <a href={`${base}${e.data.slug}/`}>
+                <span class="c-n">{i + 1}</span>
+                <span class="c-t">{e.data.title}<small>{e.data.summary}</small></span>
+                <span class="c-go" aria-hidden="true">{h.open} <span class="ar">→</span></span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </div>
+
+    <figure class="hero-fig">
+      <div class="plate hero-plate"><Schematic blocks={h.fig.blocks} noise={h.fig.noise} back={h.fig.back} alt={h.fig.alt} /></div>
+      <figcaption class="figcap"><b>{t.ui.fig} 1.</b> {h.fig.caption}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .hero { padding-block: clamp(48px, 7vw, 104px) clamp(40px, 5vw, 72px); }
+  .hero-grid { display: grid; gap: 56px; }
+  .hero-text { display: grid; align-content: start; min-width: 0; }
+  .byline { margin-top: 28px; font-style: italic; font-size: clamp(19px, 1.6vw, 22px); line-height: 1.4; color: var(--muted); }
+  .abstract { margin-top: 36px; }
+  .abstract-l { font-style: italic; }
+
+  .contents { margin-top: 48px; }
+  .contents-h { color: var(--muted); padding-bottom: 12px; border-bottom: 1.5px solid var(--c-tinta); }
+  .contents ol { list-style: none; margin: 0; padding: 0; }
+  .contents li { border-bottom: 1px solid var(--rule); }
+  .contents a {
+    display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 4px 16px; align-items: baseline;
+    padding: 18px 0; text-decoration: none;
+  }
+  .c-n { font: 500 14px var(--font-sans); color: var(--muted); font-variant-numeric: lining-nums; }
+  .c-t { font-size: clamp(21px, 1.9vw, 25px); line-height: 1.25; }
+  .c-t small { display: block; margin-top: 4px; font: 15px/1.45 var(--font-sans); color: var(--muted); }
+  .c-go {
+    font: 500 14px var(--font-sans); background: var(--hl); color: var(--hl-fg); padding: 5px 10px; white-space: nowrap;
+    display: inline-flex; gap: 6px; transition: gap 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .contents a:hover .c-go, .contents a:focus-visible .c-go { gap: 12px; }
+  .contents a:hover .c-t { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+
+  .hero-fig { min-width: 0; }
+  .hero-plate { padding: clamp(20px, 3.2vw, 44px); }
+
+  @media (max-width: 559px) {
+    .contents a { grid-template-columns: 24px minmax(0, 1fr); }
+    .c-go { grid-column: 2; justify-self: start; margin-top: 8px; }
+  }
+  @media (min-width: 1060px) {
+    .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr); column-gap: clamp(56px, 6vw, 104px); align-items: start; }
+    .hero-fig { margin-top: 10px; }
+  }
+</style>

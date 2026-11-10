@@ -1,36 +1,70 @@
 ---
+// Selected work: each project as a short paper, a figure plate and its abstract.
 import { getCollection } from 'astro:content';
-import PartDrawing from './PartDrawing.astro';
+import Figure from './Figure.astro';
 import type { Dict } from '../i18n/en';
 interface Props { t: Dict }
 const { t } = Astro.props;
 const w = t.work;
 const entries = (await getCollection('work', (e) => e.data.lang === t.lang)).sort((a, b) => a.data.order - b.data.order);
 const base = t.lang === 'en' ? '/work/' : '/pt/work/';
-const labels = { ...w.tpl, reserved: w.reserved, inPrep: w.inPrep };
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const caption = (fig?: 'phase' | 'fibrosis') => (fig ? w.figs[fig].caption : '');
 ---
-<section id="work" data-sheet="work" class="sheet">
+<section id="work" class="section work" aria-labelledby="work-h">
   <div class="wrap">
-    <header class="sheet-head" data-reveal>
-      <p class="legend sheet-no">{t.ui.sheet} 02</p>
-      <h2 class="titulo">{w.title}</h2>
+    <header class="sec-head">
+      <h2 class="head" id="work-h"><span class="n">I</span>{w.title}</h2>
+      <p>{w.lead}</p>
     </header>
-    <div class="work-grid">
-      {entries.length > 0
-        ? entries.map((e, i) => (
-            <div data-reveal>
-              <PartDrawing sheet={`02-${letters[i]}`} labels={labels} alt={w.cardAlt}
-                entry={{ ...e.data, href: `${base}${e.data.slug}/` }} />
+
+    <div class="papers">
+      {entries.map((e, i) => {
+        const d = e.data;
+        const href = `${base}${d.slug}/`;
+        return (
+          <article class:list={['paper', { 'paper--flip': i % 2 === 1 }]}>
+            <figure class="paper-fig">
+              <a class="plate paper-plate" href={href} tabindex="-1" aria-hidden="true"><Figure t={t} figure={d.figure} /></a>
+              {d.figure && <figcaption class="figcap"><b>{t.ui.fig} {i + 2}.</b> {caption(d.figure)}</figcaption>}
+            </figure>
+            <div class="paper-text">
+              <h3 class="paper-t"><a href={href}>{d.title}</a></h3>
+              <p class="paper-sum">{d.summary}</p>
+              <dl class="paper-meta">
+                <div><dt>{w.role}</dt><dd>{d.role}</dd></div>
+                <div><dt>{w.dates}</dt><dd>{d.dates}</dd></div>
+              </dl>
+              {d.dims.length > 0 && (
+                <ul class="paper-dims">{d.dims.map((m) => <li><b>{m.value}</b> {m.unit}</li>)}</ul>
+              )}
+              <a class="go" href={href}>{t.hero.open} <span class="vh">{d.title}</span> <span class="ar" aria-hidden="true">→</span></a>
             </div>
-          ))
-        : [0, 1, 2].map((i) => (
-            <div data-reveal><PartDrawing sheet={`02-${letters[i]}`} labels={labels} alt={w.cardAlt} /></div>
-          ))}
+          </article>
+        );
+      })}
     </div>
   </div>
 </section>
 
 <style>
-  .work-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
+  .papers { display: grid; gap: clamp(72px, 9vw, 136px); }
+  .paper { display: grid; gap: 32px; align-items: center; }
+  .paper-fig { min-width: 0; }
+  .paper-plate { display: block; padding: clamp(20px, 3.6vw, 52px); text-decoration: none; }
+  .paper-text { display: grid; gap: 18px; justify-items: start; align-content: center; min-width: 0; max-width: 46ch; }
+  .paper-t { font-weight: 400; font-size: clamp(30px, 3vw, 40px); line-height: 1.1; letter-spacing: -0.012em; text-wrap: balance; }
+  .paper-t a { text-decoration: none; }
+  .paper-t a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.14em; }
+  .paper-sum { font-style: italic; color: var(--muted); }
+  .paper-meta { display: flex; flex-wrap: wrap; gap: 8px 32px; font-family: var(--font-sans); font-size: 15px; padding-top: 14px; border-top: 1px solid var(--rule); width: 100%; }
+  .paper-meta dt { color: var(--muted); font-size: 13px; }
+  .paper-dims { list-style: none; margin: 0; padding: 0; display: flex; gap: 28px; font-family: var(--font-sans); font-size: 15px; color: var(--muted); }
+  .paper-dims b { font: 400 34px/1 var(--font-serif); color: var(--fg); font-variant-numeric: lining-nums; display: block; margin-bottom: 4px; }
+  .go { margin-top: 8px; }
+
+  @media (min-width: 960px) {
+    .paper { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: clamp(48px, 6vw, 96px); }
+    .paper--flip { grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr); }
+    .paper--flip .paper-fig { order: 2; }
+  }
 </style>

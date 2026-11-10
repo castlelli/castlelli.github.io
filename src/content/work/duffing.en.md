@@ -7,8 +7,8 @@ summary: A forced nonlinear oscillator integrated in the browser. Change the inp
 role: Model, integrator and page
 dates: 2026-11
 status: live
-icon: oscillation
-pins: [RK4, Python, NumPy, pytest, LaTeX, JavaScript, Canvas, Web Audio, Phase space, Basins]
+figure: phase
+stack: [RK4, Python, NumPy, pytest, LaTeX, JavaScript, Canvas, Web Audio, Phase space, Basins]
 links:
   - { label: Open live, href: "https://castlelli.github.io/algorithms/pme3100/optativa-9/" }
   - { label: Source, href: "https://github.com/castlelli/algorithms/tree/main/pme3100/optativa-9" }

@@ -1,0 +1,19 @@
+---
+// The figure a project carries, by name. Projects without one show the
+// author's mark, so a new entry never breaks the page.
+import Phase from './figures/Phase.astro';
+import Fibrosis from './figures/Fibrosis.astro';
+import Monogram from './Monogram.astro';
+import type { Dict } from '../i18n/en';
+interface Props { t: Dict; figure?: 'phase' | 'fibrosis' }
+const { t, figure } = Astro.props;
+const f = t.work.figs;
+---
+{figure === 'phase' && <Phase alt={f.phase.alt} />}
+{figure === 'fibrosis' && <Fibrosis alt={f.fibrosis.alt} labels={f.fibrosis.labels} />}
+{!figure && <div class="fig-mark" data-ground="plate"><Monogram /></div>}
+
+<style>
+  .fig-mark { display: grid; place-items: center; aspect-ratio: 25 / 16; background: transparent; }
+  .fig-mark :global(.mono-vc) { width: 38%; height: auto; }
+</style>

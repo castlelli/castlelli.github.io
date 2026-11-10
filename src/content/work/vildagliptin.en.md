@@ -7,8 +7,8 @@ summary: Can a diabetes drug quiet the cells that harden skin? A seven-day repur
 role: Co-led analysis, pitch
 dates: 2026-08
 status: live
-icon: package
-pins: [Python, Scanpy, PAGA, decoupler, STRING, PK/PD, Networks, PubMed, D3, Astro]
+figure: fibrosis
+stack: [Python, Scanpy, PAGA, decoupler, STRING, PK/PD, Networks, PubMed, D3, Astro]
 dims:
   - { label: evidence, value: "7", unit: layers }
   - { label: cohorts, value: "4", unit: datasets }
