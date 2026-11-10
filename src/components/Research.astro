@@ -1,0 +1,155 @@
+---
+// Plate I: the five lines of research as panels (a)–(e). The page's one
+// full-bleed blueprint. Each drawing can be operated; pointing at one brings
+// it forward and ghosts the other four.
+import type { Dict } from '../i18n/en';
+import Poli from './axes/Poli.astro';
+import Icb from './axes/Icb.astro';
+import Embedded from './axes/Embedded.astro';
+import Edge from './axes/Edge.astro';
+import Health from './axes/Health.astro';
+
+interface Props { t: Dict }
+const { t } = Astro.props;
+const a = t.axes;
+const drawings = { poli: Poli, icb: Icb, embedded: Embedded, edge: Edge, health: Health } as const;
+type Id = keyof typeof drawings;
+const letter = (i: number) => 'abcde'[i];
+---
+<section id="research" class="section research" data-ground="plate" aria-labelledby="research-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <h2 class="head" id="research-h"><span class="n">II</span>{a.title}</h2>
+      <p>{a.lead}</p>
+    </header>
+
+    <figure class="rs" data-axes data-dec={t.dec} data-quant={JSON.stringify(a.quant)}>
+      <div class="rs-grid">
+        {a.items.map((it, i) => {
+          const Drawing = drawings[it.id as Id];
+          return (
+            <article class={`ax ax--${it.id}`} data-ax={it.id} aria-labelledby={`ax-${it.id}`}>
+              <div class="ax-draw" role="img" aria-label={it.alt}><Drawing /></div>
+              <div class="ax-body">
+                <h3 class="ax-name" id={`ax-${it.id}`}><span class="ax-l">({letter(i)})</span> {it.name}</h3>
+                <p class="ax-sub">{it.sub} · {it.status}</p>
+                <p class="ax-text">{it.text}</p>
+                <div class="ax-ctl">
+                  {(it.id === 'poli' || it.id === 'icb' || it.id === 'embedded') && (
+                    <div class="seg" role="group" aria-label={it.name}>
+                      <button type="button" data-view="a" aria-pressed="true">{it.toggle[0]}</button>
+                      <button type="button" data-view="b" aria-pressed="false">{it.toggle[1]}</button>
+                    </div>
+                  )}
+                  {it.id === 'edge' && (
+                    <label class="ax-bits">
+                      <span class="vh">{it.toggle[0]}</span>
+                      <input type="range" min="1" max="8" step="1" value="3" data-bits />
+                      <output data-bits-out>3 bit</output>
+                    </label>
+                  )}
+                  {it.id === 'health' && (
+                    <div class="seg"><button type="button" data-run aria-pressed="false" data-on={it.toggle[1]} data-off={it.toggle[0]}>{it.toggle[0]}</button></div>
+                  )}
+                </div>
+              </div>
+            </article>
+          );
+        })}
+        <div class="rs-cota" aria-hidden="true"><i></i><span>{a.cota}</span><i></i></div>
+      </div>
+      <figcaption class="figcap"><b>{t.ui.plate} I.</b> {a.caption}</figcaption>
+    </figure>
+  </div>
+</section>
+
+<script>
+  import '../scripts/research.ts';
+</script>
+
+<style is:global>
+  .rs-grid { display: grid; gap: 56px 40px; grid-template-columns: minmax(0, 1fr); position: relative; }
+  .ax { display: grid; gap: 18px; align-content: start; min-width: 0; transition: opacity 0.35s ease, filter 0.35s ease; }
+  .ax-draw svg { width: 100%; height: auto; overflow: visible; }
+  .ax-body { display: grid; gap: 8px; }
+  .ax-name { font-weight: 400; font-size: 26px; line-height: 1.15; letter-spacing: -0.01em; }
+  .ax-l { font-style: italic; color: var(--muted); margin-right: 4px; }
+  .ax-sub { font-family: var(--font-sans); font-size: 14px; color: var(--muted); }
+  .ax-text { font-size: 17px; line-height: 1.55; max-width: 52ch; }
+  .ax-ctl { margin-top: 8px; min-height: 34px; display: flex; align-items: center; }
+  .research .seg { border-color: var(--rule); }
+  .research .seg button[aria-pressed="true"] { background: var(--c-papel); color: var(--c-coomassie); }
+
+  .ax-bits { display: grid; grid-template-columns: minmax(120px, 220px) auto; gap: 14px; align-items: center; }
+  .ax-bits output { font: 14px var(--font-sans); color: var(--muted); font-variant-numeric: lining-nums tabular-nums; }
+  .ax-bits input[type="range"] { -webkit-appearance: none; appearance: none; height: 28px; background: transparent; width: 100%; cursor: pointer; }
+  .ax-bits input[type="range"]::-webkit-slider-runnable-track { height: 1px; background: var(--c-papel); }
+  .ax-bits input[type="range"]::-moz-range-track { height: 1px; background: var(--c-papel); }
+  .ax-bits input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; margin-top: -7.5px; border-radius: 50%; background: var(--c-coomassie); border: 1.5px solid var(--c-papel); }
+  .ax-bits input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--c-coomassie); border: 1.5px solid var(--c-papel); }
+
+  /* ghosting: the drawing in hand is bright, the rest step back */
+  @media (hover: hover) {
+    .rs-grid:has(.ax:hover, .ax:focus-within) .ax:not(:hover, :focus-within) { opacity: 0.38; filter: saturate(0.6); }
+    .ax:not(:hover, :focus-within) .ax-detail { opacity: 0; }
+  }
+  .ax-detail { transition: opacity 0.3s; }
+
+  /* dimension between the two buildings */
+  .rs-cota { display: none; }
+  @media (min-width: 1000px) {
+    .rs-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); row-gap: 88px; }
+    .ax--poli, .ax--icb { grid-column: span 3; }
+    .ax--embedded, .ax--edge, .ax--health { grid-column: span 2; }
+    .ax--poli .ax-draw, .ax--icb .ax-draw { padding-inline: 4%; }
+    .rs-cota {
+      display: flex; align-items: center; gap: 12px; position: absolute; left: 25%; right: 25%; top: -36px;
+      font: 14px var(--font-sans); color: var(--muted); font-variant-numeric: lining-nums;
+    }
+    .rs-cota i { flex: 1; height: 1px; background: var(--rule); position: relative; }
+    .rs-cota i::before { content: ""; position: absolute; top: -6px; width: 1px; height: 13px; background: var(--muted); }
+    .rs-cota i:first-child::before { left: 0; }
+    .rs-cota i:last-child::before { right: 0; }
+  }
+
+  /* two-view drawings */
+  .ax-view--b { display: none; }
+  .ax.is-alt .ax-view--a { display: none; }
+  .ax.is-alt .ax-view--b { display: inline; }
+
+  /* embedded: exploded view */
+  .x-part, .x-lab-mcu, .x-small { transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .x-ghost, .x-proj { opacity: 0; transition: opacity 0.4s; }
+  .ax.is-alt .x-ghost, .ax.is-alt .x-proj { opacity: 1; }
+  .ax.is-alt .x-mcu, .ax.is-alt .x-lab-mcu { transform: translate(22px, -26px); }
+  .ax.is-alt .x-usb { transform: translate(-12px, -14px); }
+  .ax.is-alt .x-hdr-t, .ax.is-alt .x-hdr-b { transform: translate(10px, -12px); }
+  .ax.is-alt .x-small { transform: translate(6px, -7px); }
+
+  /* edge */
+  .e-quant { stroke: var(--c-papel); stroke-width: 2.4; }
+
+  /* health */
+  .h-tri { fill: var(--bg); stroke: var(--draw); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+  .h-vent { fill: var(--draw); opacity: 0; }
+  .h-pulse { fill: none; stroke: var(--c-papel); stroke-width: 2.4; vector-effect: non-scaling-stroke; stroke-dasharray: 0.06 1; stroke-dashoffset: 1.06; opacity: 0; }
+  @media (prefers-reduced-motion: no-preference) {
+    .ax.run .h-av .h-bar { animation: h-open-first 1.1s steps(1, end) infinite; }
+    .ax.run .h-av .h-tri { animation: h-fill-first 1.1s steps(1, end) infinite; }
+    .ax.run .h-out .h-bar { animation: h-open-second 1.1s steps(1, end) infinite; }
+    .ax.run .h-out .h-tri { animation: h-fill-second 1.1s steps(1, end) infinite; }
+    .ax.run .h-vent { animation: h-squeeze 1.1s ease-out infinite; }
+    .ax.run .h-pulse { opacity: 1; animation: h-run 3.3s linear infinite; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ax.run .h-out .h-bar { opacity: 0; }
+    .ax.run .h-out .h-tri { fill: var(--draw); }
+    .ax.run .h-vent { opacity: 0.3; }
+  }
+  @keyframes h-open-first { 0% { opacity: 0; } 55% { opacity: 1; } }
+  @keyframes h-fill-first { 0% { fill: var(--draw); } 55% { fill: var(--bg); } }
+  @keyframes h-open-second { 0% { opacity: 1; } 55% { opacity: 0; } }
+  @keyframes h-fill-second { 0% { fill: var(--bg); } 55% { fill: var(--draw); } }
+  @keyframes h-squeeze { 0%, 52% { opacity: 0; } 62% { opacity: 0.38; } 100% { opacity: 0; } }
+  @keyframes h-run { to { stroke-dashoffset: 0; } }
+</style>

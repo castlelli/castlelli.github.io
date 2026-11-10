@@ -17,11 +17,11 @@ const work = defineCollection({
     dates: z.string(),
     status: z.string(),
     pending: z.boolean().default(false),
-    /** what is drawn inside the package window */
-    icon: z.enum(['package', 'oscillation']).default('package'),
-    /** up to 10 pin labels: interfaces, stack, collaborators */
-    pins: z.array(z.string()).max(10).default([]),
-    /** up to 3 numbers with units, drawn as dimension lines */
+    /** the figure drawn for the project; projects without one show the author's mark */
+    figure: z.enum(['phase', 'paga']).optional(),
+    /** methods and tools, listed on the project page */
+    stack: z.array(z.string()).max(12).default([]),
+    /** up to 3 key numbers with units */
     dims: z.array(z.object({ label: z.string(), value: z.string(), unit: z.string() })).max(3).default([]),
     links: z.array(z.object({ label: z.string(), href: z.string().url() })).default([]),
   }),

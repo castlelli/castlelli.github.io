@@ -1,95 +1,56 @@
 ---
-// Sheet 04: contact drawn as a connector pinout, plus the way to the one pager.
+// Correspondence: how to reach the author.
 import type { Dict } from '../i18n/en';
-interface Props { t: Dict; teaser?: boolean }
-const { t, teaser = true } = Astro.props;
+interface Props { t: Dict; onePager?: boolean }
+const { t, onePager = true } = Astro.props;
 const c = t.contact;
-// Pin centres share the 29..165 band of the 200-unit drawing with the list rows.
-const py = (i: number) => 29 + ((i + 0.5) * 136) / c.pins.length;
+import Arrow from './Arrow.astro';
 ---
-<section id="contact" data-sheet="contact" class="sheet">
-  <div class="wrap">
-    <header class="sheet-head" data-reveal>
-      <p class="legend sheet-no">{t.ui.sheet} 04</p>
-      <h2 class="titulo">{c.title}</h2>
-    </header>
-    <div class="j1-grid">
-      <figure class="j1" data-reveal>
-        <div class="j1-body">
-          <svg viewBox="0 0 150 200" role="img" aria-label={c.alt}>
-            <path class="dw-heavy dw-fill" d="M40 22H104V178H40Z" />
-            <path class="dw" d="M40 22l-12 10V168l12 10" />
-            <path class="dw-soft" d="M52 30V170" />
-            {c.pins.map((p, i) => (
-              <g class={`j1-pin j1-pin-${p.n}`}>
-                <rect class="dw dw-fill j1-pad" x="62" y={py(i) - 8} width="22" height="16" />
-                <path class="dw-heavy" d={`M104 ${py(i)}H146`} />
-                <text class="dw-text" x="73" y={py(i) + 3.5} text-anchor="middle">{p.n}</text>
-              </g>
-            ))}
-            <text class="dw-text-soft lyr-note" x="72" y="14" text-anchor="middle">J1</text>
-          </svg>
-          <ul class="j1-list" style={`--pins: ${c.pins.length}`}>
-            {c.pins.map((p) => (
-              <li>
-                <a href={p.href} data-pin={p.n} rel="me noopener">
-                  <span class="legend" aria-hidden="true">{p.name}</span>
-                  <span class="j1-val">{p.value}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <figcaption class="fig-cap"><b>{t.ui.fig} 3</b><span class="legend">{c.figTitle}</span></figcaption>
-      </figure>
-      {teaser && (
-        <aside class="panel j1-teaser" data-reveal>
-          <p class="legend">VC-2026 · {t.ui.rev}</p>
-          <h3>{t.aboutTeaser.title}</h3>
-          <a class="btn" href={t.paths.about}>{t.aboutTeaser.cta} <span aria-hidden="true">→</span></a>
-        </aside>
-      )}
+<section id="contact" class="section contact" data-ground="plate" aria-labelledby="contact-h">
+  <div class="wrap contact-grid">
+    <div>
+      <h2 class="head" id="contact-h">{onePager && <span class="n">IV</span>}{c.title}</h2>
+      <p class="contact-lead">{c.lead}</p>
+    </div>
+    <div class="contact-body">
+      <a class="contact-mail" href={c.email.href} data-magnet><span>{c.email.value}</span></a>
+      <ul class="contact-links">
+        {c.links.map((l) => <li><span>{l.label}</span><a href={l.href} rel="me noopener">{l.value}</a></li>)}
+      </ul>
+      {onePager && <a class="link-quiet contact-op" href={t.paths.about}>{c.onePager} <Arrow /></a>}
     </div>
   </div>
 </section>
 
+<script>
+  // the address leans toward the pointer, a few pixels, then settles back
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll<HTMLElement>('[data-magnet]').forEach((el) => {
+      const inner = el.firstElementChild as HTMLElement;
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width / 2) / r.width, y = (e.clientY - r.top - r.height / 2) / r.height;
+        inner.style.transform = `translate(${x * 18}px, ${y * 10}px)`;
+      });
+      el.addEventListener('pointerleave', () => { inner.style.transform = ''; });
+    });
+  }
+</script>
+
 <style>
-  .j1-grid { display: grid; gap: 48px; align-items: start; }
-  .j1 { margin: 0; }
-  .j1-body { display: grid; grid-template-columns: 165px minmax(0, 1fr); }
-  .j1-body svg { width: 165px; height: 220px; }
-  /* rows line up with the pins: both split the 29..165 band of 200 evenly */
-  .j1-list { list-style: none; margin: 0; padding: 32px 0 38px; height: 220px; display: grid; grid-template-rows: repeat(var(--pins, 4), 1fr); }
-  .j1-list li { min-height: 0; }
-  .j1-list a {
-    display: flex; align-items: center; gap: 4px 16px; height: 100%; padding-left: 14px; text-decoration: none;
-    border-left: 2.5px solid var(--draw); transition: background-color 0.15s, color 0.15s;
+  .contact-grid { display: grid; gap: 40px; }
+  .contact-lead { margin-top: 18px; color: var(--muted); max-width: 36ch; }
+  .contact-body { display: grid; gap: 28px; justify-items: start; min-width: 0; }
+  .contact-mail {
+    font-size: clamp(32px, 4.6vw, 64px); line-height: 1.05; letter-spacing: -0.02em; text-decoration-color: rgba(243, 241, 234, 0.4);
+    text-decoration-thickness: 1px; text-underline-offset: 0.16em; overflow-wrap: anywhere;
   }
-  .j1-list .legend { display: none; flex: 0 0 120px; }
-  .j1-val { font-family: var(--font-mono); font-size: 12px; line-height: 1.15; font-weight: 500; overflow-wrap: anywhere; }
-  @media (min-width: 560px) {
-    .j1-list .legend { display: block; }
-    .j1-val { font-size: 15px; }
-  }
-  @media (max-width: 559px) {
-    .j1-body { grid-template-columns: 120px minmax(0, 1fr); }
-    .j1-body svg { width: 120px; height: 160px; }
-    .j1-list { height: 160px; padding: 23px 0 28px; }
-    .j1-list a { padding-left: 10px; }
-    .j1-val { font-size: 11.5px; }
-  }
-  .j1-list a:hover, .j1-list a:focus-visible { background: var(--draw); color: var(--bg); }
-  .j1-list a:hover .legend, .j1-list a:focus-visible .legend { color: var(--bg); }
-  .j1-pad { transition: fill 0.15s; }
-  .j1-body:has([data-pin="1"]:is(:hover, :focus-visible)) .j1-pin-1 .j1-pad,
-  .j1-body:has([data-pin="2"]:is(:hover, :focus-visible)) .j1-pin-2 .j1-pad,
-  .j1-body:has([data-pin="3"]:is(:hover, :focus-visible)) .j1-pin-3 .j1-pad,
-  .j1-body:has([data-pin="4"]:is(:hover, :focus-visible)) .j1-pin-4 .j1-pad { fill: var(--hl); }
-  .j1-body:has([data-pin="1"]:is(:hover, :focus-visible)) .j1-pin-1 text,
-  .j1-body:has([data-pin="2"]:is(:hover, :focus-visible)) .j1-pin-2 text,
-  .j1-body:has([data-pin="3"]:is(:hover, :focus-visible)) .j1-pin-3 text,
-  .j1-body:has([data-pin="4"]:is(:hover, :focus-visible)) .j1-pin-4 text { fill: var(--hl-fg); }
-  .j1-teaser { display: grid; gap: 14px; justify-items: start; }
-  .j1-teaser h3 { font-family: var(--font-serif); font-weight: 600; font-size: 34px; line-height: 1.1; }
-  @media (min-width: 1000px) { .j1-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 72px; } }
+  .contact-mail:hover { text-decoration-color: var(--c-papel); }
+  .contact-mail span { display: inline-block; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .contact-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-family: var(--font-sans); font-size: 16px; width: 100%; max-width: 480px; }
+  .contact-links li { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }
+  .contact-links span { color: var(--muted); }
+  .contact-links a { text-decoration: none; }
+  .contact-links a:hover { text-decoration: underline; }
+  @media (min-width: 960px) { .contact-grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); align-items: end; } }
 </style>

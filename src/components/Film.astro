@@ -1,0 +1,151 @@
+---
+// The opening film: a tall section with a sticky stage. The WebGL scene plays
+// as you scroll; the hero, the three questions and the closing line scroll over
+// it as text, and a six-step rail tells the sequence-to-device story.
+// Without WebGL, with reduced motion or without JS, it is a stack of readable
+// sections on the night ground with a still frame of the board.
+import { getCollection } from 'astro:content';
+import { existsSync } from 'node:fs';
+import Arrow from './Arrow.astro';
+import Photo from './Photo.astro';
+import type { Dict } from '../i18n/en';
+interface Props { t: Dict }
+const { t } = Astro.props;
+const f = t.film;
+const h = t.hero;
+const entries = (await getCollection('work', (e) => e.data.lang === t.lang)).sort((a, b) => a.data.order - b.data.order);
+const base = t.lang === 'en' ? '/work/' : '/pt/work/';
+const [first, ...rest] = h.name.split(' ');
+const poster = existsSync('public/film/poster.jpg') ? '/film/poster.jpg' : null;
+const shots = [1, 2, 3].filter((n) => existsSync(`public/photos/bench-${n}.jpg`));
+---
+<section class="film" data-film data-terminal={JSON.stringify(f.terminal)} aria-label={f.label}>
+  <div class="film-stage" data-ground="night">
+    {poster && <img class="film-poster" src={poster} alt="" width="1920" height="1080" fetchpriority="high" />}
+    <canvas class="film-canvas" data-film-canvas aria-hidden="true"></canvas>
+    <ol class="film-rail" aria-hidden="true">
+      {f.rail.map((r, i) => <li data-rail={i}><span>{r}</span></li>)}
+    </ol>
+  </div>
+
+  <div class="film-beats">
+    <header class="beat beat--hero" data-beat><div class="beat-in wrap">
+      <h1 class="film-name" data-split>{first}<br />{rest.join(' ')}</h1>
+      <p class="film-lead">{h.lead}</p>
+      <nav class="film-contents" aria-label={h.contents}>
+        <ol>
+          {entries.map((e, i) => (
+            <li>
+              <a href={`${base}${e.data.slug}/`}>
+                <span class="c-n">{i + 1}</span>
+                <span class="c-t">{e.data.title}</span>
+                <span class="c-go">{h.open} <Arrow /></span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+      <p class="film-cue" aria-hidden="true"><span></span>{f.cue}</p>
+    </div></header>
+
+    {f.beats.map((b, i) => (
+      <article class={`beat beat--q beat--${i + 1}`} data-beat><div class="beat-in wrap">
+        <h2 class="film-q">{b.q}</h2>
+        <p class="film-a">{b.a}</p>
+      </div></article>
+    ))}
+
+    <footer class="beat beat--coda" data-beat><div class="beat-in wrap">
+      {shots.length > 0 && (
+        <div class="film-shots">{shots.map((n) => <Photo name={`bench-${n}`} alt={f.photoAlt} />)}</div>
+      )}
+      <p class="film-coda">{f.coda}</p>
+      <a class="go" href="#work">{f.toWork} <Arrow /></a>
+      <p class="film-note">{f.note}</p>
+    </div></footer>
+  </div>
+</section>
+
+<script>
+  import '../scripts/film/index.ts';
+</script>
+
+<style>
+  .film { position: relative; background: var(--c-night); color: var(--c-papel); --muted: var(--c-coomassie-tinta); }
+  .film-stage { position: relative; height: 100svh; overflow: hidden; }
+  .film-poster, .film-canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .film-canvas { opacity: 0; transition: opacity 1.2s ease; }
+  :global(.film-on) .film-canvas { opacity: 1; }
+  .film-rail { display: none; }
+  /* a soft scrim keeps the text legible over the film */
+  .film-stage::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, rgba(11, 16, 48, 0.78) 0%, rgba(11, 16, 48, 0.35) 38%, transparent 62%), linear-gradient(0deg, rgba(11, 16, 48, 0.6), transparent 30%); }
+
+  .film-beats { position: relative; }
+  .beat { position: relative; z-index: 2; padding-block: 16vh; }
+  .beat--hero { padding-top: 0; }
+
+  .film-name { font-family: var(--font-serif); font-weight: 600; font-size: clamp(64px, 10vw, 168px); line-height: 0.88; letter-spacing: -0.035em; text-wrap: balance; }
+  .film-lead { margin-top: 28px; font-size: clamp(19px, 1.6vw, 23px); line-height: 1.5; max-width: 40ch; color: var(--c-papel); opacity: 0.92; }
+  .film-contents { margin-top: 36px; max-width: 560px; }
+  .film-contents ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(243, 241, 234, 0.35); }
+  .film-contents li { border-bottom: 1px solid rgba(243, 241, 234, 0.2); }
+  .film-contents a { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 14px; align-items: center; padding: 14px 0; text-decoration: none; }
+  .c-n { font: 500 14px var(--font-sans); color: var(--c-coomassie-tinta); font-variant-numeric: lining-nums; }
+  .c-t { font-size: clamp(19px, 1.6vw, 23px); line-height: 1.25; }
+  .c-go { display: inline-flex; gap: 8px; align-items: center; font: 500 14px var(--font-sans); background: var(--hl); color: var(--hl-fg); padding: 6px 11px; transition: gap 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .film-contents a:hover .c-go, .film-contents a:focus-visible .c-go { gap: 13px; }
+  .film-contents a:hover .c-t { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+  .film-cue { margin-top: 40px; display: flex; align-items: center; gap: 14px; font: 14px var(--font-sans); color: var(--c-coomassie-tinta); }
+  .film-cue span { width: 1px; height: 40px; background: linear-gradient(var(--c-papel), transparent); animation: cue 2.2s ease-in-out infinite; transform-origin: top; }
+  @keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+
+  .film-q { font-family: var(--font-serif); font-weight: 400; font-size: clamp(40px, 5.6vw, 92px); line-height: 1.02; letter-spacing: -0.025em; max-width: 17ch; text-wrap: balance; }
+  .film-a { margin-top: 28px; font-size: clamp(18px, 1.45vw, 21px); line-height: 1.6; max-width: 44ch; }
+  .beat--coda .go { justify-self: start; }
+  .film-coda { font-family: var(--font-serif); font-style: italic; font-size: clamp(26px, 2.8vw, 40px); line-height: 1.25; max-width: 26ch; margin-bottom: 32px; }
+  .film-shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; max-width: 860px; margin-bottom: 48px; }
+  .film-shots :global(.photo) { aspect-ratio: 4 / 3; }
+  .film-note { margin-top: 48px; font: 13px var(--font-sans); color: var(--c-coomassie-tinta); max-width: 52ch; }
+
+  /* the film is on: the stage sticks, the text scrolls over it */
+  :global(.film-on) .film-stage { position: sticky; top: 0; }
+  :global(.film-on) .film-beats { margin-top: -100svh; }
+  /* each beat is a tall scroll segment whose text is pinned in the middle of
+     the screen: it fades in, holds and fades out without moving. Heights and
+     gaps place each pinned window on its scene (scroll progress ≈ 0.17 board,
+     0.45 alignment, 0.68 fold, 0.95 attractor; scroll length 1360svh). */
+  :global(.film-on) .beat { padding: 0; height: 200svh; }
+  :global(.film-on) .beat--hero { height: 180svh; }
+  :global(.film-on) .beat--2 { margin-top: 181svh; }
+  :global(.film-on) .beat--3 { margin-top: 113svh; }
+  :global(.film-on) .beat--coda { margin-top: 167svh; margin-bottom: 18svh; }
+  :global(.film-on) .beat-in { position: sticky; top: 0; height: 100svh; display: grid; align-content: center; justify-items: start; isolation: isolate; }
+  :global(.film-on) .beat--hero .beat-in { align-content: end; padding-bottom: 10vh; }
+  :global(.film-on) .beat-in > * { text-shadow: 0 2px 30px rgba(6, 9, 30, 0.9); }
+  /* a soft dark field behind each beat's text, on the side the text sits */
+  :global(.film-on) .beat--q .beat-in::before, :global(.film-on) .beat--coda .beat-in::before {
+    content: ""; position: absolute; z-index: -1; top: 18%; bottom: 18%; left: -8%; width: 66%;
+    background: radial-gradient(closest-side, rgba(8, 12, 40, 0.78), rgba(8, 12, 40, 0.4) 60%, transparent); filter: blur(8px); pointer-events: none;
+  }
+  :global(.film-on) .beat--2 .beat-in::before { left: auto; right: -8%; }
+  @media (min-width: 900px) { :global(.film-on) .beat--2 .beat-in { padding-right: 150px; } }
+  @media (max-width: 899px) {
+    :global(.film-on) .beat--q .beat-in::before, :global(.film-on) .beat--coda .beat-in::before { left: -10%; right: -10%; width: auto; }
+    :global(.film-on) .beat--hero .beat-in { background: linear-gradient(0deg, rgba(8, 12, 40, 0.85) 45%, transparent); }
+  }
+  :global(.film-on) .beat--2 .beat-in { justify-items: end; text-align: right; }
+  :global(.film-on) .beat--2 .film-q, :global(.film-on) .beat--2 .film-a { margin-left: auto; }
+  :global(.film-on) .film-rail {
+    display: grid; gap: 10px; position: absolute; right: max(16px, 3vw); top: 50%; transform: translateY(-50%); z-index: 3;
+    list-style: none; margin: 0; padding: 0; font: 13px var(--font-sans); color: rgba(201, 206, 242, 0.5); text-align: right;
+  }
+  :global(.film-on) .film-rail li { display: flex; justify-content: flex-end; align-items: center; gap: 12px; transition: color 0.4s; }
+  :global(.film-on) .film-rail li::after { content: ""; width: 10px; height: 1px; background: currentColor; transition: width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  :global(.film-on) .film-rail li.on { color: var(--c-papel); }
+  :global(.film-on) .film-rail li.on::after { width: 36px; }
+  @media (max-width: 899px) { :global(.film-on) .film-rail { display: none; } }
+
+  /* without the film: the stage is a still, the beats stack below it */
+  :global(html:not(.film-on)) .film-stage { height: 70svh; }
+  :global(html:not(.film-on)) .beat--hero { padding-top: 48px; }
+</style>

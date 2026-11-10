@@ -1,0 +1,18 @@
+---
+// The site's one icon: a drawn arrow in the line weight of the figures.
+// right: go into, left: go back, out: leaves the site.
+interface Props { dir?: 'right' | 'left' | 'out' }
+const { dir = 'right' } = Astro.props;
+const d = {
+  right: 'M2 8H14M9 3L14 8L9 13',
+  left: 'M14 8H2M7 3L2 8L7 13',
+  out: 'M4 12L12 4M5.5 4H12V10.5',
+}[dir];
+---
+<svg class="arrow" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+  <path d={d} fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
+
+<style>
+  .arrow { display: inline-block; flex: none; vertical-align: -0.1em; transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); }
+</style>
