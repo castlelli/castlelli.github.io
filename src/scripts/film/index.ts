@@ -5,6 +5,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
+// phones: the address bar showing/hiding must not re-measure the triggers mid-scroll
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 const root = document.documentElement;
 const section = document.querySelector<HTMLElement>('[data-film]');
@@ -69,8 +71,11 @@ if (section && canvas && !reduce && !saveData && webgl()) {
     });
     rail[0]?.classList.add('on');
 
-    addEventListener('pointermove', (e) => film.setPointer(e.clientX / innerWidth - 0.5, e.clientY / innerHeight - 0.5), { passive: true });
-    addEventListener('resize', () => film.resize(), { passive: true });
+    // parallax follows a mouse only: touch-scrolling must not nudge the camera
+    addEventListener('pointermove', (e) => e.pointerType === 'mouse' && film.setPointer(e.clientX / innerWidth - 0.5, e.clientY / innerHeight - 0.5), { passive: true });
+    // resize only when the width changes; on phones the address bar changes the height while scrolling
+    let lastW = innerWidth;
+    addEventListener('resize', () => { if (innerWidth !== lastW) { lastW = innerWidth; film.resize(); } }, { passive: true });
 
     // render only while the film is on screen and the tab is visible
     let visible = true;

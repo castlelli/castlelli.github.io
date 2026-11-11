@@ -72,7 +72,7 @@ const shots = [1, 2, 3].filter((n) => existsSync(`public/photos/bench-${n}.jpg`)
 </script>
 
 <style>
-  .film { position: relative; background: var(--c-night); color: var(--c-papel); --muted: var(--c-coomassie-tinta); }
+  .film { position: relative; overflow-x: clip; background: var(--c-night); color: var(--c-papel); --muted: var(--c-coomassie-tinta); }
   .film-stage { position: relative; height: 100svh; overflow: hidden; }
   .film-poster, .film-canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
   .film-canvas { opacity: 0; transition: opacity 1.2s ease; }
@@ -107,6 +107,11 @@ const shots = [1, 2, 3].filter((n) => existsSync(`public/photos/bench-${n}.jpg`)
   .film-coda-sub { font-family: var(--font-sans); font-size: clamp(16px, 1.3vw, 19px); line-height: 1.45; max-width: 42ch; opacity: 0.82; margin-bottom: 32px; }
   .film-shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; max-width: 860px; margin-bottom: 48px; }
   .film-shots :global(.photo) { aspect-ratio: 4 / 3; }
+  /* phones: the project rows stay as links, without the button chips */
+  @media (max-width: 899px) {
+    .c-go { display: none; }
+    .film-contents a { grid-template-columns: 28px minmax(0, 1fr); }
+  }
   .film-note { margin-top: 48px; font: 13px var(--font-sans); color: var(--c-coomassie-tinta); max-width: 52ch; }
 
   /* the film is on: the stage sticks, the text scrolls over it */
@@ -121,7 +126,7 @@ const shots = [1, 2, 3].filter((n) => existsSync(`public/photos/bench-${n}.jpg`)
   :global(.film-on) .beat--2 { margin-top: 181svh; }
   :global(.film-on) .beat--3 { margin-top: 113svh; }
   :global(.film-on) .beat--coda { margin-top: 167svh; margin-bottom: 18svh; }
-  :global(.film-on) .beat-in { position: sticky; top: 0; height: 100svh; display: grid; align-content: center; justify-items: start; isolation: isolate; }
+  :global(.film-on) .beat-in { position: sticky; top: 0; height: 100svh; display: grid; align-content: center; justify-items: start; isolation: isolate; will-change: opacity; }
   :global(.film-on) .beat--hero .beat-in { align-content: end; padding-bottom: 10vh; }
   :global(.film-on) .beat-in > * { text-shadow: 0 2px 30px rgba(6, 9, 30, 0.9); }
   /* a soft dark field behind each beat's text, on the side the text sits */
@@ -132,8 +137,14 @@ const shots = [1, 2, 3].filter((n) => existsSync(`public/photos/bench-${n}.jpg`)
   :global(.film-on) .beat--2 .beat-in::before { left: auto; right: -8%; }
   @media (min-width: 900px) { :global(.film-on) .beat--2 .beat-in { padding-right: 150px; } }
   @media (max-width: 899px) {
-    :global(.film-on) .beat--q .beat-in::before, :global(.film-on) .beat--coda .beat-in::before { left: -10%; right: -10%; width: auto; }
-    :global(.film-on) .beat--hero .beat-in { background: linear-gradient(0deg, rgba(8, 12, 40, 0.85) 45%, transparent); }
+    /* on phones the fields span the screen edge to edge (the wrap's 16px
+       gutter), with no blur: no visible box, nothing past the viewport */
+    :global(.film-on) .beat--q .beat-in::before, :global(.film-on) .beat--coda .beat-in::before { left: -16px; right: -16px; width: auto; filter: none; background: radial-gradient(closest-side, rgba(8, 12, 40, 0.6), rgba(8, 12, 40, 0.3) 60%, transparent); }
+    :global(.film-on) .beat--hero .beat-in::before {
+      content: ""; position: absolute; z-index: -1; left: -16px; right: -16px; bottom: 0; height: 75%; pointer-events: none;
+      background: linear-gradient(0deg, rgba(8, 12, 40, 0.6) 20%, rgba(8, 12, 40, 0.3) 60%, transparent);
+    }
+    :global(.film-on) .beat-in > * { text-shadow: 0 2px 16px rgba(6, 9, 30, 0.85); }
   }
   :global(.film-on) .beat--2 .beat-in { justify-items: end; text-align: right; }
   :global(.film-on) .beat--2 .film-q, :global(.film-on) .beat--2 .film-a { margin-left: auto; }

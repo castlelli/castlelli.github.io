@@ -25,6 +25,7 @@ body {
   font-variant-numeric: oldstyle-nums proportional-nums;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 a { color: inherit; text-decoration-line: underline; text-decoration-color: var(--rule); text-decoration-thickness: 1px; text-underline-offset: 0.22em; transition: text-decoration-color 0.2s; }
