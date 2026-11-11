@@ -2,7 +2,7 @@ export const pt = {
   lang: 'pt',
   htmlLang: 'pt-BR',
   dec: ',',
-  paths: { home: '/', about: '/sobre/', other: '/en/', otherAbout: '/en/about/' },
+  paths: { home: '/', about: '/sobre/', other: '/', otherAbout: '/about' },
   otherLabel: 'EN',
   otherName: 'English',
   meta: {
@@ -20,9 +20,9 @@ export const pt = {
     fig: 'Fig.',
     plate: 'Prancha',
     table: 'Tabela',
-    place: 'São Paulo, 2026',
+    place: 'Made in Brasil',
     onePager: 'One Pager',
-    colophon: 'Tipografia em Source Serif 4 e IBM Plex. Ilustrações do autor.',
+    colophon: 'Ilustrações do autor.',
   },
   nav: [
     { id: 'work', label: 'Trabalho' },

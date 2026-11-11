@@ -20,9 +20,9 @@ export const en = {
     fig: 'Fig.',
     plate: 'Plate',
     table: 'Table',
-    place: 'São Paulo, 2026',
+    place: 'Made in Brazil',
     onePager: 'One Pager',
-    colophon: 'Set in Source Serif 4 and IBM Plex. Drawings by the author.',
+    colophon: 'Drawings by the author.',
   },
   nav: [
     { id: 'work', label: 'Work' },
