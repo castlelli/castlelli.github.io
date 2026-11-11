@@ -42,7 +42,7 @@ export const en = {
     photoAlt: 'At the bench, photographed by the author.',
     cue: 'Scroll',
     beats: [
-      { q: 'What if the medical device could think for itself?', a: 'A monitor that waits on the cloud is slow exactly when it matters. I want the intelligence inside the device, small enough to run on a microcontroller and built to the safety rules medicine already demands, so care stays close to the patient even when the network fails.' },
+      { q: 'What if hardware could think?', a: 'A monitor that waits on the cloud is slow exactly when it matters. I want the intelligence inside the device, small enough to run on a microcontroller and built to the safety rules the industry already demands, so the device stays close to where it is needed even when the network fails.' },
       { q: 'What is evolution already telling us about disease?', a: 'Every genome keeps a record of how life adapted to pressure, including the pressure we put on microbes with antibiotics. Read across many species at once, those sequences can point to how resistance arises. I want that reading to be open and reproducible, so any lab can check it.' },
       { q: 'Why should a good result stop at the paper?', a: 'Too much good science ends as a PDF. I want findings from the bench to reach the clinic as devices and tools people actually use. That takes the patience of research and the urgency of a company, and I mean to work with both.' },
     ],
@@ -76,7 +76,7 @@ export const en = {
   },
   axes: {
     title: 'Lines of research',
-    lead: 'Five drawings: the pillars of my work and what they aim to achieve. Each one has a control to play with.',
+    lead: 'The pillars of my work and what they aim to achieve. Each one has a control to play with.',
     caption: 'Five lines of work, drawn by the author.',
     cota: '≈ 1.2 km',
     quant: { bit: 'bit', levels: 'levels', size: 'of float32 size' },
@@ -95,13 +95,13 @@ export const en = {
       },
       {
         id: 'embedded', name: 'Embedded Systems', sub: 'Firmware and hardware safety',
-        text: 'Designing the hardware that touches the patient. Focus on firmware, sensor interfaces, and the strict safety and regulatory demands of medical devices.',
+        text: 'Designing the hardware that touches the patient. Focus on firmware, sensor interfaces, and the strict safety and regulatory demands of critical devices.',
         status: 'in focus', toggle: ['Assembled', 'Exploded'],
         alt: 'A microcontroller board seen from above: package, pin headers, connector and traces.',
       },
       {
         id: 'edge', name: 'Edge AI', sub: 'Intelligence on the device',
-        text: 'Training, quantizing, and deploying machine learning models to run efficiently and securely directly on embedded healthcare systems.',
+        text: 'Training, quantizing, and deploying machine learning models to run efficiently and securely directly on embedded systems.',
         status: 'in focus', toggle: ['Bits', ''],
         alt: 'A chip with a small neural network drawn inside it, next to a waveform that becomes stepped as bit depth drops.',
       },
@@ -119,9 +119,9 @@ export const en = {
     caption: 'Research tools, from lab infrastructure to simulation.',
     head: ['Tool', 'What it is', 'Status', 'Notes'],
     rows: [
-      { p: 'ROTIFER', w: 'Comparative genomics toolkit', n: 'Open source', u: 'LEEP, ICB-USP', c: 'Leading its modernisation to scale biological data analysis' },
-      { p: 'S(H)ARP', w: 'Antibiotic hit finder & Wiki', n: 'Live', u: 'iGEM', c: 'Lead developer; focusing computational tools on public health' },
-      { p: 'Duffing', w: 'Nonlinear oscillator simulation', n: 'Live', u: 'browser', c: 'RK4 integration in JavaScript and Canvas, built for PME3100' },
+      { p: 'ROTIFER', w: 'Comparative genomics toolkit', n: 'Open source', u: 'CEPID B3', c: 'Leading its modernisation to scale biological data analysis' },
+      { p: 'S(H)ARP', w: 'Antibiotic hit finder & Wiki', n: 'Open Source', u: 'iGEM', c: 'Engineering Lead; computational tools on public health' },
+      { p: 'Duffing', w: 'Nonlinear oscillator simulation', n: 'Open Source', u: 'browser', c: 'Live physics simulation + Rigorous research' },
     ],
   },
   contact: {

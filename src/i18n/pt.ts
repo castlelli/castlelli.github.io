@@ -42,7 +42,7 @@ export const pt = {
     photoAlt: 'Na bancada, fotografia do autor.',
     cue: 'Role a página',
     beats: [
-      { q: 'E se o dispositivo médico pensasse por conta própria?', a: 'Um monitor que depende da nuvem fica lento justamente quando mais importa. Quero a inteligência dentro do aparelho, pequena o bastante para rodar num microcontrolador e feita dentro das regras de segurança que a medicina já exige, para que o cuidado fique perto do paciente mesmo quando a rede cai.' },
+      { q: 'E se o hardware pudesse pensar?', a: 'Um monitor que depende da nuvem fica lento justamente quando mais importa. Quero a inteligência dentro do aparelho, pequena o bastante para rodar num microcontrolador e feita dentro das regras de segurança que a indústria já exige, para que o dispositivo fique perto de onde ele é necessário, mesmo quando a rede cai.' },
       { q: 'O que a evolução já está nos contando sobre a doença?', a: 'Cada genoma guarda o registro de como a vida se adaptou à pressão, inclusive à que colocamos sobre os micróbios com antibióticos. Lidas em muitas espécies de uma vez, essas sequências podem mostrar como a resistência surge. Quero que essa leitura seja aberta e reprodutível, para que qualquer laboratório possa conferir.' },
       { q: 'Por que um bom resultado tem que parar no artigo?', a: 'Muita ciência boa termina como um PDF. Quero que o que sai da bancada chegue à clínica como aparelhos e ferramentas que as pessoas usam de verdade. Isso pede a paciência da pesquisa e a urgência de uma empresa, e pretendo trabalhar com as duas.' },
     ],
@@ -53,7 +53,7 @@ export const pt = {
   },
   work: {
     title: 'Trabalhos selecionados',
-    lead: 'Projetos na intersecção entre ciências da vida, hardware inteligente e software de pesquisa.',
+    lead: 'Projetos em ciências da vida, hardware inteligente e software de pesquisa.',
     role: 'Papel',
     dates: 'Data',
     stack: 'Métodos e ferramentas',
@@ -76,7 +76,7 @@ export const pt = {
   },
   axes: {
     title: 'Linhas de pesquisa',
-    lead: 'Cinco desenhos: os pilares do meu trabalho e o que eles buscam alcançar. Cada um tem um controle interativo.',
+    lead: 'Os pilares do meu trabalho e o que eles buscam alcançar. Cada um tem um controle interativo.',
     caption: 'Cinco linhas de trabalho, ilustradas pelo autor.',
     cota: '≈ 1,2 km',
     quant: { bit: 'bit', levels: 'níveis', size: 'do tamanho em float32' },
@@ -95,13 +95,13 @@ export const pt = {
       },
       {
         id: 'embedded', name: 'Sistemas Embarcados', sub: 'Firmware e segurança de hardware',
-        text: 'Projetando o hardware que toca o paciente. Foco em firmware, interfaces de sensores e nas rigorosas exigências regulatórias e de segurança de dispositivos médicos.',
+        text: 'Projetando o hardware que toca o paciente. Foco em firmware, interfaces de sensores e nas rigorosas exigências regulatórias e de segurança de dispositivos críticos.',
         status: 'em foco', toggle: ['Montado', 'Explodido'],
         alt: 'Uma placa de microcontrolador vista de cima: chip, pinos, conectores e trilhas.',
       },
       {
         id: 'edge', name: 'Edge AI', sub: 'Inteligência no dispositivo',
-        text: 'Treinamento, quantização e deploy de modelos de machine learning para rodar de forma eficiente e segura diretamente em sistemas embarcados para saúde.',
+        text: 'Treinamento, quantização e deploy de modelos de machine learning para rodar de forma eficiente e segura diretamente em sistemas embarcados.',
         status: 'em foco', toggle: ['Bits', ''],
         alt: 'Um chip com uma pequena rede neural desenhada dentro, ao lado de uma forma de onda que se torna em degraus conforme a profundidade de bits cai.',
       },
@@ -119,9 +119,9 @@ export const pt = {
     caption: 'Ferramentas de pesquisa, da infraestrutura de laboratório à simulação.',
     head: ['Ferramenta', 'O que é', 'Status', 'Notas'],
     rows: [
-      { p: 'ROTIFER', w: 'Toolkit de genômica comparativa', n: 'Open source', u: 'LEEP, ICB-USP', c: 'Liderando sua modernização para escalar a análise de dados biológicos' },
-      { p: 'S(H)ARP', w: 'Buscador de alvos antibióticos & Wiki', n: 'No ar', u: 'iGEM', c: 'Desenvolvedor líder; focando ferramentas computacionais na saúde pública' },
-      { p: 'Duffing', w: 'Simulação de oscilador não linear', n: 'No ar', u: 'navegador', c: 'Integração RK4 em JavaScript e Canvas, feita para PME3100' },
+      { p: 'ROTIFER', w: 'Toolkit de genômica comparativa', n: 'Open source', u: 'CEPID B3', c: 'Liderando sua modernização para escalar a análise de dados biológicos' },
+      { p: 'S(H)ARP', w: 'Buscador de alvos antibióticos & Wiki', n: 'Open Source', u: 'iGEM', c: 'Engenharia de Software; ferramentas computacionais na saúde pública' },
+      { p: 'Duffing', w: 'Simulação de oscilador não linear', n: 'Open Source', u: 'navegador', c: 'Simulação física complexa ao vivo + Estudo metodológico por trás' },
     ],
   },
   contact: {
