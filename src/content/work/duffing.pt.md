@@ -10,8 +10,8 @@ status: no ar
 figure: phase
 stack: [RK4, Python, NumPy, pytest, LaTeX, JavaScript, Canvas, Web Audio, Fases, Bacias]
 links:
-  - { label: Abrir ao vivo, href: "https://castlelli.github.io/algorithms/pme3100/optativa-9/" }
-  - { label: Código, href: "https://github.com/castlelli/algorithms/tree/main/pme3100/optativa-9" }
+  - { label: Abrir ao vivo, href: "https://castlelli.github.io/physics/duffing/" }
+  - { label: Código, href: "https://github.com/castlelli/physics/tree/main/duffing" }
 ---
 
 O oscilador de Duffing é uma massa presa a uma mola que endurece conforme estica, empurrada por uma força periódica. Pequenas mudanças nos dados levam o sistema de uma órbita estável ao caos.

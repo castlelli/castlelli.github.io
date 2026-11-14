@@ -10,8 +10,8 @@ status: live
 figure: phase
 stack: [RK4, Python, NumPy, pytest, LaTeX, JavaScript, Canvas, Web Audio, Phase space, Basins]
 links:
-  - { label: Open live, href: "https://castlelli.github.io/algorithms/pme3100/optativa-9/" }
-  - { label: Source, href: "https://github.com/castlelli/algorithms/tree/main/pme3100/optativa-9" }
+  - { label: Open live, href: "https://castlelli.github.io/physics/duffing/" }
+  - { label: Source, href: "https://github.com/castlelli/physics/tree/main/duffing" }
 ---
 
 The Duffing oscillator is a mass on a spring that stiffens as it stretches, pushed by a periodic force. Small changes in the inputs move it from a steady orbit to chaos.
