@@ -61,7 +61,7 @@ export const pt: Dict = {
       },
       {
         key: 'technology', label: 'Tecnologia', h: 'Construir até o metal.',
-        p: 'Software, modelos e hardware hoje são uma pilha só. Os sistemas que valem a pena rodam onde o dado nasce, em dispositivos pequenos que não podem contar com a rede. Conhecer cada camada, da porta lógica à interface, é o que os torna confiáveis.',
+        p: 'Software, modelos e hardware hoje são uma pilha só. Os sistemas que valem a pena rodam onde o dado nasce, em dispositivos pequenos que não precisam contar com a rede. Conhecer cada camada, da porta lógica à interface, é o que os torna confiáveis.',
         cap: 'Um sinal digital passando por uma porta.',
       },
       {
