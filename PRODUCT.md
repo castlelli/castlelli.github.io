@@ -17,13 +17,13 @@ Both arrive cold, usually from a link (LinkedIn, email signature, GitHub profile
 
 ## Product Purpose
 
-Personal portfolio of Vinicius Castelli: Computer Engineering student at Escola Politécnica (Poli-USP, 2026 → 2030) and undergraduate researcher at LEEP, ICB-USP, where he leads the modernisation of ROTIFER, the lab's open-source comparative-genomics toolkit. Direction: embedded systems for health.
+Personal portfolio of Vinicius Castelli: Computer Engineering student at Escola Politécnica (Poli-USP, 2026 → 2030) and undergraduate researcher at LEEP, ICB-USP, where he leads the modernisation of ROTIFER, the lab's open-source comparative-genomics toolkit. Direction: deep tech from the lab into industry (machine learning, embedded systems, research software), with health as the first application.
 
 Success: a visitor opens a project page (Duffing oscillator, vildagliptin repurposing study). Contact (email, LinkedIn, GitHub) and the One Pager (About/CV) are secondary.
 
 ## Positioning
 
-A serious engineer, builder and researcher at once, spanning biology and health, open-source research software, and hardware. The breadth is real and documented (lab toolkit, shipped products with thousands of users, a repurposing study, hardware focus), and the author draws his own illustrations.
+A serious engineer, builder and researcher at once, spanning biology, open-source research software and hardware. Health is the first application. Industry roles in hardware, AI and the life sciences are in scope, and the business side (product, leadership, pitching) counts as evidence too. The breadth is real and documented (lab toolkit, shipped products with thousands of users, a repurposing study, hardware focus), and the author draws his own illustrations.
 
 ## Operating Context
 
