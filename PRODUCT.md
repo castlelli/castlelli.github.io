@@ -17,7 +17,7 @@ Both arrive cold, usually from a link (LinkedIn, email signature, GitHub profile
 
 ## Product Purpose
 
-Personal portfolio of Vinicius Castelli: Computer Engineering student at Escola Politécnica (Poli-USP, 2026 → 2030) and undergraduate researcher at LEEP, ICB-USP, where he leads the modernisation of ROTIFER, the lab's open-source comparative-genomics toolkit. Direction: deep tech from the lab into industry (machine learning, embedded systems, research software), with health as the first application.
+Personal portfolio of Vinicius Castelli: Computer Engineering student at Escola Politécnica (Poli-USP, 2026 → 2030) and undergraduate researcher at LEEP, ICB-USP, where he leads the modernisation of ROTIFER, the lab's open-source comparative-genomics toolkit. Direction: deep tech from the lab into industry and healthcare (machine learning, embedded systems, research software).
 
 Success: a visitor opens a project page (Duffing oscillator, vildagliptin repurposing study). Contact (email, LinkedIn, GitHub) and the One Pager (About/CV) are secondary.
 

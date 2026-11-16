@@ -8,7 +8,7 @@ export const en = {
   meta: {
     title: 'Vinicius Castelli',
     description:
-      'I study Computer Engineering at Poli-USP and do research at ICB-USP. I build with machine learning and embedded systems, and I’m moving deep tech from the lab into industry, starting with health.',
+      'I study Computer Engineering at Poli-USP and do research at ICB-USP. I build with machine learning and embedded systems, and I’m moving deep tech from the lab into industry and healthcare.',
     aboutTitle: 'One Pager · Vinicius Castelli',
     aboutDescription:
       'Vinicius Castelli on one page: the mission, the research, the stack, the history and how to reach me.',
@@ -31,7 +31,7 @@ export const en = {
   ],
   hero: {
     name: 'Vinicius Castelli',
-    lead: 'I build software and hardware for science, and I’m moving deep tech from the lab into industry, starting with health. Computer Engineering at Poli-USP; research at ICB-USP.',
+    lead: 'I build software and hardware for science, and I’m moving deep tech from the lab into industry and healthcare. Computer Engineering at Poli-USP; research at ICB-USP.',
     contents: 'Contents',
     open: 'Open',
   },
@@ -150,7 +150,7 @@ export const en = {
     },
     description: [
       'I’m Vinicius Castelli. I study computer engineering at Escola Politécnica, USP, in the class of 2026 → 2030.',
-      'I build software and hardware for science, and I’m moving that work from the lab into industry. Health comes first. Industry roles in hardware, AI and the life sciences are on my map too.',
+      'I build software and hardware for science, and I’m moving that work from the lab into industry and healthcare. Industry roles in hardware, AI and the life sciences are on my map too.',
       'At LEEP (ICB-USP), I lead the modernisation of ROTIFER, the lab’s open-source comparative-genomics toolkit. The work covers data access, performance, testing and documentation, and a tool paper is in preparation. Machine learning on the same data is the next research step.',
       'Outside the lab, I’m learning embedded systems and edge AI for my first hardware project, a point-of-care diagnostic device. A device that runs its own model has to be safe and certifiable from the start, so I study those rules alongside the firmware.',
       'I like the business side too. I was Director of Innovation and Expansion at AccessPlus, where I led a team of eight, and I presented the business case at a drug-repurposing hackathon. PhD, industry or a company: whichever comes next, I’ll be building technology people use.',

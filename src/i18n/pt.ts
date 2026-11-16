@@ -8,7 +8,7 @@ export const pt = {
   meta: {
     title: 'Vinicius Castelli · Deep tech, machine learning e sistemas embarcados',
     description:
-      'Estudo Engenharia de Computação na Poli-USP e faço pesquisa no ICB-USP. Construo com machine learning e sistemas embarcados e estou levando deep tech do laboratório para a indústria, começando pela saúde.',
+      'Estudo Engenharia de Computação na Poli-USP e faço pesquisa no ICB-USP. Construo com machine learning e sistemas embarcados e estou levando deep tech do laboratório para a indústria e a saúde.',
     aboutTitle: 'One Pager · Vinicius Castelli',
     aboutDescription:
       'Vinicius Castelli em uma página: a missão, a pesquisa, a stack, a trajetória e como entrar em contato.',
@@ -31,7 +31,7 @@ export const pt = {
   ],
   hero: {
     name: 'Vinicius Castelli',
-    lead: 'Construo software e hardware para a ciência e estou levando deep tech do laboratório para a indústria, começando pela saúde. Engenharia de Computação na Poli-USP; pesquisa no ICB-USP.',
+    lead: 'Construo software e hardware para a ciência e estou levando deep tech do laboratório para a indústria e a saúde. Engenharia de Computação na Poli-USP; pesquisa no ICB-USP.',
     contents: 'Índice',
     open: 'Abrir',
   },
@@ -150,7 +150,7 @@ export const pt = {
     },
     description: [
       'Sou Vinicius Castelli. Estudo Engenharia de Computação na Escola Politécnica, USP, turma de 2026 → 2030.',
-      'Construo software e hardware para a ciência e estou levando esse trabalho do laboratório para a indústria. A saúde vem primeiro. Posições na indústria em hardware, IA e ciências da vida também estão no meu mapa.',
+      'Construo software e hardware para a ciência e estou levando esse trabalho do laboratório para a indústria e a saúde. Posições na indústria em hardware, IA e ciências da vida também estão no meu mapa.',
       'No LEEP (ICB-USP), lidero a modernização do ROTIFER, o toolkit open-source de genômica comparativa do laboratório. O trabalho cobre acesso a dados, performance, testes e documentação, e um artigo sobre a ferramenta está em preparação. Machine learning sobre esses mesmos dados é o próximo passo da pesquisa.',
       'Fora do laboratório, estou aprendendo sistemas embarcados e edge AI para o meu primeiro projeto de hardware, um dispositivo de diagnóstico point-of-care. Um aparelho que roda o próprio modelo precisa ser seguro e certificável desde o início, então estudo essas regras junto com o firmware.',
       'Também gosto do lado de negócios. Fui Diretor de Inovação e Expansão na AccessPlus, onde liderei uma equipe de oito pessoas, e apresentei o caso de negócio num hackathon de reposicionamento de fármacos. PhD, indústria ou uma empresa: seja qual vier primeiro, vou estar construindo tecnologia que as pessoas usam.',
