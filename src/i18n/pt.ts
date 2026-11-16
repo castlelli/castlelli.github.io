@@ -8,7 +8,7 @@ export const pt = {
   meta: {
     title: 'Vinicius Castelli · Deep tech, machine learning e sistemas embarcados',
     description:
-      'Estudo Engenharia de Computação na Poli-USP e faço pesquisa no ICB-USP. Trabalho com machine learning e sistemas embarcados, e quero levar deep tech do laboratório para a indústria, começando pela saúde.',
+      'Estudo Engenharia de Computação na Poli-USP e faço pesquisa no ICB-USP. Construo com machine learning e sistemas embarcados e estou levando deep tech do laboratório para a indústria, começando pela saúde.',
     aboutTitle: 'One Pager · Vinicius Castelli',
     aboutDescription:
       'Vinicius Castelli em uma página: a missão, a pesquisa, a stack, a trajetória e como entrar em contato.',
@@ -31,7 +31,7 @@ export const pt = {
   ],
   hero: {
     name: 'Vinicius Castelli',
-    lead: 'Construo software e hardware para a ciência, e quero levar deep tech do laboratório para a indústria, começando pela saúde. Engenharia de Computação na Poli-USP; pesquisa no ICB-USP.',
+    lead: 'Construo software e hardware para a ciência e estou levando deep tech do laboratório para a indústria, começando pela saúde. Engenharia de Computação na Poli-USP; pesquisa no ICB-USP.',
     contents: 'Índice',
     open: 'Abrir',
   },
@@ -42,9 +42,9 @@ export const pt = {
     photoAlt: 'Na bancada, fotografia do autor.',
     cue: 'Role a página',
     beats: [
-      { q: 'E se o hardware pudesse pensar?', a: 'Um aparelho que depende da nuvem fica lento justamente quando mais importa, seja ao lado de um leito de hospital ou numa linha de produção. Quero a inteligência dentro do aparelho, pequena o bastante para rodar num microcontrolador e feita dentro das regras de segurança que a indústria já exige, para que ele continue funcionando quando a rede cai.' },
-      { q: 'O que a evolução já está nos contando sobre a doença?', a: 'Cada genoma guarda o registro de como a vida se adaptou à pressão, inclusive à que colocamos sobre os micróbios com antibióticos. Lidas em muitas espécies de uma vez, essas sequências podem mostrar como a resistência surge. Quero que essa leitura seja aberta e reprodutível, para que qualquer laboratório possa conferir.' },
-      { q: 'Por que um bom resultado tem que parar no artigo?', a: 'Muita ciência boa termina como um PDF. Quero que o que sai da bancada chegue a hospitais e à indústria como aparelhos e ferramentas que as pessoas usam. Isso pede a paciência da pesquisa e a urgência de uma empresa, e pretendo trabalhar com as duas.' },
+      { q: 'E se o hardware pudesse pensar?', a: 'Um aparelho que depende da nuvem fica lento justamente quando mais importa, seja ao lado de um leito de hospital ou numa linha de produção. Por isso estou colocando a inteligência dentro do aparelho, pequena o bastante para rodar num microcontrolador e feita dentro das regras de segurança que a indústria já exige, para que ele continue funcionando quando a rede cai.' },
+      { q: 'O que a evolução já está nos contando sobre a doença?', a: 'Cada genoma guarda o registro de como a vida se adaptou à pressão, inclusive à que colocamos sobre os micróbios com antibióticos. Lidas em muitas espécies de uma vez, essas sequências podem mostrar como a resistência surge. Mantenho essa leitura aberta e reprodutível, para que qualquer laboratório possa conferir.' },
+      { q: 'Por que um bom resultado tem que parar no artigo?', a: 'Muita ciência boa termina como um PDF. Construo para que o que sai da bancada chegue a hospitais e à indústria como aparelhos e ferramentas que as pessoas usam. Isso pede a paciência da pesquisa e a urgência de uma empresa, e trabalho com as duas.' },
     ],
     coda: 'É isso que eu faço.',
     codaSub: 'Ciência e engenharia juntas para construir deep tech que sai do laboratório.',
@@ -150,10 +150,10 @@ export const pt = {
     },
     description: [
       'Sou Vinicius Castelli. Estudo Engenharia de Computação na Escola Politécnica, USP, turma de 2026 → 2030.',
-      'Construo software e hardware para a ciência, e meu objetivo é levar deep tech do laboratório para a indústria. A saúde é a primeira aplicação que me interessa. Também estou aberto a posições na indústria em hardware, IA e ciências da vida.',
+      'Construo software e hardware para a ciência e estou levando esse trabalho do laboratório para a indústria. A saúde vem primeiro. Posições na indústria em hardware, IA e ciências da vida também estão no meu mapa.',
       'No LEEP (ICB-USP), lidero a modernização do ROTIFER, o toolkit open-source de genômica comparativa do laboratório. O trabalho cobre acesso a dados, performance, testes e documentação, e um artigo sobre a ferramenta está em preparação. Machine learning sobre esses mesmos dados é o próximo passo da pesquisa.',
       'Fora do laboratório, estou aprendendo sistemas embarcados e edge AI para o meu primeiro projeto de hardware, um dispositivo de diagnóstico point-of-care. Um aparelho que roda o próprio modelo precisa ser seguro e certificável desde o início, então estudo essas regras junto com o firmware.',
-      'Também gosto do lado de negócios. Fui Diretor de Inovação e Expansão na AccessPlus, onde liderei uma equipe de oito pessoas, e apresentei o caso de negócio num hackathon de reposicionamento de fármacos. O próximo passo pode ser um PhD, a indústria ou uma empresa; em qualquer um deles, quero construir tecnologia que as pessoas usem.',
+      'Também gosto do lado de negócios. Fui Diretor de Inovação e Expansão na AccessPlus, onde liderei uma equipe de oito pessoas, e apresentei o caso de negócio num hackathon de reposicionamento de fármacos. PhD, indústria ou uma empresa: seja qual vier primeiro, vou estar construindo tecnologia que as pessoas usam.',
     ],
     features: [
       'Engenharia de software de pesquisa: empacotamento, testes, CI/CD e documentação de um toolkit de laboratório',

@@ -8,7 +8,7 @@ export const en = {
   meta: {
     title: 'Vinicius Castelli',
     description:
-      'I study Computer Engineering at Poli-USP and do research at ICB-USP. I work on machine learning and embedded systems, and I want to take deep tech from the lab into industry, starting with health.',
+      'I study Computer Engineering at Poli-USP and do research at ICB-USP. I build with machine learning and embedded systems, and I’m moving deep tech from the lab into industry, starting with health.',
     aboutTitle: 'One Pager · Vinicius Castelli',
     aboutDescription:
       'Vinicius Castelli on one page: the mission, the research, the stack, the history and how to reach me.',
@@ -31,7 +31,7 @@ export const en = {
   ],
   hero: {
     name: 'Vinicius Castelli',
-    lead: 'I build software and hardware for science, and I want to take deep tech from the lab into industry, starting with health. Computer Engineering at Poli-USP; research at ICB-USP.',
+    lead: 'I build software and hardware for science, and I’m moving deep tech from the lab into industry, starting with health. Computer Engineering at Poli-USP; research at ICB-USP.',
     contents: 'Contents',
     open: 'Open',
   },
@@ -42,9 +42,9 @@ export const en = {
     photoAlt: 'At the bench, photographed by the author.',
     cue: 'Scroll',
     beats: [
-      { q: 'What if hardware could think?', a: 'A device that waits on the cloud is slow exactly when it matters, whether it sits by a hospital bed or on a factory line. I want the intelligence inside the device, small enough to run on a microcontroller and built to the safety rules the industry already demands, so it keeps working when the network fails.' },
-      { q: 'What is evolution already telling us about disease?', a: 'Every genome keeps a record of how life adapted to pressure, including the pressure we put on microbes with antibiotics. Read across many species at once, those sequences can point to how resistance arises. I want that reading to be open and reproducible, so any lab can check it.' },
-      { q: 'Why should a good result stop at the paper?', a: 'Too much good science ends as a PDF. I want findings from the bench to reach hospitals and industry as devices and tools people use. That takes the patience of research and the urgency of a company, and I mean to work with both.' },
+      { q: 'What if hardware could think?', a: 'A device that waits on the cloud is slow exactly when it matters, whether it sits by a hospital bed or on a factory line. So I’m putting the intelligence inside the device, small enough to run on a microcontroller and built to the safety rules the industry already demands, so it keeps working when the network fails.' },
+      { q: 'What is evolution already telling us about disease?', a: 'Every genome keeps a record of how life adapted to pressure, including the pressure we put on microbes with antibiotics. Read across many species at once, those sequences can point to how resistance arises. I keep that reading open and reproducible, so any lab can check it.' },
+      { q: 'Why should a good result stop at the paper?', a: 'Too much good science ends as a PDF. I build so that findings from the bench reach hospitals and industry as devices and tools people use. That takes the patience of research and the urgency of a company, and I work with both.' },
     ],
     coda: 'This is what I do.',
     codaSub: 'Science and engineering, joined up to build deep tech that leaves the lab.',
@@ -150,10 +150,10 @@ export const en = {
     },
     description: [
       'I’m Vinicius Castelli. I study computer engineering at Escola Politécnica, USP, in the class of 2026 → 2030.',
-      'I build software and hardware for science, and my goal is to take deep tech from the lab into industry. Health is the first application I care about. I’m also open to industry roles in hardware, AI and the life sciences.',
+      'I build software and hardware for science, and I’m moving that work from the lab into industry. Health comes first. Industry roles in hardware, AI and the life sciences are on my map too.',
       'At LEEP (ICB-USP), I lead the modernisation of ROTIFER, the lab’s open-source comparative-genomics toolkit. The work covers data access, performance, testing and documentation, and a tool paper is in preparation. Machine learning on the same data is the next research step.',
       'Outside the lab, I’m learning embedded systems and edge AI for my first hardware project, a point-of-care diagnostic device. A device that runs its own model has to be safe and certifiable from the start, so I study those rules alongside the firmware.',
-      'I like the business side too. I was Director of Innovation and Expansion at AccessPlus, where I led a team of eight, and I presented the business case at a drug-repurposing hackathon. A PhD, an industry role or a company could come next; in any of them, I want to build technology people use.',
+      'I like the business side too. I was Director of Innovation and Expansion at AccessPlus, where I led a team of eight, and I presented the business case at a drug-repurposing hackathon. PhD, industry or a company: whichever comes next, I’ll be building technology people use.',
     ],
     features: [
       'Research software engineering: packaging, testing, CI/CD and documentation for a lab toolkit',
