@@ -4,8 +4,8 @@ slug: igem
 order: 2
 domain: synthetic-biology
 year: "2026"
-title: iGEM USP · wiki and SHARP
-summary: The team's wiki and its antibiotic hit finder, for iGEM USP 2026.
+title: iGEM 2026 - wiki and software
+summary: The team's wiki and its antibiotic hit finder, for iGEM 2026.
 role: Lead developer of the team wiki; software team on SHARP
 dates: "2026"
 status: Shipped · wiki frozen October 2026
