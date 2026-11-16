@@ -1,0 +1,14 @@
+---
+// The wordmark: lowercase castelli in Funnel Display with a square i-dot.
+// The dot is fluorescein on ultramarine or ink, ultramarine on light grounds.
+interface Props { tone?: 'band' | 'plain' | 'ink'; class?: string }
+const { tone = 'plain', class: cls } = Astro.props;
+---
+<span class:list={['wm', `wm--${tone}`, cls]} role="img" aria-label="castelli"><span aria-hidden="true">castell<span class="wm-i">ı</span></span></span>
+
+<style>
+  .wm { display: inline-block; font-family: var(--font-display); font-weight: 700; line-height: 1; letter-spacing: -0.03em; white-space: nowrap; --dot: var(--accent); }
+  .wm--band, .wm--ink { --dot: var(--signal); }
+  .wm-i { position: relative; display: inline-block; }
+  .wm-i::after { content: ""; position: absolute; left: 50%; top: 0.1em; width: 0.17em; height: 0.17em; transform: translateX(-50%); background: var(--dot); }
+</style>

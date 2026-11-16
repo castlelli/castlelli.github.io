@@ -1,0 +1,48 @@
+---
+// The ink footer: the way to reach me, on every page.
+import Wordmark from './Wordmark.astro';
+import Arrow from './Arrow.astro';
+import type { Dict } from '../i18n/en';
+interface Props { t: Dict; other: string; otherLang: string }
+const { t, other, otherLang } = Astro.props;
+const f = t.footer;
+---
+<footer class="foot" id="contact" aria-labelledby="foot-h">
+  <div class="wrap foot-in">
+    <div class="foot-main">
+      <h2 class="h2" id="foot-h">{f.title}</h2>
+      <p class="foot-lead">{f.lead}</p>
+      <a class="foot-mail" href={f.email.href}>{f.email.value}</a>
+    </div>
+    <ul class="foot-links">
+      {f.links.map((l) => <li><a href={l.href} rel="me">{l.label} <Arrow dir="out" /></a><span>{l.value}</span></li>)}
+    </ul>
+    <div class="foot-base">
+      <a href={t.paths.home} class="foot-wm" aria-label="castelli"><Wordmark tone="ink" /></a>
+      <p>{f.copy}</p>
+      <a href={other} hreflang={otherLang} lang={otherLang}>{t.otherName}</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .foot { background: var(--c-ink); color: var(--c-raised); --accent: var(--c-fluorescein); border-top: 1px solid var(--rule); }
+  .foot-in { display: grid; gap: 56px; padding-block: var(--section) 40px; }
+  .foot-main { display: grid; gap: 16px; }
+  .foot-lead { color: #B9B6AE; max-width: 44ch; }
+  .foot-mail { justify-self: start; margin-top: 12px; font-family: var(--font-display); font-weight: 650; font-size: clamp(30px, 5.4vw, 72px); line-height: 1; letter-spacing: -0.03em; text-decoration: none; border-bottom: 3px solid var(--c-fluorescein); padding-bottom: 6px; overflow-wrap: anywhere; transition: color 180ms var(--ease); }
+  .foot-mail:hover { color: var(--c-fluorescein); }
+  .foot-links { list-style: none; display: grid; gap: 0; border-top: 1px solid #3A3833; }
+  .foot-links li { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 14px 0; border-bottom: 1px solid #3A3833; }
+  .foot-links a { display: inline-flex; gap: 10px; align-items: center; min-height: 32px; font-weight: 600; text-decoration: none; }
+  .foot-links a:hover { color: var(--c-fluorescein); }
+  .foot-links span { color: #B9B6AE; }
+  .foot-base { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; font-size: 14px; color: #B9B6AE; }
+  .foot-base p { flex: 1; min-width: 220px; }
+  .foot-wm { font-size: 28px; color: var(--c-raised); text-decoration: none; }
+  .foot-base a:not(.foot-wm) { min-height: 44px; display: inline-flex; align-items: center; }
+  @media (min-width: 900px) {
+    .foot-in { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: end; }
+    .foot-base { grid-column: 1 / -1; }
+  }
+</style>

@@ -1,18 +1,80 @@
 ---
+// The front page: who, what now, and the work, all starting in the first viewport.
+import { getCollection } from 'astro:content';
 import Page from '../layouts/Page.astro';
-import Film from '../components/Film.astro';
-import Work from '../components/Work.astro';
-import Research from '../components/Research.astro';
-import Proof from '../components/Proof.astro';
-import Contact from '../components/Contact.astro';
+import WorkIndex from '../components/WorkIndex.astro';
+import Story from '../components/Story.astro';
+import Arrow from '../components/Arrow.astro';
 import type { Dict } from '../i18n/en';
 interface Props { t: Dict }
 const { t } = Astro.props;
+const h = t.hero;
+const entries = (await getCollection('work', (e) => e.data.lang === t.lang)).sort((a, b) => a.data.order - b.data.order);
 ---
-<Page t={t} page="home" dark>
-  <Film t={t} />
-  <Work t={t} />
-  <Research t={t} />
-  <Proof t={t} />
-  <Contact t={t} />
+<Page t={t} page="home">
+  <section class="band hero" aria-labelledby="hero-h">
+    <div class="wrap hero-in">
+      <div class="hero-main">
+        <h1 class="display hero-name" id="hero-h">
+          <span>{h.name}</span><span class="hero-stain" aria-hidden="true" data-stain-load>{h.name}</span>
+        </h1>
+        <p class="lead hero-line">{h.line}</p>
+        <div class="hero-act">
+          <a class="btn" href="#work">{h.cta} <Arrow /></a>
+          <a class="link" href={t.footer.email.href}>{t.footer.email.value}</a>
+        </div>
+      </div>
+      <section class="hero-now" aria-labelledby="now-h">
+        <h2 class="hero-now-h" id="now-h">{h.nowTitle}</h2>
+        <ul>
+          {h.now.map((n) => <li><span>{n.t}</span><span class="hero-now-s">{n.s}</span></li>)}
+        </ul>
+      </section>
+    </div>
+  </section>
+
+  <Story t={t} />
+
+  <section class="index" id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <header class="index-head">
+        <h2 class="h2" id="work-h">{t.index.title}</h2>
+        <p class="index-lead">{t.index.lead}</p>
+      </header>
+      <WorkIndex t={t} entries={entries} />
+    </div>
+  </section>
+
+  <section class="teaser" aria-label={t.ui.onePager}>
+    <div class="wrap teaser-in">
+      <p class="lead">{t.teaser.text}</p>
+      <a class="btn" href={t.paths.about}>{t.teaser.link} <Arrow /></a>
+    </div>
+  </section>
 </Page>
+
+<style>
+  .hero-in { display: grid; gap: 48px; padding-block: clamp(36px, 6vw, 88px) clamp(48px, 6vw, 80px); }
+  .hero-main { display: grid; gap: 28px; align-content: end; }
+  .hero-name { position: relative; max-width: 9ch; }
+  .hero-stain { position: absolute; inset: 0; color: var(--c-fluorescein); clip-path: inset(0 100% 0 0); pointer-events: none; }
+  .hero-line { max-width: 30ch; color: var(--on-band); }
+  .hero-act { display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; }
+  .hero-act .link { color: var(--on-band); }
+  .hero-now { align-self: end; border-top: 1px solid rgba(255, 255, 255, 0.4); }
+  .hero-now-h { font-size: 14px; font-weight: 600; color: var(--on-band-muted); padding-block: 12px 4px; }
+  .hero-now ul { list-style: none; }
+  .hero-now li { display: flex; justify-content: space-between; gap: 6px 20px; flex-wrap: wrap; padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.22); font-size: 16px; }
+  .hero-now-s { color: var(--on-band-muted); white-space: nowrap; }
+  @media (min-width: 1000px) {
+    .hero-in { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: clamp(48px, 6vw, 112px); }
+  }
+
+  .index { padding-block: clamp(40px, 5vw, 72px) var(--section); }
+  .index-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px 32px; flex-wrap: wrap; margin-bottom: 24px; }
+  .index-lead { color: var(--muted); }
+
+  .teaser { border-top: 1px solid var(--rule); }
+  .teaser-in { display: grid; gap: 24px; justify-items: start; padding-block: var(--section); }
+  .teaser .lead { font-family: var(--font-display); font-weight: 600; font-size: var(--t-h3); line-height: 1.2; letter-spacing: -0.02em; max-width: 34ch; }
+</style>

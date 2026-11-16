@@ -1,107 +1,152 @@
 ---
-// The one pager, set as a curriculum vitae in the journal's style.
+// The One Pager: a CV that reads on screen and prints on one sheet.
 import Page from '../layouts/Page.astro';
-import Contact from '../components/Contact.astro';
-import Photo from '../components/Photo.astro';
+import Arrow from '../components/Arrow.astro';
+import Poli from '../components/axes/Poli.astro';
+import Icb from '../components/axes/Icb.astro';
+import Embedded from '../components/axes/Embedded.astro';
+import Edge from '../components/axes/Edge.astro';
+import Health from '../components/axes/Health.astro';
 import { findPhoto } from '../lib/photo';
 import type { Dict } from '../i18n/en';
 interface Props { t: Dict }
 const { t } = Astro.props;
 const a = t.about;
 const s = a.sections;
-const hasPortrait = findPhoto('portrait') !== null;
-import Arrow from '../components/Arrow.astro';
+const portrait = findPhoto('portrait');
+const drawings = { poli: Poli, icb: Icb, embedded: Embedded, edge: Edge, health: Health } as const;
 ---
 <Page t={t} page="about">
-  <article class="cv wrap">
-    <a class="link-quiet cv-back" href={t.paths.home}><Arrow dir="left" /> {a.back}</a>
-
-    <header class="cv-head">
-      <div>
+  <header class="band cv-hd">
+    <div class="wrap cv-hd-in">
+      <div class="cv-id">
+        <a class="link cv-back" href={t.paths.home}><Arrow dir="left" /> {a.back}</a>
         <h1 class="display">{a.title}</h1>
-        <p class="cv-sub">{a.subtitle}</p>
+        <p class="lead cv-sub">{a.subtitle}</p>
       </div>
-      <figure class="cv-fig">
-        <Photo name="portrait" alt={a.portraitAlt} fallback="mark" class="cv-plate" eager />
-        <figcaption class="figcap"><b>{t.ui.fig} 1.</b> {hasPortrait ? a.portraitCaption : a.figCaption}</figcaption>
-      </figure>
-    </header>
-
-    <div class="cv-cols">
-      <section class="cv-sec" aria-labelledby="cv-about">
-        <h2 class="cv-h" id="cv-about">{s.description}</h2>
-        <div class="cv-prose">{a.description.map((p) => <p>{p}</p>)}</div>
-      </section>
-      <section class="cv-sec" aria-labelledby="cv-do">
-        <h2 class="cv-h" id="cv-do">{s.features}</h2>
-        <ul class="cv-list">{a.features.map((f) => <li>{f}</li>)}</ul>
-      </section>
+      {portrait && (
+        <figure class="cv-portrait">
+          <img src={portrait} alt={a.portraitAlt} width="900" height="862" fetchpriority="high" decoding="async" />
+        </figure>
+      )}
     </div>
+  </header>
 
-    <section class="cv-sec" aria-labelledby="cv-op">
-      <h2 class="cv-h" id="cv-op">{s.operating}</h2>
-      <div class="table-scroll" tabindex="0" role="region" aria-labelledby="cv-op">
-        <table class="jtable cv-table">
-          <caption><b>{t.ui.table} 1.</b> {a.opCaption}</caption>
-          <thead><tr><th scope="col">{a.opHead[0]}</th><th scope="col">{a.opHead[1]}</th><th scope="col">{a.opHead[2]}</th></tr></thead>
-          <tbody>
-            {a.operating.map((r) => <tr><td>{r.p}</td><td>{r.v}</td><td class="note">{r.c}</td></tr>)}
-          </tbody>
-        </table>
-      </div>
+  <div class="wrap cv">
+    <section class="cv-sec cv-summary" aria-labelledby="cv-sum">
+      <h2 class="cv-h" id="cv-sum">{s.summary}</h2>
+      <div class="cv-prose">{a.summary.map((p) => <p>{p}</p>)}</div>
     </section>
 
-    <div class="cv-cols">
-      <section class="cv-sec" aria-labelledby="cv-pub">
-        <h2 class="cv-h" id="cv-pub">{s.publications}</h2>
-        <ol class="cv-refs">
-          {a.publications.map((p) => (
-            <li><span>{p.text}</span> <span class:list={['cv-status', { 'cv-status--pending': p.pending }]}>{p.status}</span></li>
-          ))}
-        </ol>
-      </section>
-      <section class="cv-sec" aria-labelledby="cv-hist">
-        <h2 class="cv-h" id="cv-hist">{s.history}</h2>
-        <ol class="cv-chron">
-          {a.history.map((r) => <li><span class="cv-date">{r.d}</span><span>{r.t}</span></li>)}
-        </ol>
-      </section>
-    </div>
-  </article>
+    <section class="cv-sec" aria-labelledby="cv-res">
+      <h2 class="cv-h" id="cv-res">{s.research}</h2>
+      <ul class="cv-rows">{a.research.map((r) => <li><span>{r.t}</span><span class="cv-when">{r.s}</span></li>)}</ul>
+    </section>
 
-  <Contact t={t} onePager={false} />
+    <section class="cv-sec" aria-labelledby="cv-exp">
+      <h2 class="cv-h" id="cv-exp">{s.experience}</h2>
+      <ol class="cv-chron">{a.experience.map((r) => <li><span class="cv-date">{r.d}</span><span>{r.t}</span></li>)}</ol>
+    </section>
+
+    <section class="cv-sec" aria-labelledby="cv-edu">
+      <h2 class="cv-h" id="cv-edu">{s.education}</h2>
+      <ol class="cv-chron">{a.education.map((r) => <li><span class="cv-date">{r.d}</span><span>{r.t}</span></li>)}</ol>
+    </section>
+
+    <section class="cv-sec" aria-labelledby="cv-sk">
+      <h2 class="cv-h" id="cv-sk">{s.skills}</h2>
+      <dl class="cv-skills">{a.skills.map((r) => <div><dt>{r.p}</dt><dd>{r.v}</dd></div>)}</dl>
+    </section>
+  </div>
+
+  <section class="cv-draw" aria-labelledby="cv-dr">
+    <div class="wrap">
+      <h2 class="cv-h" id="cv-dr">{s.drawings}</h2>
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+          <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="7" stroke="var(--draw-soft)" stroke-width="1.2" />
+          </pattern>
+        </defs>
+      </svg>
+      <ul class="axes">
+        {a.axes.map((ax) => {
+          const Drawing = drawings[ax.id as keyof typeof drawings];
+          return (
+            <li class={`ax ax--${ax.id}`}>
+              <div class="ax-draw" role="img" aria-label={ax.alt}><Drawing /></div>
+              <p><b>{ax.name}</b> <span>{ax.sub}</span></p>
+            </li>
+          );
+        })}
+      </ul>
+      <p class="cap">{a.drawingsCaption}</p>
+    </div>
+  </section>
 </Page>
 
-<script>
-  import '../scripts/ticker.ts';
-</script>
-
 <style>
-  .cv { display: grid; gap: clamp(64px, 8vw, 112px); padding-block: clamp(32px, 4vw, 56px) var(--section); }
-  .cv-back { color: var(--muted); justify-self: start; margin-bottom: calc(clamp(64px, 8vw, 112px) * -0.6); }
-  .cv-back:hover { color: var(--fg); }
-  .cv-head { display: grid; gap: 40px; align-items: end; padding-bottom: clamp(32px, 4vw, 48px); border-bottom: 1.5px solid var(--c-tinta); }
-  .cv-sub { margin-top: 22px; font-style: italic; font-size: clamp(20px, 1.8vw, 24px); line-height: 1.35; color: var(--muted); max-width: 32ch; }
-  .cv-fig { width: min(100%, 340px); }
-  .cv-fig :global(.cv-plate) { aspect-ratio: 4 / 5; width: 100%; height: auto; }
-  /* the portrait is a cutout: show it whole, at its own shape, straight on the paper */
-  .cv-fig :global(img.cv-plate) { aspect-ratio: auto; object-fit: contain; filter: none; }
-  .cv-cols { display: grid; gap: clamp(56px, 7vw, 96px); }
-  .cv-sec { display: grid; gap: 24px; align-content: start; min-width: 0; }
-  .cv-h { font-weight: 400; font-size: var(--t-head); line-height: 1.1; letter-spacing: -0.015em; }
-  .cv-prose { display: grid; gap: 1em; max-width: 62ch; }
-  .cv-list { margin: 0; padding: 0 0 0 1.1em; display: grid; gap: 12px; }
-  .cv-list li::marker { color: var(--accent); }
-  .cv-table { min-width: 620px; }
-  .cv-refs { margin: 0; padding-left: 1.6em; display: grid; gap: 14px; }
-  .cv-refs li::marker { font: 500 14px var(--font-sans); color: var(--muted); }
-  .cv-status { font: 500 13px var(--font-sans); color: var(--muted); margin-left: 6px; white-space: nowrap; }
-  .cv-status--pending { font-style: italic; font-family: var(--font-serif); font-weight: 400; font-size: 16px; }
-  .cv-chron { list-style: none; margin: 0; padding: 0; border-top: 1.5px solid var(--c-tinta); }
-  .cv-chron li { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--rule); font-size: 17px; }
-  .cv-date { font: 500 14px/1.9 var(--font-sans); color: var(--accent); font-variant-numeric: lining-nums tabular-nums; white-space: nowrap; }
-  @media (max-width: 479px) { .cv-chron li { grid-template-columns: minmax(0, 1fr); gap: 2px; } }
-  /* the title column never shrinks below its longest word, so the portrait can't slide over it */
-  @media (min-width: 820px) { .cv-head { grid-template-columns: minmax(min-content, 1fr) clamp(220px, 28vw, 340px); } .cv-fig { width: 100%; } }
-  @media (min-width: 1000px) { .cv-cols { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); } }
+  .cv-hd-in { display: grid; gap: 32px; align-items: end; padding-top: clamp(16px, 3vw, 32px); }
+  .cv-id { display: grid; gap: 22px; justify-items: start; padding-bottom: clamp(40px, 5vw, 72px); }
+  .cv-back { color: var(--on-band-muted); text-decoration: none; }
+  .cv-back:hover { color: var(--on-band); }
+  .cv-hd h1 { max-width: 9ch; }
+  .cv-sub { max-width: 40ch; color: var(--on-band); }
+  .cv-portrait { justify-self: center; width: min(100%, 420px); position: relative; }
+  .cv-portrait::after { content: ""; position: absolute; right: 12%; top: 8%; width: 9%; aspect-ratio: 1; background: var(--c-fluorescein); }
+  .cv-portrait img { width: 100%; height: auto; display: block; }
+  @media (min-width: 900px) { .cv-hd-in { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); } .cv-portrait { justify-self: end; } }
+
+  .cv { display: grid; gap: 0; padding-block: clamp(48px, 6vw, 88px) var(--section); }
+  .cv-sec { display: grid; gap: 16px; padding-block: 36px; border-top: 1px solid var(--rule-strong); }
+  .cv-sec:first-child { border-top: 0; padding-top: 0; }
+  .cv-h { font-family: var(--font-display); font-weight: 650; font-size: var(--t-h3); line-height: 1.15; letter-spacing: -0.02em; }
+  .cv-prose { display: grid; gap: 0.9em; max-width: 66ch; font-size: 18px; line-height: 1.6; }
+  .cv-prose p:first-child { font-size: var(--t-lead); line-height: 1.45; }
+  .cv-rows, .cv-chron { list-style: none; }
+  .cv-rows li, .cv-chron li { display: grid; gap: 4px 24px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+  .cv-rows li:last-child, .cv-chron li:last-child { border-bottom: 0; }
+  .cv-when, .cv-date { font-size: 14px; color: var(--muted); white-space: nowrap; }
+  .cv-date { font-weight: 600; color: var(--accent); }
+  .cv-skills { display: grid; }
+  .cv-skills div { display: grid; gap: 2px 24px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+  .cv-skills div:last-child { border-bottom: 0; }
+  .cv-skills dt { font-weight: 600; }
+  .cv-skills dd { color: var(--muted); }
+  @media (min-width: 760px) {
+    .cv-sec { grid-template-columns: 14rem minmax(0, 1fr); gap: 32px; }
+    .cv-rows li { grid-template-columns: minmax(0, 1fr) auto; }
+    .cv-chron li { grid-template-columns: 8rem minmax(0, 1fr); }
+    .cv-skills div { grid-template-columns: 12rem minmax(0, 1fr); }
+  }
+
+  .cv-draw { border-top: 1px solid var(--rule); padding-block: var(--section); }
+  .cv-draw .wrap { display: grid; gap: 28px; }
+  .axes { list-style: none; display: grid; gap: 40px 32px; grid-template-columns: minmax(0, 1fr); }
+  .ax { display: grid; gap: 12px; align-content: start; }
+  .ax-draw :global(svg) { width: 100%; height: auto; overflow: visible; }
+  .ax p { font-size: 15px; }
+  .ax p span { color: var(--muted); }
+  /* static views of the drawings: no controls, the default state only */
+  .axes :global(.ax-view--b), .axes :global(.x-ghost), .axes :global(.x-proj), .axes :global(.h-pulse), .axes :global(.e-quant) { display: none; }
+  .axes :global(.h-vent) { fill: var(--draw); opacity: 0; }
+  .axes :global(.h-tri) { fill: var(--bg); stroke: var(--draw); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+  @media (min-width: 700px) { .axes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1100px) {
+    .axes { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .ax--poli, .ax--icb { grid-column: span 3; }
+    .ax--embedded, .ax--edge, .ax--health { grid-column: span 2; }
+  }
+
+  @media print {
+    :global(.hd), :global(.foot), :global(.skip), .cv-back, .cv-draw { display: none !important; }
+    :global(body) { background: #fff; color: #000; font-size: 11pt; }
+    .band { background: #fff; color: #000; }
+    .cv-hd-in { grid-template-columns: 1fr 140px; padding: 0; }
+    .cv-sub { color: #000; }
+    .cv-portrait { width: 140px; }
+    .cv-portrait::after { display: none; }
+    .cv { padding: 0; }
+    .cv-sec { padding-block: 10pt; break-inside: avoid; }
+  }
 </style>

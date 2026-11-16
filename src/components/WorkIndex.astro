@@ -1,0 +1,76 @@
+---
+// The work index: one row per project, each leading to its page and from there
+// to the live site. On hover or focus the row takes the ultramarine stain.
+import type { CollectionEntry } from 'astro:content';
+import Arrow from './Arrow.astro';
+import type { Dict } from '../i18n/en';
+interface Props { t: Dict; entries: CollectionEntry<'work'>[] }
+const { t, entries } = Astro.props;
+const base = t.lang === 'en' ? '/work/' : '/pt/work/';
+const live = (s: string) => /live|shipped|no ar|entregue/i.test(s);
+---
+<ol class="wi">
+  {entries.map((e) => {
+    const d = e.data;
+    const status = d.status.split('·')[0].trim();
+    return (
+      <li>
+        <a class="wi-row" href={`${base}${d.slug}/`}>
+          <span class="wi-thumb">
+            <img src={`${d.image}-800.webp`} alt="" width="800" height="500" loading="lazy" decoding="async" />
+          </span>
+          <span class="wi-main">
+            <span class="wi-t h3" style={`view-transition-name: title-${d.slug}`}>{d.title}</span>
+            <span class="wi-s">{d.summary}</span>
+          </span>
+          <span class="wi-meta">
+            <span class="wi-dom">{t.domains[d.domain]}</span>
+            <span class="wi-year">{d.year}</span>
+            <span class="wi-status"><i class:list={['wi-sq', { 'wi-sq--open': !live(d.status) }]} aria-hidden="true"></i>{status}</span>
+          </span>
+          <span class="wi-go" aria-hidden="true"><Arrow /></span>
+        </a>
+      </li>
+    );
+  })}
+</ol>
+
+<style>
+  .wi { list-style: none; border-top: 1px solid var(--rule-strong); }
+  .wi li { border-bottom: 1px solid var(--rule); }
+  .wi-row {
+    position: relative; isolation: isolate; display: grid; gap: 16px 20px; align-items: center;
+    grid-template-columns: 96px minmax(0, 1fr) auto; padding: 18px 0; text-decoration: none;
+    transition: color 320ms var(--ease);
+  }
+  /* the stain: a solid ultramarine field that wipes across the row */
+  .wi-row::before {
+    content: ""; position: absolute; inset: 0 -16px; z-index: -1; background: var(--c-ultramarine);
+    clip-path: inset(0 100% 0 0); transition: clip-path 520ms var(--ease);
+  }
+  .wi-row:hover, .wi-row:focus-visible { color: var(--c-white); }
+  .wi-row:hover::before, .wi-row:focus-visible::before { clip-path: inset(0 0 0 0); }
+  .wi-row:focus-visible { outline-offset: 6px; }
+  .wi-thumb { grid-row: span 2; align-self: start; display: block; aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface); outline: 1px solid var(--rule); outline-offset: -1px; }
+  .wi-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+  .wi-main { display: grid; gap: 6px; min-width: 0; }
+  .wi-s { font-size: 16px; line-height: 1.45; color: var(--muted); max-width: 52ch; transition: color 320ms var(--ease); }
+  .wi-row:hover .wi-s, .wi-row:focus-visible .wi-s { color: var(--on-band-muted); }
+  .wi-meta { grid-column: 2 / -1; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; }
+  .wi-dom { font-weight: 600; }
+  .wi-status { display: inline-flex; align-items: center; gap: 8px; }
+  .wi-sq { width: 9px; height: 9px; background: var(--accent); display: inline-block; }
+  .wi-sq--open { background: transparent; box-shadow: inset 0 0 0 1.5px currentColor; }
+  .wi-row:hover .wi-sq:not(.wi-sq--open), .wi-row:focus-visible .wi-sq:not(.wi-sq--open) { background: var(--c-fluorescein); }
+  .wi-go { display: none; }
+
+  @media (min-width: 760px) {
+    .wi-row { grid-template-columns: 168px minmax(0, 1fr) 15rem 28px; gap: 28px; padding: 22px 0; }
+    .wi-thumb { grid-row: auto; }
+    .wi-meta { grid-column: auto; display: grid; gap: 4px; align-content: center; }
+    .wi-go { display: block; justify-self: end; }
+    .wi-go :global(.arrow) { width: 20px; height: 20px; }
+    .wi-row:hover .wi-go :global(.arrow) { transform: translateX(4px); }
+  }
+  @media (min-width: 1100px) { .wi-row { grid-template-columns: 220px minmax(0, 1fr) 16rem 28px; } }
+</style>

@@ -19,7 +19,7 @@ Both arrive cold, usually from a link (LinkedIn, email signature, GitHub profile
 
 Personal portfolio of Vinicius Castelli: Computer Engineering student at Escola Politécnica (Poli-USP, 2026 → 2030) and undergraduate researcher at LEEP, ICB-USP, where he leads the modernisation of ROTIFER, the lab's open-source comparative-genomics toolkit. Direction: deep tech from the lab into industry and healthcare (machine learning, embedded systems, research software).
 
-Success: a visitor opens a project page (Duffing oscillator, vildagliptin repurposing study). Contact (email, LinkedIn, GitHub) and the One Pager (About/CV) are secondary.
+Success: a visitor opens a project page (ROTIFER, iGEM USP wiki and SHARP, AccessPlus, Mechanics, Digital hardware) and follows it to the live site. Contact (email, LinkedIn, GitHub) and the One Pager (About/CV) are secondary.
 
 ## Positioning
 
@@ -36,17 +36,20 @@ A serious engineer, builder and researcher at once, spanning biology, open-sourc
 - Pages: landing, One Pager (`/about/`, `/pt/sobre/`), one page per project (`/work/<slug>/`).
 - Must work without JavaScript; content visible by default.
 - Self-hosted fonts in `public/fonts/`; no third-party font or script hosts.
-- GSAP (with ScrollTrigger, SplitText, DrawSVG) and three.js 0.186.1 are dependencies; the WebGL film loads lazily and degrades to static content without WebGL, with reduced motion or with data saver.
+- No animation libraries: the only scripts are the stain (Web Animations API), the menu and the reading progress bar. Cross-document View Transitions join pages.
 - Text on the site is reviewed with the humanizer skill; facts are not altered without the author's approval.
 - Commits carry no co-author lines.
 
 ## Brand Commitments
 
-- Monogram "VC" with a dimension-line mark under it (`public/brand/monograma*.svg`, `src/components/Monogram.astro`).
-- Palette from the brand kit: papel `#F3F1EA`, papel elevado `#FBFAF6`, tinta `#16181D`, grafite `#55575C`, linha `#CFCBBF`, Coomassie `#24338F`, Coomassie claro `#DCE0F5`, marca-texto `#F2D43B`.
-- Type from the brand kit: Source Serif 4 (400, 400 italic, 600), IBM Plex Sans (400/500/600), IBM Plex Mono (400/500). Binding.
-- The blueprint / cyanotype idea is the author's, to be used selectively, not as wallpaper.
-- Five hand-drawn axis drawings (Poli, ICB, embedded board, edge AI, heart pump) in `src/components/axes/` are kept.
+Source of truth: `docs/brand-guidelines.md` (v1.0, 2026-11-16).
+
+- Wordmark: lowercase "castelli" in Funnel Display 700 with a square i-dot (`public/brand/castelli*.svg`, favicon `public/favicon.svg`). No symbol.
+- Main pair: ultramarine `#2626C9` (brand) and fluorescein `#C8E64A` (signal). Arsenal pair for health content: blood `#8A1C2B` and plasma `#EBC94A`, never mixed with the main pair.
+- Neutrals: plaster `#E6E4DE`, raised `#F2F1ED`, ink `#141312`, ink 2 `#55524C`, rule `#C9C6BE`.
+- Type: Funnel Display and Funnel Sans only (numbers included, tabular figures). Binding.
+- Motion: the stain (clip-path wipe of solid colour) plus View Transitions. No WebGL, grain or letter-by-letter type.
+- The five hand-drawn axis drawings (Poli, ICB, embedded board, edge AI, heart pump) in `src/components/axes/` are kept, on the One Pager only, in ultramarine line.
 
 ## Evidence on Hand
 
@@ -54,11 +57,12 @@ A serious engineer, builder and researcher at once, spanning biology, open-sourc
 - Poster, CEPID B3 Annual Scientific Meeting 2026 (abstract published).
 - iGEM USP 2026 team wiki, lead developer.
 - Vildagliptin for skin fibrosis: Cortellis Drug Repositioning Hackathon 2026-08, co-led analysis, live project page and source.
-- Duffing oscillator, live in-browser simulation.
+- Mechanics tools, live: wrench, momentfield, Duffing, carousel, hypocycloid (castlelli.github.io/physics/). Digital hardware, live: parameterized ALU and Verilog cosine (castlelli.github.io/electronics/).
+- AccessPlus: accessplus.com.br.
 - VivaPay: 5,000+ users, 10,000 transactions over 3 days. NxCoop CRM: 10,000+ users (as intern). AccessPlus: 5,000+ opportunities, led a team of 8.
-- Real figure data for the vildagliptin study, copied with source notes into `src/data/vildagliptin/` from castlelli/vildagliptin-for-sclerosis (values read from published figures, approximate).
+- VivaPay and the vildagliptin study are off the site for now (author's decision, 2026-11-16).
 
-Pending from the author: a portrait (`public/photos/portrait.jpg`) and 2–3 bench photos (`public/photos/bench-1.jpg` …); slots fall back to the monogram or collapse until then. The "three questions" copy is a draft built only from facts on the site; the author will write their own motivation.
+The portrait cutout (`public/photos/portrait.webp`) appears on the One Pager only. Work pages show screenshots of the live sites in `public/work/<slug>/`.
 
 Absent, never to be fabricated: published papers, awards, testimonials, employer logos, motivations the author has not stated.
 

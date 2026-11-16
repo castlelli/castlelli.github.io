@@ -4,6 +4,7 @@ import { z } from 'astro/zod';
 
 // One Markdown file per project and language. Files starting with "_" are
 // ignored, so _template.md documents the format without being published.
+// Every project links out to its own live site; the portfolio never hosts the tool.
 const work = defineCollection({
   // Keyed by filename: <slug>.en.md and <slug>.pt.md share a slug, so the slug cannot be the id.
   loader: glob({ pattern: '**/[^_]*.md', base: './src/content/work', generateId: ({ entry }) => entry.replace(/\.md$/, '') }),
@@ -11,19 +12,30 @@ const work = defineCollection({
     lang: z.enum(['en', 'pt']),
     slug: z.string(),
     order: z.number().default(100),
+    kind: z.enum(['project', 'collection']).default('project'),
+    domain: z.enum(['research-software', 'synthetic-biology', 'product', 'mechanics', 'digital-hardware']),
+    year: z.string(),
     title: z.string(),
     summary: z.string(),
     role: z.string(),
     dates: z.string(),
+    /** honest status, in words: live, shipped, in progress, in preparation */
     status: z.string(),
-    pending: z.boolean().default(false),
-    /** the figure drawn for the project; projects without one show the author's mark */
-    figure: z.enum(['phase', 'paga']).optional(),
-    /** methods and tools, listed on the project page */
+    /** the project's own live site; the primary action on its page */
+    site: z.object({ label: z.string(), href: z.string().url() }),
+    /** a screenshot of the live site in public/work/<slug>/, without the -800/-1600 suffix */
+    image: z.string(),
+    imageAlt: z.string(),
     stack: z.array(z.string()).max(12).default([]),
-    /** up to 3 key numbers with units */
-    dims: z.array(z.object({ label: z.string(), value: z.string(), unit: z.string() })).max(3).default([]),
     links: z.array(z.object({ label: z.string(), href: z.string().url() })).default([]),
+    /** tools inside a collection, each with its own live link */
+    items: z.array(z.object({
+      title: z.string(),
+      summary: z.string(),
+      href: z.string().url(),
+      image: z.string().optional(),
+      imageAlt: z.string().optional(),
+    })).default([]),
   }),
 });
 
