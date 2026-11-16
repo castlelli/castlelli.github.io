@@ -36,6 +36,7 @@ export const en = {
     product: 'Product',
     mechanics: 'Mechanics',
     'digital-hardware': 'Digital hardware',
+    'image-processing': 'Image processing',
   },
   hero: {
     name: 'Vinicius Castelli',

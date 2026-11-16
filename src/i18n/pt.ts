@@ -38,6 +38,7 @@ export const pt: Dict = {
     product: 'Produto',
     mechanics: 'Mecânica',
     'digital-hardware': 'Hardware digital',
+    'image-processing': 'Processamento de imagens',
   },
   hero: {
     name: 'Vinicius Castelli',

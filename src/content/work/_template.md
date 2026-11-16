@@ -4,7 +4,7 @@ lang: en
 slug: example
 order: 10
 kind: project            # or collection, with items below
-domain: research-software # research-software | synthetic-biology | product | mechanics | digital-hardware
+domain: research-software # research-software | synthetic-biology | product | mechanics | digital-hardware | image-processing
 year: "2026"
 title: Project name
 summary: One sentence. What it is and what I did.

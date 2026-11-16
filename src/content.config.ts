@@ -13,7 +13,7 @@ const work = defineCollection({
     slug: z.string(),
     order: z.number().default(100),
     kind: z.enum(['project', 'collection']).default('project'),
-    domain: z.enum(['research-software', 'synthetic-biology', 'product', 'mechanics', 'digital-hardware']),
+    domain: z.enum(['research-software', 'synthetic-biology', 'product', 'mechanics', 'digital-hardware', 'image-processing']),
     year: z.string(),
     title: z.string(),
     summary: z.string(),
