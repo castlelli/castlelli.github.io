@@ -19,7 +19,7 @@ Both arrive cold, usually from a link (LinkedIn, email signature, GitHub profile
 
 Personal portfolio of Vinicius Castelli: Computer Engineering student at Escola Politécnica (Poli-USP, 2026 → 2030) and undergraduate researcher at LEEP, ICB-USP, where he leads the modernisation of ROTIFER, the lab's open-source comparative-genomics toolkit. Direction: deep tech from the lab into industry and healthcare (machine learning, embedded systems, research software).
 
-Success: a visitor opens a project page (ROTIFER, iGEM USP wiki and SHARP, AccessPlus, Mechanics, Digital hardware) and follows it to the live site. Contact (email, LinkedIn, GitHub) and the One Pager (About/CV) are secondary.
+Success: a visitor opens a project page (ROTIFER, iGEM USP wiki and SHARP, AccessPlus, VivaPay, Mechanics, Digital hardware) and follows it to the live site. Contact (email, LinkedIn, GitHub) and the One Pager (About/CV) are secondary.
 
 ## Positioning
 
@@ -60,7 +60,7 @@ Source of truth: `docs/brand-guidelines.md` (v1.0, 2026-11-16).
 - Mechanics tools, live: wrench, momentfield, Duffing, carousel, hypocycloid (castlelli.github.io/physics/). Digital hardware, live: parameterized ALU and Verilog cosine (castlelli.github.io/electronics/).
 - AccessPlus: accessplus.com.br.
 - VivaPay: 5,000+ users, 10,000 transactions over 3 days. NxCoop CRM: 10,000+ users (as intern). AccessPlus: 5,000+ opportunities, led a team of 8.
-- VivaPay and the vildagliptin study are off the site for now (author's decision, 2026-11-16).
+- VivaPay is back on the site (author's decision, 2026-11-17), with its own showcase at castlelli.github.io/vivapay: R$10K+ processed, 5,000+ people, 10,000 transactions, 40 booths, 3 days, a team of 7 led by the author. The vildagliptin study stays off the site for now.
 
 The portrait cutout (`public/photos/portrait.webp`) appears on the One Pager only. Work pages show screenshots of the live sites in `public/work/<slug>/`.
 
