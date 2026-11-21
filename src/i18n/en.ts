@@ -43,7 +43,7 @@ export const en = {
     line: 'I build across genomics software, embedded hardware and health.',
     nowTitle: 'Now',
     now: [
-      { t: 'Engineering Lead at the Protein Structural Evolution Lab, ICB-USP/CEPID B3', s: 'In progress' },
+      { t: 'Engineering Lead at the Protein Structure and Evolution Lab, ICB-USP/CEPID B3', s: 'In progress' },
       { t: 'Computer Engineering major at São Paulo University', s: '2026 - 2030' },    ],
     cta: 'See the work',
   },
