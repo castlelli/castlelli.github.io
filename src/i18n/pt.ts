@@ -126,7 +126,7 @@ export const pt: Dict = {
       { d: '2022 - 2024', t: 'Olimpíadas: top 10% na OBECON (economia).' },
     ],
     skills: [
-      { p: 'Idiomas', v: 'Português (nativo), inglês (fluente), espanhol (fluente)' },
+      { p: 'Idiomas', v: 'Português (nativo), Inglês (fluente), Espanhol (fluente), Francês (básico), italiano (básico)' },
       { p: 'Código', v: 'Python (principal), C/C++, Rust, TypeScript, Java, C#, JavaScript e Frameworks' },
       { p: 'IA', v: 'Agentes de IA, Harness & Context Engineering, LLMs (Claude Code, MCP), ML aplicado' },
       { p: 'Hardware', v: 'HDL, Verilog, Sistemas Embarcados' },

@@ -123,7 +123,7 @@ export const en = {
       { d: '2022 - 2024', t: 'Olympiads: top 10% at OBECON (economics).' },
     ],
     skills: [
-      { p: 'Spoken', v: 'Portuguese (native), English (fluent), Spanish (fluent)' },
+      { p: 'Spoken', v: 'Portuguese (native), English (fluent), Spanish (fluent), French (Basic), Italian (Basic)' },
       { p: 'Code', v: 'Python (main), C/C++, Rust, TypeScript, Java, C#, JavaScript and Frameworks' },
       { p: 'AI', v: 'AI Agents, Harness & Context Engineering, LLMs (Claude Code, MCP), Applied ML' },
       { p: 'Hardware', v: 'HDL, Verilog, Embedded Systems' },
