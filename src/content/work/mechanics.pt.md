@@ -6,7 +6,7 @@ kind: collection
 domain: mechanics
 year: "2026"
 title: Mecânica
-summary: Cinco laboratórios de mecânica ao vivo, calculados no navegador.
+summary: Cinco laboratórios interativos de mecânica, calculados no navegador.
 role: Autor
 dates: "2026"
 status: No ar

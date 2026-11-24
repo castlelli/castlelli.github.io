@@ -8,7 +8,7 @@ export const pt: Dict = {
   otherName: 'English',
   meta: {
     title: 'Vinicius Castelli',
-    description: 'Vinicius Castelli trabalha entre software de genômica, hardware embarcado e saúde. Engenharia de Computação na Poli-USP; pesquisa no LEEP, ICB-USP.',
+    description: 'Vinicius Castelli atua em software de genômica, hardware embarcado e saúde. Engenharia de Computação na Poli-USP; pesquisa no LEEP, ICB-USP.',
     aboutTitle: 'One Pager · Vinicius Castelli',
     aboutDescription: 'Vinicius Castelli numa página: pesquisa, experiência, formação e ferramentas.',
   },
@@ -24,7 +24,7 @@ export const pt: Dict = {
     visit: 'Visitar',
     prev: 'Anterior',
     next: 'Próximo',
-    role: 'Papel',
+    role: 'Função',
     dates: 'Datas',
     status: 'Status',
     stack: 'Feito com',
@@ -42,11 +42,11 @@ export const pt: Dict = {
   },
   hero: {
     name: 'Vinicius Castelli',
-    line: 'Trabalho entre software de genômica, hardware embarcado e saúde.',
+    line: 'Atuo em software de genômica, hardware embarcado e saúde.',
     nowTitle: 'Agora',
     now: [
-      { t: 'Líder da Engenharia no Laboratório de Estrutura e Evolução de Proteínas, ICB-USP/CEPID B3', s: 'Em andamento' },
-      { t: 'Engenharia de Computação na Poli-USP', s: '2026 - 2030' },     
+      { t: 'Líder de Engenharia no Laboratório de Estrutura e Evolução de Proteínas, ICB-USP/CEPID B3', s: 'Em andamento' },
+      { t: 'Engenharia de Computação na Poli-USP', s: '2026 - 2030' },
     ],
     cta: 'Ver os trabalhos',
   },
@@ -55,33 +55,33 @@ export const pt: Dict = {
     of: 'de',
     chapters: [
       {
-        key: 'science', label: 'Ciência', h: 'Rigor é a vantagem.',
-        p: 'Os problemas difíceis continuam abertos: como um genoma codifica função, como um sistema caótico se comporta, como um circuito falha sob carga. Ciência é o jeito de chegar a uma resposta que se sustenta: métodos abertos e números que aguentam uma segunda olhada.',
-        cap: 'Medidas ruidosas assentando sobre um modelo (ilustrativo).',
+        key: 'science', label: 'Ciência', h: 'O rigor é a vantagem.',
+        p: 'Os problemas difíceis continuam abertos: como um genoma codifica funções, como um sistema caótico se comporta, como um circuito falha sob carga. A ciência é o caminho para uma resposta que se sustenta: métodos abertos e números que resistem a um segundo olhar.',
+        cap: 'Medições ruidosas convergindo para um modelo (ilustrativo).',
       },
       {
-        key: 'technology', label: 'Tecnologia', h: 'Construir até o metal.',
-        p: 'Software, modelos e hardware hoje são uma pilha só. Os sistemas que valem a pena rodam onde o dado nasce, em dispositivos pequenos que não precisam contar com a rede. Conhecer cada camada, da porta lógica à interface, é o que os torna confiáveis.',
-        cap: 'Um sinal digital passando por uma porta.',
+        key: 'technology', label: 'Tecnologia', h: 'Vá até o metal.',
+        p: 'Hoje, software, modelos e hardware formam uma pilha só. Os sistemas que valem a pena construir rodam onde os dados nascem, em dispositivos pequenos que não podem contar com a rede. Conhecer cada camada, da porta lógica à interface, é o que os torna confiáveis.',
+        cap: 'Um sinal digital passando por uma porta lógica.',
       },
       {
-        key: 'industry', label: 'Indústria', h: 'Conta quando alguém usa.',
-        p: 'Um resultado que fica no artigo não muda nada. Produtos põem a ciência nas mãos das pessoas, e é na saúde que isso mais importa. O trabalho é levar a pesquisa do laboratório ao mercado com o rigor da academia e a velocidade de uma empresa.',
-        cap: 'Um traçado de batimento cardíaco (ilustrativo).',
+        key: 'industry', label: 'Indústria', h: 'Só conta quando as pessoas usam.',
+        p: 'Um resultado que fica só no artigo não muda nada. Produtos colocam a ciência nas mãos das pessoas, e é na saúde que isso mais importa. O trabalho é levar a pesquisa do laboratório ao mercado com o rigor da academia e a velocidade de uma empresa.',
+        cap: 'Um traçado de batimentos cardíacos (ilustrativo).',
       },
     ],
   },
   index: {
     title: 'Trabalhos',
-    lead: 'O trabalho até aqui, com links para tudo o que está no ar.',
+    lead: 'Os trabalhos até aqui, com links para tudo o que está no ar.',
   },
   teaser: {
     text: 'Meu currículo cabe numa página, do laboratório aos produtos que entreguei.',
     link: 'Ler o One Pager',
   },
   footer: {
-    title: 'Escreva para mim',
-    lead: 'Estou aberto a colaborações de pesquisa e a estágios em tecnologia.',
+    title: 'Fale comigo',
+    lead: 'Estou aberto a colaborações em pesquisa e a estágios em tecnologia.',
     email: { label: 'E-mail', value: 'vcastelli@usp.br', href: 'mailto:vcastelli@usp.br' },
     links: [
       { label: 'LinkedIn', value: 'in/viniciuscastelli', href: 'https://www.linkedin.com/in/viniciuscastelli' },

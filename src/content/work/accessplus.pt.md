@@ -5,7 +5,7 @@ order: 3
 domain: product
 year: "2025"
 title: AccessPlus
-summary: Uma plataforma gratuita de bolsas, intercâmbios e olimpíadas, feita por estudantes de escola pública. Liderei um time de oito pessoas lá.
+summary: Uma plataforma gratuita de bolsas, intercâmbios e olimpíadas, feita por estudantes de escola pública. Liderei um time de oito pessoas no projeto.
 role: Desenvolvedor full-stack, depois Diretor de Inovação e Expansão
 dates: → 2025
 status: No ar

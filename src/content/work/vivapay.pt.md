@@ -5,7 +5,7 @@ order: 7
 domain: product
 year: "2024"
 title: VivaPay
-summary: O sistema de pagamento que substituiu o dinheiro numa feira de 40 estandes, usado por mais de 5.000 pessoas em três dias. Liderei o time de sete.
+summary: O sistema de pagamento que substituiu o dinheiro numa feira de 40 estandes, usado por mais de 5.000 pessoas em três dias. Liderei a equipe de sete pessoas.
 role: Líder de equipe e desenvolvedor
 dates: 2022 → 2024
 status: Entregue · funcionou ao vivo na VivaCTI
