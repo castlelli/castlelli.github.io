@@ -5,7 +5,7 @@ order: 2
 domain: synthetic-biology
 year: "2026"
 title: iGEM USP · wiki e SHARP
-summary: A wiki da equipe e o seu buscador de antibióticos, no iGEM USP 2026.
+summary: A wiki da equipe e o SHARP, seu buscador de antibióticos, no iGEM USP 2026.
 role: Desenvolvedor líder da wiki; equipe de software do SHARP
 dates: "2026"
 status: Entregue · wiki congelada em outubro de 2026
