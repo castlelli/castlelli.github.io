@@ -1,6 +1,6 @@
 ---
 name: Vinicius Castelli
-description: An index-first portfolio on plaster with ultramarine bands, one Funnel family, and a single stain motion. The work leads from the first viewport.
+description: "A single ink page: name, a short bio and links in sentences, with ultramarine and fluorescein details."
 colors:
   plaster: "#E6E4DE"
   raised: "#F2F1ED"
@@ -68,29 +68,12 @@ spacing:
   24: "96px"
   section: "clamp(72px, 9vw, 136px)"
 components:
-  button-primary:
+  page:
     backgroundColor: "{colors.ink}"
     textColor: "{colors.raised}"
-    typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: "0 20px"
-    height: "48px"
-  button-on-brand:
-    backgroundColor: "{colors.fluorescein}"
-    textColor: "{colors.ink}"
-    typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: "0 20px"
-    height: "48px"
-  band:
-    backgroundColor: "{colors.ultramarine}"
-    textColor: "#FFFFFF"
-  footer:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.raised}"
-  work-row-hover:
-    backgroundColor: "{colors.ultramarine}"
-    textColor: "#FFFFFF"
+  link:
+    underline: "{colors.fluorescein}"
+    hover: "{colors.ultramarine-lit}"
 ---
 
 # Design System: Vinicius Castelli
@@ -99,40 +82,19 @@ The brand source of truth is `docs/brand-guidelines.md`. This file records how t
 
 ## Overview
 
-**North star: "The work, stained."** A plaster reading ground with ultramarine bands that own the top of every page. The landing is index-first: name, positioning and the work list share the first viewport, and every project leads to its live site. Motion is one idea, the stain, plus View Transitions between pages.
-
-**Key characteristics:**
-- Committed colour: ultramarine covers the header, the hero and case-page title bands (30 to 60 percent of a page). The footer is ink. Fluorescein appears only as a signal: the i-dot, the primary button on ultramarine, focus on dark grounds.
-- One family: Funnel Display for headlines, Funnel Sans for everything else, numbers included.
-- Real imagery only: screenshots of the live sites, the portrait on the One Pager, and the author's axis drawings.
-- Zero radius, hairlines, no cards, no eyebrows, no section numbers, no stat tiles.
+The site is one page in English (`/`) and Portuguese (`/pt/`): the wordmark, the name, a short bio, and three sentences that carry the links (LinkedIn and GitHub, the Substack, email). Copy lives in `src/i18n/en.ts` and `src/i18n/pt.ts`; the page is `src/views/Landing.astro`.
 
 ## Colors
 
-- **Ultramarine** is the brand ground for bands; white text on it is 9.53 : 1. On plaster it is link and figure colour (7.50 : 1).
-- **Fluorescein** is the signal, only on ultramarine or ink, always with ink text on it.
-- **Blood and plasma** are reserved for health-specific content and never share a composition with ultramarine and fluorescein.
-- **Plaster, raised, ink, ink 2, rule** are the neutrals.
-
-**Named rules:**
-- **The Ground Rule.** Fluorescein and plasma never sit on plaster.
-- **The Word Rule.** Status always has a word; colour never carries meaning alone.
+- **Ink** is the ground for the whole page; text is raised, secondary text `#B9B6AE`, hairlines `#3A3833`.
+- **Ultramarine** marks the page: a 6 px strip across the top and a square before each link sentence.
+- **Fluorescein** is the signal: the wordmark's i-dot, link underlines, focus rings and selection.
+- **Ultramarine lit** (`#9C9CFF`) is the hover colour for links on ink.
 
 ## Typography
 
-- Display 700, −0.04 em, leading 0.92: the name in the hero.
-- h1 and h2 in Funnel Display, from 600 to 700.
-- Body in Funnel Sans, 17 px with 1.55 leading, 62 to 70 ch measure. Tabular figures everywhere.
-
-## Layout
-
-12 columns, 1280 px max width, side gutter at least 16 px (72 px from 900 px wide). The landing hero is sized to its content, never 100vh. Work rows run the full width, with title, line, domain, year and status.
+Funnel Display for the name and the link sentences, Funnel Sans for everything else. Tabular figures everywhere.
 
 ## Motion
 
-- **The stain:** a clip-path wipe of a solid ultramarine (or white on bands) copy of the text, using `cubic-bezier(.16,1,.3,1)`.
-  - On load, on the hero name: in, then out, 1.5 s, once.
-  - On work rows: on hover or focus, the row ground becomes ultramarine, 520 ms.
-- **The story ("How I see it"):** one line, three meanings. A sticky ultramarine panel holds one fluorescein line that reshapes (700 ms) into noisy data, a digital signal and a heartbeat as each chapter reaches the reading line. Native scroll only: no pinning, no scrub. Phones and no-JS get a static figure per chapter.
-- **View Transitions:** the work row title morphs into the case page title (`view-transition-name: title-<slug>`).
-- **Reduced motion and no JavaScript:** static, complete pages.
+One idea, the stain: on load, a fluorescein copy of the name wipes in and out once (1.5 s). Reduced motion and no JavaScript get a static page.

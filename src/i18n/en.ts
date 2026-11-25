@@ -1,144 +1,32 @@
 export const en = {
   lang: 'en',
   htmlLang: 'en',
-  paths: { home: '/', about: '/about/', other: '/pt/', otherAbout: '/pt/sobre/' },
+  paths: { home: '/', other: '/pt/' },
   otherLabel: 'PT',
   otherName: 'Português',
   meta: {
     title: 'Vinicius Castelli',
-    description: 'Vinicius Castelli builds across genomics software, embedded hardware and health. Computer engineering at Poli-USP; research at the Protein Structural Evolution Lab, ICB-USP.',
-    aboutTitle: 'One Pager · Vinicius Castelli',
-    aboutDescription: 'Vinicius Castelli on one page: research, experience, education and skills.',
+    description: 'Vinicius Castelli: work, writing and how to reach me.',
   },
-  ui: {
-    skip: 'Skip to content',
-    menu: 'Menu',
-    close: 'Close',
-    work: 'Work',
-    onePager: 'One Pager',
-    contact: 'Contact',
-    backToWork: 'All work',
-    open: 'Open',
-    visit: 'Visit',
-    prev: 'Previous',
-    next: 'Next',
-    role: 'Role',
-    dates: 'Dates',
-    status: 'Status',
-    stack: 'Built with',
-    links: 'Links',
-    tools: 'Tools',
-    source: 'Source',
-  },
-  domains: {
-    'research-software': 'Research software',
-    'synthetic-biology': 'Synthetic biology',
-    product: 'Product',
-    mechanics: 'Mechanics',
-    'digital-hardware': 'Digital hardware',
-    'image-processing': 'Image processing',
-  },
-  hero: {
-    name: 'Vinicius Castelli',
-    line: 'I build across genomics software, embedded hardware and health.',
-    nowTitle: 'Now',
-    now: [
-      { t: 'Engineering Lead at the Protein Structure and Evolution Lab, Biomedical Sci Institute, CEPID-B3', s: 'In progress' },
-      { t: 'Computer Engineering major at São Paulo University', s: '2026 - 2030' },    ],
-    cta: 'See the work',
-  },
-  story: {
-    title: 'How I see it',
-    of: 'of',
-    chapters: [
-      {
-        key: 'science', label: 'Science', h: 'Rigour is the advantage.',
-        p: 'The hard problems are still open: how a genome encodes function, how a chaotic system behaves, how a circuit fails under load. Science is how you get an answer you can defend: open methods, and numbers that survive a second look.',
-        cap: 'Noisy measurements settling onto a model (illustrative).',
-      },
-      {
-        key: 'technology', label: 'Technology', h: 'Build down to the metal.',
-        p: 'Software, models and hardware are one stack now. The systems worth building run where the data is born, on small devices that can’t count on a network. Knowing every layer, from the logic gate to the interface, is what makes them reliable.',
-        cap: 'A digital signal through a gate.',
-      },
-      {
-        key: 'industry', label: 'Industry', h: 'It counts when people use it.',
-        p: 'A result that stays in a paper changes nothing. Products put science in people’s hands, and health is where that matters most. The job is to carry work from the lab to the market with the rigour of research and the speed of a company.',
-        cap: 'A heartbeat trace (illustrative).',
-      },
-    ],
-  },
-  index: {
-    title: 'Work',
-    lead: 'The work so far, with links to everything that runs.',
-  },
-  teaser: {
-    text: 'My CV fits on one page, from the lab to the products I have shipped.',
-    link: 'Read the One Pager',
-  },
-  footer: {
-    title: 'Write to me',
-    lead: 'I am open to research collaborations and to internships in tech.',
-    email: { label: 'Email', value: 'vcastelli@usp.br', href: 'mailto:vcastelli@usp.br' },
-    links: [
-      { label: 'LinkedIn', value: 'in/viniciuscastelli', href: 'https://www.linkedin.com/in/viniciuscastelli' },
-      { label: 'GitHub', value: 'github.com/castlelli', href: 'https://github.com/castlelli' },
-    ],
-    copy: '© 2026 Vinicius Castelli. Drawings by the author.',
-  },
-  about: {
-    title: 'Vinicius Castelli',
-    subtitle: 'Computer engineering at Poli-USP. Research at the Protein Structural Evolution Lab, ICB-USP. Embedded systems for health.',
-    back: 'Front page',
-    portraitAlt: 'Portrait of Vinicius Castelli, smiling, in a black t-shirt.',
-    sections: {
-      summary: 'Summary',
-      research: 'Research',
-      experience: 'Experience',
-      education: 'Education',
-      skills: 'Languages and tools',
-      drawings: 'Lines of work',
-    },
-    summary: [
-      'I study computer engineering at Escola Politécnica, USP, class of 2026 - 2030.',
-      'At the Protein Structural Evolution Lab, ICB-USP, I lead the engineering of ROTIFER, the lab’s open-source comparative-genomics toolkit.',
-      'My direction is embedded systems for health: devices that run their own models, built to the rules medical hardware has to follow.',
-      'Before university I shipped software used by thousands of people. I want a career that keeps research and company building together.',
-    ],
-    research: [
-      { t: 'ROTIFER, Protein Structural Evolution Lab, ICB-USP (CEPID B3, FAPESP).', s: '2026-02 -' },
-      { t: 'ROTIFER tool paper. Co-author.', s: 'in preparation' },
-      { t: 'Poster, CEPID B3 Annual Scientific Meeting 2026. Abstract published.', s: '2026' },
-      { t: 'ROTIFER public documentation, leepusp.github.io/rotifer.', s: 'live' },
-    ],
-    experience: [
-      { d: '2026', t: 'iGEM USP 2026. Lead developer of the team wiki; software team on SHARP, an antibiotic hit finder.' },
-      { d: '2025', t: 'AccessPlus. Full-stack developer, then Director of Innovation and Expansion; led a team of 8. Automated curation in C# with the Gemini API; 5,000+ opportunities.' },
-      { d: '2024', t: 'Nexum Tecnologia. Intern on NxCoop, an enterprise CRM with 10,000+ users.' },
-      { d: '2023 - Today', t: 'Mapa Educação. Volunteer local lead; created Grêmio Cidadão, on student representation.' },
-    ],
-    education: [
-      { d: '2026 - 2030', t: 'Computer Engineering, Escola Politécnica, USP.' },
-      { d: '2022 - 2024', t: 'IT technician, CTI-UNESP Bauru.' },
-      { d: '2022 - 2024', t: 'Olympiads: top 10% at OBECON (economics).' },
-    ],
-    skills: [
-      { p: 'Spoken', v: 'Portuguese (native), English (fluent), Spanish (fluent), French (Basic), Italian (Basic)' },
-      { p: 'Code', v: 'Python (main), C/C++, Rust, TypeScript, Java, C#, JavaScript and Frameworks' },
-      { p: 'AI', v: 'AI Agents, Harness & Context Engineering, LLMs (Claude Code, MCP), Applied ML' },
-      { p: 'Hardware', v: 'HDL, Verilog, Embedded Systems' },
-      { p: 'Tooling', v: 'Git, CI/CD, Conda' },
-      { p: 'Design', v: 'Figma, Canva, Illustration' },
-    ],
-    drawingsCaption: 'Five lines of work, drawn by the author.',
-    axes: [
-      { id: 'poli', name: 'Poli-USP', sub: 'Computer engineering', alt: 'Elevation of a long modernist university building on columns.' },
-      { id: 'icb', name: 'ICB-USP', sub: 'Computational biology', alt: 'Elevation of a four-storey laboratory block with a gridded façade.' },
-      { id: 'embedded', name: 'Embedded systems', sub: 'Firmware and hardware safety', alt: 'A microcontroller board seen from above: package, pin headers, connector and traces.' },
-      { id: 'edge', name: 'Edge AI', sub: 'Models on the device', alt: 'A chip with a small neural network drawn inside it, next to a stepped waveform.' },
-      { id: 'health', name: 'Health', sub: 'The mission', alt: 'The heart drawn as a pump in section: four chambers, four check valves, inlet and outlet pipes.' },
-    ],
-  },
+  skip: 'Skip to content',
+  name: 'Vinicius Castelli',
+  bio: [
+    'I\'m an engineering major at Poli-USP, obsessed with building useful tools that change lives and businesses. I work with computational biology, health and industry-wide ML and AI.',
+  ],
+  // Each line is a sentence; the links sit inside it between `before` and `after`.
+  lines: [
+    { before: 'My work is at ', links: [
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/in/viniciuscastelli' },
+      { label: 'GitHub', href: 'https://github.com/castlelli' },
+    ], join: ' and ', after: '.' },
+    { before: 'My writing is at ', links: [
+      { label: 'castellibr.substack.com', href: 'https://castellibr.substack.com' },
+    ], join: '', after: '.' },
+    { before: 'Write to me at ', links: [
+      { label: 'vcastelli@usp.br', href: 'mailto:vcastelli@usp.br' },
+    ], join: '', after: '.' },
+  ],
+  copy: '© 2026 Vinicius Castelli',
 };
 
 export type Dict = typeof en;

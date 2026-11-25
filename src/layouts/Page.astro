@@ -1,18 +1,10 @@
 ---
 import '../styles/global.css';
-import Wordmark from '../components/Wordmark.astro';
-import Footer from '../components/Footer.astro';
 import type { Dict } from '../i18n/en';
 
-// A work page passes its own path and its translation's path in `paths`.
-interface Props { t: Dict; page: 'home' | 'about' | 'work'; paths?: { self: string; other: string }; title?: string; description?: string }
-const { t, page, paths } = Astro.props;
-const title = Astro.props.title ?? (page === 'about' ? t.meta.aboutTitle : t.meta.title);
-const description = Astro.props.description ?? (page === 'about' ? t.meta.aboutDescription : t.meta.description);
-const self = paths?.self ?? (page === 'about' ? t.paths.about : t.paths.home);
-const other = paths?.other ?? (page === 'about' ? t.paths.otherAbout : t.paths.other);
+interface Props { t: Dict }
+const { t } = Astro.props;
 const site = Astro.site!;
-const workHref = page === 'home' ? '#work' : `${t.paths.home}#work`;
 const otherLang = t.lang === 'en' ? 'pt-BR' : 'en';
 ---
 <!doctype html>
@@ -20,83 +12,25 @@ const otherLang = t.lang === 'en' ? 'pt-BR' : 'en';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={new URL(self, site)} />
-    <link rel="alternate" hreflang={t.lang === 'en' ? 'en' : 'pt-BR'} href={new URL(self, site)} />
-    <link rel="alternate" hreflang={otherLang} href={new URL(other, site)} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <title>{t.meta.title}</title>
+    <meta name="description" content={t.meta.description} />
+    <link rel="canonical" href={new URL(t.paths.home, site)} />
+    <link rel="alternate" hreflang={t.lang === 'en' ? 'en' : 'pt-BR'} href={new URL(t.paths.home, site)} />
+    <link rel="alternate" hreflang={otherLang} href={new URL(t.paths.other, site)} />
+    <meta property="og:title" content={t.meta.title} />
+    <meta property="og:description" content={t.meta.description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={new URL(self, site)} />
-    <meta name="theme-color" content="#2626C9" />
+    <meta property="og:url" content={new URL(t.paths.home, site)} />
+    <meta name="theme-color" content="#141312" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preload" href="/fonts/funnel-display-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/funnel-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
-    <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
   <body>
-    <a class="skip" href="#main">{t.ui.skip}</a>
-
-    <header class="band hd">
-      <div class="wrap hd-in">
-        <a class="hd-id" href={t.paths.home} aria-label="castelli, home"><Wordmark tone="band" /></a>
-        <nav class="hd-nav" aria-label="Main">
-          <a href={workHref}>{t.ui.work}</a>
-          <a href={t.paths.about} aria-current={page === 'about' ? 'page' : undefined}>{t.ui.onePager}</a>
-          <a href="#contact">{t.ui.contact}</a>
-        </nav>
-        <div class="hd-end">
-          <a class="hd-lang" href={other} hreflang={otherLang} lang={otherLang} aria-label={t.otherName}>{t.otherLabel}</a>
-          <button type="button" class="hd-menu" data-open-menu aria-haspopup="dialog">{t.ui.menu}</button>
-        </div>
-      </div>
-    </header>
-
-    <dialog class="menu band" data-menu aria-label={t.ui.menu}>
-      <div class="menu-head">
-        <Wordmark tone="band" class="menu-wm" />
-        <button type="button" class="hd-menu" data-close-menu>{t.ui.close}</button>
-      </div>
-      <nav class="menu-nav">
-        <a href={workHref} data-close-menu>{t.ui.work}</a>
-        <a href={t.paths.about} data-close-menu>{t.ui.onePager}</a>
-        <a href="#contact" data-close-menu>{t.ui.contact}</a>
-        <a href={other} lang={otherLang} data-close-menu>{t.otherName}</a>
-      </nav>
-    </dialog>
-
-    <main id="main"><slot /></main>
-
-    <Footer t={t} other={other} otherLang={otherLang} />
-
+    <a class="skip" href="#main">{t.skip}</a>
+    <slot />
     <script>
       import '../scripts/page.ts';
     </script>
   </body>
 </html>
-
-<style>
-  .hd { position: relative; z-index: 10; }
-  .hd-in { display: flex; align-items: center; gap: 32px; min-height: 76px; font-size: 15px; }
-  .hd-id { font-size: 26px; text-decoration: none; display: inline-flex; min-height: 44px; align-items: center; }
-  .hd-nav { display: none; gap: 30px; margin-left: auto; }
-  .hd-nav a { text-decoration: none; color: var(--on-band-muted); padding-block: 10px; font-weight: 500; }
-  .hd-nav a:hover, .hd-nav a[aria-current] { color: var(--on-band); }
-  .hd-nav a[aria-current] { text-decoration: underline; text-decoration-color: var(--signal); text-decoration-thickness: 2px; text-underline-offset: 0.4em; }
-  .hd-end { display: flex; align-items: center; gap: 22px; margin-left: auto; }
-  .hd-lang { text-decoration: none; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center; }
-  .hd-menu { font-weight: 600; font-size: 15px; min-height: 44px; }
-  @media (min-width: 900px) {
-    .hd-nav { display: flex; }
-    .hd-end { margin-left: 0; padding-left: 28px; border-left: 1px solid rgba(255, 255, 255, 0.28); }
-    .hd-menu { display: none; }
-  }
-
-  .menu { width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: 18px 16px 40px; border: 0; }
-  .menu::backdrop { background: var(--band); }
-  .menu-head { display: flex; justify-content: space-between; align-items: center; min-height: 58px; margin-bottom: 40px; }
-  .menu-head :global(.menu-wm) { font-size: 26px; }
-  .menu-nav { display: grid; }
-  .menu-nav a { font-family: var(--font-display); font-weight: 650; font-size: 40px; line-height: 1.1; letter-spacing: -0.025em; text-decoration: none; padding: 14px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.28); }
-</style>
